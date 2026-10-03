@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Build Spec v4 section 7.1. Dark only; the panel does not follow the system light theme. -->
+<resources>
+    <color name="bg_base">#0A0E14</color>
+    <color name="bg_surface">#111722</color>
+    <color name="bg_raised">#182030</color>
+    <color name="line">#243044</color>
+    <color name="text_primary">#E6EDF7</color>
+    <color name="text_secondary">#9AA7BD</color>
+    <color name="text_muted">#5F6C82</color>
+    <color name="accent">#3DD6F5</color>
+    <color name="on_accent">#04222B</color>
+    <color name="ok">#3EE0A1</color>
+    <color name="warn">#FFB454</color>
+    <color name="bad">#FF5C7A</color>
+    <color name="info">#8B9DFF</color>
+</resources>

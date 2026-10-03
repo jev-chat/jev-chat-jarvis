@@ -1,0 +1,14 @@
+page=CONVERSATION stable=true older=false newer=true
+SYSTEM  DATE_DIVIDER  -      "今天"
+SYSTEM  SYSTEM_NOTICE -      "‌ 消息和通话已进行端到端加密。只有此聊天中的成员可以查看、收听或分享。了解更多"
+SYSTEM  SYSTEM_NOTICE -      "‎<TOPBAR>已成为联系人"
+OTHER   TEXT          06:41  "1"
+OTHER   TEXT          06:53  "Hi, this is a test chat for the reply assistant."
+SELF    TEXT          06:53  "Got it, thanks for helping."
+OTHER   TEXT          06:53  "Can you send me the report by Friday?"
+SELF    TEXT          06:54  "I'll check and let you know."
+OTHER   TEXT          06:54  "OK"
+OTHER   TEXT          06:54  "OK"
+SELF    TEXT          06:54  "OK"
+OTHER   TEXT          06:54  "Any update on this?" quote(SELF)="I'll check and let you know."
+SELF    TEXT          06:55  "Friday might be tight." quote(OTHER)="Can you send me the report by Friday?" clipped

@@ -19,14 +19,14 @@
 
 ## 开始使用 Jev
 
-| Android | Windows | macOS |
-| :---: | :---: | :---: |
-| [获取 Android 版 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/apk/jev-assistant-v1.4-release.apk) | [获取 Windows 版](https://github.com/jev-chat/jev-chat-windows/releases) | [获取 macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
-| Android 11+ · ARM64 · [历史版本](https://github.com/jev-chat/jev-chat-jarvis/releases) | Windows 10 1903+ / 11 | macOS 13+ · Apple Silicon |
+| Android | WhatsApp（英文） | Windows | macOS |
+| :---: | :---: | :---: | :---: |
+| [获取 Android 版 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/apk/jev-assistant-v1.4-release.apk) | [获取 WhatsApp 英文版 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/overseas/apk/jev-whatsapp-v0.1.0-release.apk) | [获取 Windows 版](https://github.com/jev-chat/jev-chat-windows/releases) | [获取 macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
+| Android 11+ · ARM64 · [历史版本](https://github.com/jev-chat/jev-chat-jarvis/releases) | Android 11+ · 一对一英文聊天 · [说明](overseas/README.zh-CN.md) | Windows 10 1903+ / 11 | macOS 13+ · Apple Silicon |
 
 如果项目对你有帮助，欢迎点击本仓库右上角的 **Star**，支持后续维护。获取和使用无需先加星或关注。
 
-**安装教程 · 交流更新：**[Android 安装说明](#快速开始) · [Windows 项目说明](https://github.com/jev-chat/jev-chat-windows#使用说明) · [macOS 项目说明](https://github.com/jev-chat/jev-chat-jarvis-mac#用法) · [交流群与公众号](#交流群--需求收集)。
+**安装教程 · 交流更新：**[Android 安装说明](#快速开始) · [WhatsApp 英文版说明](overseas/README.zh-CN.md) · [Windows 项目说明](https://github.com/jev-chat/jev-chat-windows#使用说明) · [macOS 项目说明](https://github.com/jev-chat/jev-chat-jarvis-mac#用法) · [交流群与公众号](#交流群--需求收集)。
 
 ## ❤️赞助商
 
@@ -79,6 +79,7 @@
 | X / Twitter 私信 | ✅ 全链路 | 解析 Compose 节点的 content-desc | 12.25 实测，中文界面；英文界面未验 |
 | 飞书 / Lark | ✅ OCR 兜底（真机验证） | 无障碍读气泡矩形 + ML Kit 离线 OCR 识别正文 | 正文自绘不在无障碍树里，1.3 起对每个气泡矩形做 OCR；我/对方按已读状态判 |
 | 其它未适配 App（微信除外） | ✅ 手动 | 悬浮窗菜单「截屏识别一次」整屏 OCR | 不自动、不分我/对方（全部当作对方所说并在面板标注）；微信 Android 版已全面下架 |
+| WhatsApp（英文，独立 App） | 🧪 v0.1 | 无障碍读节点 | 独立的英文版，单独构建，与本 App 不共用代码；只支持一对一英文聊天，2.26.38.73 实测，有签好名的 APK。见 [overseas/](overseas/README.zh-CN.md) |
 | macOS / Windows（独立项目） | ✅ 已提供 | 见各自仓库说明 | [macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac) · [Windows 版](https://github.com/jev-chat/jev-chat-windows) |
 | 网页 | ⏳ 规划 | — | 尚无网页版 |
 
@@ -237,6 +238,7 @@ JDK 17 + Android SDK（platform 35 / build-tools 35）。
 - `tools/jev/` — Jev 题目集与校准脚手架（Python）
 - `docs/` — 设计与验收文档
 - `apk/` — 签好名的 release 包
+- `overseas/` — WhatsApp 英文版，独立的 Gradle 构建，见 [overseas/README.zh-CN.md](overseas/README.zh-CN.md)
 
 </details>
 
@@ -282,6 +284,7 @@ JDK 17 + Android SDK（platform 35 / build-tools 35）。
 
 同在 [jev-chat](https://github.com/jev-chat) 组织下：
 
+- [Jev for WhatsApp](overseas/README.zh-CN.md)（本仓库 `overseas/`）：WhatsApp 一对一英文聊天的独立 Android App，先判断再起草两条回复，逐条检查打分后填入输入框，发送永远手动。
 - [Jev 聊天助手 macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac)：消息意图识别悬浮窗，看屏 + 本地小模型判断意图和风险，再按话术生成回复候选，纯只读。
 - [Jev 聊天助手 Windows 版](https://github.com/jev-chat/jev-chat-windows)：聊天窗口旁挂的回复辅助，窗口截图 + 本地离线 OCR，3 条候选一键填入，发送永远手动。
 

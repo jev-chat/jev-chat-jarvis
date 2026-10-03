@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Jev Probe（只读）</string>
+    <string name="a11y_description">只读取 WhatsApp 当前这一屏的界面结构，保存在本机。不联网，不发送消息，不写入输入框，不滚动。</string>
+    <string name="button_read">Jev probe · 读取这一屏</string>
+    <string name="status_reading">读取中…</string>
+    <string name="status_not_whatsapp">当前不是 WhatsApp，没有读取</string>
+    <string name="status_failed">读取失败：%1$s</string>
+    <string name="status_saved_full">已保存 #%1$d · 完整 · 行 %2$d · 文字 %3$d · 可滚动 %4$d</string>
+    <string name="status_saved_structure">已保存 #%1$d · 只有结构（%2$s）· 行 %3$d · 可滚动 %4$d</string>
+    <string name="reason_not_chat_page">不像聊天页</string>
+    <string name="reason_not_test_chat">没认出测试对话</string>
+    <string name="main_title">Jev Probe（T1 只读）</string>
+    <string name="main_service_on">无障碍服务：已开启</string>
+    <string name="main_service_off">无障碍服务：未开启</string>
+    <string name="main_dump_count">已保存的录制：%1$d 个</string>
+    <string name="main_open_accessibility">打开无障碍设置</string>
+    <string name="main_open_app_info">打开应用信息</string>
+    <string name="main_how_to">用法：开启无障碍服务后，打开 WhatsApp 的测试对话，点屏幕右侧的“读取这一屏”。</string>
+</resources>

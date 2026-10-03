@@ -1,0 +1,20 @@
+# Build
+build/
+.gradle/
+.kotlin/
+local.properties
+*.apk
+*.aab
+
+# IDE
+.idea/
+*.iml
+
+# Live evaluation output and spend ledger (core:liveEval)
+_reports/
+
+# Secrets
+*.env
+*.jks
+*.keystore
+keystore.properties

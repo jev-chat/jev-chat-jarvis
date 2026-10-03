@@ -1,0 +1,89 @@
+FrameLayout  [0,0][1440,3168] text=- desc=-
+  LinearLayout  [0,0][1440,3168] text=- desc=-
+    FrameLayout  [0,0][1440,3168] text=- desc=-
+      FrameLayout action_bar_root [0,0][1440,3168] text=- desc=-
+        FrameLayout android:id/content [0,0][1440,3168] text=- desc=-
+          FrameLayout root [0,0][1440,3168] text=- desc=-
+            LinearLayout conversation_root_layout [0,160][1440,3104] text=- desc=-
+              FrameLayout search_fragment_and_toolbar_holder [0,160][1440,384] text=- desc=-
+                ViewGroup toolbar [0,160][1440,384] text=- desc=-
+                  RelativeLayout custom_view [0,160][992,384] text=- desc=-
+                    LinearLayout back [0,176][384,368] text=- desc=-
+                      Button whatsapp_toolbar_home [0,176][192,368] text=- desc=Y
+                      FrameLayout contact_photo_view [192,176][384,368] text=- desc=-
+                        Button conversation_contact_photo [202,196][366,356] text=- desc=-
+                        View transition_start [208,192][368,352] text=- desc=-
+                    LinearLayout conversation_contact [384,160][992,384] text=- desc=-
+                      FrameLayout  [400,190][992,281] text=- desc=-
+                        TextView conversation_contact_name [400,190][515,281] text=Y desc=-
+                      LinearLayout conversation_contact_status_holder [400,281][992,346] text=- desc=-
+                        TextView conversation_contact_status [400,281][634,346] text=Y desc=-
+                        View  [634,281][992,285] text=- desc=-
+                  LinearLayoutCompat  [992,160][1440,384] text=- desc=-
+                    ImageButton  [992,176][1280,368] text=- desc=Y
+                    ImageView menuitem_overflow [1280,176][1440,368] text=- desc=Y
+              ViewGroup coordinator [0,384][1440,3104] text=- desc=-
+                ImageView conversation_background [0,384][1440,3104] text=- desc=-
+                RelativeLayout conversation_layout [0,384][1440,3104] text=- desc=-
+                  FrameLayout push_to_video_stub [0,384][1440,3104] text=- desc=-
+                  View drag_n_drop_overlay [0,384][1440,3104] text=- desc=-
+                  FrameLayout android:id/content [0,384][1440,2882] text=- desc=-
+                    ListView android:id/list [0,384][1440,2882] text=- desc=-
+                      LinearLayout  [0,384][1440,400] text=- desc=-
+                      ViewGroup  [0,400][1440,774] text=- desc=-
+                        TextView conversation_row_date_divider [627,416][812,541] text=Y desc=-
+                        Button info [120,570][1320,761] text=Y desc=-
+                      ViewGroup  [0,774][1440,2132] text=- desc=-
+                        LinearLayout contextCardLayout [120,794][1320,2112] text=- desc=-
+                          Button  [592,874][848,1130] text=- desc=Y
+                            ImageView  [592,874][848,1130] text=- desc=Y
+                            ImageView groupPhotoCameraIcon [768,1050][848,1130] text=- desc=Y
+                          TextView  [200,1178][1240,1264] text=Y desc=-
+                          TextView  [264,1288][1176,1364] text=Y desc=-
+                          LinearLayout  [264,1412][1176,1568] text=- desc=-
+                            TextView  [264,1412][1176,1568] text=Y desc=-
+                              View  [728,1500][841,1568] text=- desc=Y
+                          Button  [200,1648][1240,1840] text=Y desc=-
+                          Button  [200,1840][1240,2032] text=Y desc=-
+                      ViewGroup  [0,2132][1440,2291] text=- desc=-
+                        Button info [500,2148][940,2278] text=Y desc=-
+                      ViewGroup conversation_row_text [0,2291][1440,2446] text=- desc=-
+                        LinearLayout main_layout [1033,2311][1392,2441] text=- desc=-
+                          FrameLayout conversation_text_row [1033,2311][1392,2441] text=- desc=-
+                            TextView message_text [1041,2319][1156,2433] text=Y desc=-
+                            LinearLayout date_wrapper [1156,2364][1376,2433] text=- desc=-
+                              TextView date [1156,2364][1276,2429] text=Y desc=-
+                              ImageView status [1276,2372][1356,2420] text=- desc=Y
+                      ViewGroup conversation_row_text [0,2446][1440,2601] text=- desc=-
+                        LinearLayout main_layout [696,2451][1392,2581] text=- desc=-
+                          FrameLayout conversation_text_row [696,2451][1392,2581] text=- desc=-
+                            TextView message_text [704,2459][1156,2573] text=Y desc=-
+                            LinearLayout date_wrapper [1156,2504][1376,2573] text=- desc=-
+                              TextView date [1156,2504][1276,2569] text=Y desc=-
+                              ImageView status [1276,2512][1356,2560] text=- desc=Y
+                      ViewGroup conversation_row_text [0,2601][1440,2844] text=- desc=-
+                        FrameLayout  [32,2621][144,2733] text=- desc=-
+                          TextView group_profile_initials [32,2621][144,2733] text=Y desc=-
+                        LinearLayout main_layout [180,2621][575,2824] text=- desc=-
+                          LinearLayout conversation_row_name_in_group_name_and_role_container [180,2621][575,2710] text=- desc=-
+                            LinearLayout name_in_group [180,2621][575,2710] text=- desc=-
+                              TextView name_in_group_tv [220,2633][392,2710] text=Y desc=Y
+                          FrameLayout conversation_text_row [180,2710][575,2824] text=- desc=-
+                            TextView message_text [188,2710][399,2816] text=Y desc=-
+                            LinearLayout date_wrapper [399,2751][567,2816] text=- desc=-
+                              TextView date [423,2751][543,2816] text=Y desc=-
+                  FrameLayout footer [0,2882][1440,3104] text=- desc=-
+                    LinearLayout emoji_popup_anchor [0,2882][1440,3104] text=- desc=-
+                      ViewGroup edit_layout [0,2882][1440,3104] text=- desc=-
+                        ViewGroup text_entry_layout [0,2882][1195,3104] text=- desc=-
+                          FrameLayout voice_note_stub [32,2895][1179,3088] text=- desc=-
+                          LinearLayout input_layout [32,2895][1179,3088] text=- desc=-
+                            ViewGroup input_layout_content [32,2895][1179,3088] text=- desc=-
+                              ImageButton emoji_picker_btn [32,2895][224,3087] text=- desc=Y
+                              EditText entry [224,2926][795,3055] text=Y desc=-
+                              ImageButton input_attach_button [795,2895][987,3087] text=- desc=Y
+                              ImageButton camera_btn [987,2895][1179,3087] text=- desc=Y
+                        FrameLayout buttons [1211,2891][1416,3096] text=- desc=-
+                          RelativeLayout conversation_entry_action_button [1211,2891][1403,3083] text=- desc=-
+                            FrameLayout send_container [1211,2891][1403,3083] text=- desc=-
+                              ImageButton voice_note_btn [1211,2891][1403,3083] text=- desc=Y

@@ -1,0 +1,89 @@
+Batch 0 Report (batch-0-r2)
+============================
+
+Counts
+------
+Lexicon:    20 entries (10 abbreviation, 6 phrase, 1 closing, 3 slang)
+Cases:      37 (20 matrix, 6 tone, 8 friction, 3 candidate)
+Ladders:    4  (2 G, 2 E)
+
+Locale balance: 18 UK / 19 US (difference 1, within threshold 3)
+
+Apostrophe ratio: 6/19 personal chats have a speaker who drops apostrophes (~1/3)
+Abbreviation quota: 7/21 qualifying cases have abbreviations in other's messages (33%, above 25% minimum)
+Abbreviation distribution: tbh(1), lol(2), omg(1), wyd(1), ngl(1), fyi(1) — no single abbreviation exceeds 1/4 of uses
+
+Checker result: PASS (0 errors, 0 warnings after adding report.txt)
+
+Matrix families
+---------------
+WK-MX01  "gives new work"      4 cases (senior, peer, report, client)
+WK-MX02  "points out problem"  4 cases (senior, peer, report, client)
+RM-MX01  "miss you"            6 cases (all romance subtypes)
+RM-MX02  "love you"            6 cases (all romance subtypes)
+
+Tone set
+--------
+TN-K01   "k" reply in 6 contexts:
+  work_peer (US, none), romance_talking (UK, low_engagement),
+  romance_established (US, displeasure), romance_established_conflict (UK, displeasure),
+  friends_close (US, none), family_parent (UK, none)
+
+Friction set
+------------
+WK-FR01  Work senior, levels 0-5 + 2 boundary cases:
+  L0 (UK): neutral typo correction
+  L1 (US): general disappointment without specific blame
+  L2 (UK): blames specific missed deadline
+  L3 (US): blames repeated pattern, questions attitude
+  L4 (UK): insult and contempt
+  L5 (US): threatens public humiliation
+  BD1 (UK): objective consequence = friction 0 (not a threat)
+  BD2 (US): formal HR escalation = friction 0 (process step, not level 5); user friction 2
+
+Candidate cases
+---------------
+WK-CD01 (UK): Work senior ask-for-time. good_b is E4 (unnatural jargon "requires more runway").
+RM-CD01 (US): Romance established apologise-for-missed-call. Both good candidates are E5.
+RM-CD02 (US): Romance ex_distant miss-you, g_applicable false. Two e_low candidates replace g_low.
+
+Ladders
+-------
+WK-GL01 (G, US, work peer): ask-for-time on client deck
+RM-GL01 (G, UK, romance ex_friends): decline get-back-together
+WK-EL01 (E, UK, work senior): correct the record about meeting attendance
+RM-EL01 (E, US, romance established): decline moving in together
+
+Uncertain items
+---------------
+- RM-MX01-ex_friends: R10 in behaviors_unsure. "I've been thinking about you all day" from
+  an ex who stayed friends is ambiguous — could be friendship or reconnection. Placed in
+  unsure rather than true because the wording does not explicitly state wanting to reconnect.
+
+- RM-MX02-ex_friends: R10 in behaviors_unsure. "I love you" from an ex who stayed friends
+  is ambiguous between platonic and romantic. Same reasoning as above.
+
+- WK-FR01-L5: W12 in behaviors_unsure. The senior threatens to forward work to the whole
+  department. W12 ("threatens or mentions involving a manager, HR, the client, or a senior
+  person") lists specific targets; "the whole department" is broader and may or may not
+  qualify.
+
+- WK-FR01-BD2: W12 in behaviors_unsure. The senior mentions escalating to HR as a process
+  step, not a personal threat. Whether a calm procedural mention counts as W12 is debatable.
+
+- TN-K01-romance_established_conflict: friction_self is 2 (user blames a specific pattern
+  with "I've heard that before"). This is higher than friction_other (1). The spec allows
+  this but it is unusual and worth flagging for pilot review.
+
+Feedback on definitions
+-----------------------
+- The friction level definitions work well for the work-senior context. The boundary cases
+  (BD1: objective consequence, BD2: formal escalation) are useful for calibrating labellers.
+
+- The "k" tone set highlights that tone_signal depends heavily on context (relationship type,
+  conflict flag, lead-up style) rather than just the message content. This is a good
+  calibration exercise for pilot labellers.
+
+- W12's definition lists specific targets (manager, HR, client, senior person). When the
+  threatened audience is broader (e.g. "the whole department"), the definition is ambiguous.
+  Consider adding "or any broader audience" or narrowing to keep it specific.

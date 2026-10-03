@@ -1,0 +1,21 @@
+                            ViewGroup wa:conversation_row_document [0,2177][1440,2882] text=- desc=-
+                              LinearLayout wa:main_layout [68,2182][1116,2862] text=- desc=-
+                                Button wa:content [68,2182][1116,2785] text=- desc=-
+                                  FrameLayout wa:document_frame [88,2202][1096,2765] text=- desc=-
+                                    LinearLayout  [88,2202][1096,2765] text=- desc=-
+                                      ImageView wa:preview [88,2202][1096,2538] text=- desc=-
+                                      View wa:preview_separator [88,2538][1096,2539] text=- desc=-
+                                      LinearLayout wa:document_info_container [88,2539][1096,2765] text=- desc=-
+                                        LinearLayout  [88,2539][1064,2765] text=- desc=-
+                                          TextView wa:title [120,2571][1032,2652] text=Y desc=-
+                                          LinearLayout wa:metadata_container [120,2668][558,2733] text=- desc=-
+                                            TextView wa:info [120,2668][222,2733] text=Y desc=-
+                                            TextView wa:bullet_info [222,2668][270,2733] text=Y desc=-
+                                            TextView wa:file_size [270,2668][421,2733] text=Y desc=-
+                                            TextView wa:bullet_file_size [421,2668][469,2733] text=Y desc=-
+                                            TextView wa:file_type [469,2668][558,2733] text=Y desc=-
+                                FrameLayout wa:text_and_date [68,2785][1116,2862] text=- desc=-
+                                  LinearLayout wa:date_wrapper [916,2785][1116,2862] text=- desc=-
+                                    TextView wa:date [956,2785][1076,2850] text=Y desc=-
+                              LinearLayout  [1148,2458][1276,2586] text=- desc=-
+                                Button wa:action_button [1148,2458][1276,2586] text=- desc=Y

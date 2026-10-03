@@ -69,6 +69,7 @@
 | X / Twitter tin nhắn riêng | ✅ Hỗ trợ đầy đủ từ đầu đến cuối | Phân tích content-desc của node Compose | Đã kiểm thử trên 12.25, giao diện tiếng Trung; chưa xác minh giao diện tiếng Anh |
 | 飞书 / Lark | ✅ Dự phòng bằng OCR (đã xác minh trên thiết bị thật) | Đọc hình chữ nhật bong bóng bằng dịch vụ trợ năng + OCR tiếng Trung ngoại tuyến bằng ML Kit để nhận dạng nội dung chính | Nội dung chính tự vẽ không có trong cây trợ năng; từ 1.3, thực hiện OCR cho hình chữ nhật từng bong bóng; phân biệt tôi/đối phương theo trạng thái đã đọc |
 | Ứng dụng khác chưa hỗ trợ (trừ 微信) | ✅ Thủ công | OCR toàn màn hình bằng “Nhận diện ảnh chụp một lần” trong menu cửa sổ nổi | Không tự động, không phân biệt tôi/đối phương (mọi nội dung đều được coi là lời của đối phương và được ghi rõ trong khung phân tích); phiên bản Android của 微信 đã bị gỡ khỏi cửa hàng ứng dụng hoàn toàn |
+| WhatsApp (tiếng Anh, ứng dụng riêng) | 🧪 v0.1 | Đọc node bằng dịch vụ trợ năng | Chỉ trò chuyện 1v1 bằng tiếng Anh; đã kiểm thử trên 2.26.38.73. Xem [Jev for WhatsApp](overseas/README.md) |
 | Máy tính để bàn / web | ⏳ Đang lên kế hoạch | Ảnh chụp màn hình + OCR / thị giác | Cùng một lõi, chỉ thay đổi cách thu thập |
 
 Dự án này chỉ đọc nội dung chat trên thiết bị của chính bạn, nơi bạn có quyền xem và phiên bản hiện tại hỗ trợ; phiên bản Android của 微信 đã bị gỡ khỏi cửa hàng ứng dụng hoàn toàn, không cung cấp tính năng thu thập hay phân tích 微信.
@@ -226,6 +227,7 @@ JDK 17 + Android SDK (platform 35 / build-tools 35).
 - `tools/jev/` — bộ câu hỏi và bộ công cụ hiệu chuẩn cho Jev (Python)
 - `docs/` — tài liệu thiết kế và nghiệm thu
 - `apk/` — gói release đã ký
+- `overseas/` — Jev for WhatsApp (tiếng Anh), bản build Gradle riêng, xem [overseas/README.md](overseas/README.md)
 
 </details>
 
@@ -271,6 +273,7 @@ Muốn biết nhu cầu thật: bạn muốn trợ lý này nhất trong ứng d
 
 Cùng thuộc tổ chức [jev-chat](https://github.com/jev-chat):
 
+- [Jev for WhatsApp](overseas/README.md) (thư mục `overseas/` trong kho này): ứng dụng Android riêng cho trò chuyện WhatsApp 1v1 bằng tiếng Anh; phân tích trước, soạn hai câu trả lời, kiểm tra và chấm điểm, rồi điền câu bạn chọn vào ô nhập. Thao tác gửi luôn thủ công.
 - [Jev 聊天助手 bản macOS](https://github.com/jev-chat/jev-chat-jarvis-mac): cửa sổ nổi nhận diện ý định tin nhắn, xem màn hình + mô hình nhỏ cục bộ để phân tích ý định và rủi ro, sau đó tạo các câu trả lời ứng viên theo kịch bản; hoàn toàn chỉ đọc.
 - [Jev 聊天助手 bản Windows](https://github.com/jev-chat/jev-chat-windows): trợ lý trả lời đặt bên cạnh cửa sổ chat, chụp màn hình cửa sổ + OCR ngoại tuyến cục bộ, điền 3 câu trả lời ứng viên bằng một chạm, thao tác gửi luôn thủ công.
 

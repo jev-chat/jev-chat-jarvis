@@ -18,6 +18,8 @@
 
 </div>
 
+> **Chatting in English on WhatsApp?** [Jev for WhatsApp](overseas/README.md) is a separate Android app for one-to-one WhatsApp chats in English: it works out what they want, drafts two replies, checks and scores them, and fills the one you pick. [Download the APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/overseas/apk/jev-whatsapp-v0.1.0-release.apk).
+
 ## Sponsors
 
 > [Interested in sponsoring the project?](#community-and-feedback)
@@ -69,6 +71,7 @@
 | X / Twitter DMs | Full workflow supported | Parses `content-desc` on Compose nodes | Tested with version 12.25 in Chinese; the English UI has not been verified |
 | Feishu / Lark | OCR fallback verified on a real device | Reads message bubble bounds through accessibility, then extracts text with offline ML Kit OCR | Message text is custom-rendered and absent from the accessibility tree. Since v1.3, each bubble is processed with OCR; read status is used to identify the sender |
 | Any other app | Manual capture supported | Full-screen OCR via "Scan screen once" in the overlay menu | Manual only; all text is treated as coming from the other person, with a notice in the panel |
+| WhatsApp (English, separate app) | v0.1 | Accessibility nodes | One-to-one chats in English; tested on 2.26.38.73. See [Jev for WhatsApp](overseas/README.md) |
 | Desktop / web | Planned | Screenshots with OCR / vision | Same core, different capture method |
 
 Jev only reads conversations on your own device that you are authorized to view. It is not designed to target any particular platform.
@@ -238,6 +241,7 @@ Requires JDK 17 and the Android SDK (platform 35 / build-tools 35).
 - `tools/jev/`: Jev question sets and calibration tooling in Python.
 - `docs/`: Design and acceptance documentation.
 - `apk/`: Signed release APKs.
+- `overseas/`: Jev for WhatsApp (English), a separate Gradle build. See [overseas/README.md](overseas/README.md).
 
 </details>
 
@@ -282,6 +286,7 @@ We'd love to hear what you actually need. Which chat app would you most like to 
 
 Also part of the [jev-chat](https://github.com/jev-chat) organization:
 
+- [Jev for WhatsApp](overseas/README.md) (`overseas/` in this repository): a separate Android app for one-to-one WhatsApp chats in English. It analyses first, drafts two replies, checks and scores them, and fills the one you pick. Sending is always manual.
 - [Jev Chat Assistant for macOS](https://github.com/jev-chat/jev-chat-jarvis-mac): A read-only overlay that reads the screen, uses a small local model to assess intent and risk, and generates suggested replies based on conversation guidance.
 - [Jev Chat Assistant for Windows](https://github.com/jev-chat/jev-chat-windows): A reply assistant that sits beside your chat window. Uses window screenshots and local offline OCR, with three suggested replies you can insert with a click. Sending is always manual.
 

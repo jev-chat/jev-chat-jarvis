@@ -1,0 +1,8 @@
+page=CONVERSATION stable=true older=true newer=false
+OTHER   IMAGE         06:55  - clipped
+OTHER   VOICE         06:55  - duration=0:02
+OTHER   TEXT          06:56  "Just to recap what we agreed on the call. First, the draft goes to the client on Monday. Second, I will send you the figures tomorrow morning. Third, we review everything together on Wednesday afternoon. Let me know if I missed anything."
+SELF    TEXT          06:56  "Sounds good to me."
+OTHER   TEXT          06:56  "See you Wednesday" edited
+SELF    DELETED       06:57  "你已删除这条消息"
+OTHER   TEXT          06:57  "Thanks, speak soon." clipped
