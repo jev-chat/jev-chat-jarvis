@@ -9,6 +9,8 @@ import android.os.Looper
 import android.os.SystemClock
 import android.util.Log
 import android.view.Display
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
@@ -73,12 +75,19 @@ class ScreenCapture(
         lastAttemptAt = now
 
         val done = AtomicBoolean(false)
+        // The shot callback now runs on [shotExecutor] (off-main, upstream #18:
+        // the HardwareBuffer -> bitmap copy stalled the UI thread for seconds on
+        // some devices), so everything user-visible is marshalled back by
+        // posting to the main thread here. The compareAndSet stays on the
+        // calling thread, so a late result can never race the timeout runnable.
         val finish: (Result) -> Unit = { r ->
             if (done.compareAndSet(false, true)) {
-                restoreOverlay()
-                if (r is Result.Ok) failStreak = 0
-                else failStreak = (failStreak + 1).coerceAtMost(MAX_STREAK)
-                onResult(r)
+                main.post {
+                    restoreOverlay()
+                    if (r is Result.Ok) failStreak = 0
+                    else failStreak = (failStreak + 1).coerceAtMost(MAX_STREAK)
+                    onResult(r)
+                }
             }
         }
 
@@ -93,7 +102,11 @@ class ScreenCapture(
     }
 
     private fun shoot(finish: (Result) -> Unit, done: AtomicBoolean) {
-        val exec = service.mainExecutor
+        // Off-main on purpose: onSuccess copies the HardwareBuffer into a
+        // software bitmap, which froze the UI thread for seconds on some vivo
+        // builds (upstream #18). [finish] posts the outcome back to the main
+        // thread, so the "answers on the main thread" contract still holds.
+        val exec = shotExecutor
         // Which area the picture will cover. Set just before the window shot is
         // issued and read inside the callback, so the mapping always matches the
         // call that actually produced the bitmap.
@@ -192,6 +205,14 @@ class ScreenCapture(
 
         /** How long we wait for the screenshot callback before giving up. */
         private const val TIMEOUT_MS = 3000L
+
+        /** One shared off-main thread for the screenshot callback: the
+         *  HardwareBuffer -> bitmap copy must never run on the UI thread
+         *  (upstream #18). Daemon, so it never blocks process exit. */
+        private val shotExecutor: ExecutorService =
+            Executors.newSingleThreadExecutor { r ->
+                Thread(r, "jev-shot").apply { isDaemon = true }
+            }
 
         // Global across instances on purpose: the system limit is per service,
         // and the service may build a new ScreenCapture per call site.

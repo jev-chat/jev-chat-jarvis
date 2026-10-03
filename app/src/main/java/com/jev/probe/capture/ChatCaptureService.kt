@@ -7,6 +7,7 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.SystemClock
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
@@ -21,9 +22,12 @@ import com.jev.probe.core.kb.ContextBuilder
 import com.jev.probe.core.kb.KbStore
 import com.jev.probe.jev.JevClient
 import com.jev.probe.overlay.OverlayController
+import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
 import java.util.concurrent.RejectedExecutionException
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
 /**
  * The live capture service (registered under a disguised class name so WeChat
@@ -44,13 +48,40 @@ open class ChatCaptureService : AccessibilityService() {
     private val main = Handler(Looper.getMainLooper())
     private val worker = Executors.newFixedThreadPool(2)
 
+    /** Judge/reply HTTP runs here under a hard watchdog (see [withHardTimeout]).
+     *  Cached so an abandoned request — interrupts do not break a wedged socket
+     *  read — never blocks the next round's threads. */
+    private val analysisPool = Executors.newCachedThreadPool { r ->
+        Thread(r, "jev-http").apply { isDaemon = true }
+    }
+
+    /**
+     * Run [body] on [analysisPool] but never wait longer than [ms].
+     *
+     * HttpURLConnection bounds connect/read per attempt yet NOT DNS resolution
+     * (and some OEM stacks stall connects beyond both), so one wedged request
+     * used to hold its round's callback forever: the panel stayed on 生成中 and
+     * the round's [analyzing] flag never dropped, silently discarding every
+     * later analysis. Past the ceiling we abandon the attempt and surface a
+     * plain, retryable error instead.
+     */
+    private fun <T> withHardTimeout(ms: Long, what: String, body: () -> T): T {
+        val f = analysisPool.submit(Callable { body() })
+        return try {
+            f.get(ms, TimeUnit.MILLISECONDS)
+        } catch (e: TimeoutException) {
+            f.cancel(true)
+            throw java.io.IOException("$what 超时（${ms / 1000}秒），请检查网络后重试")
+        }
+    }
+
     /** Adapted chat apps, keyed by package name.
      *  WeChat is intentionally NOT wired in: reading it (node tree / screenshot /
      *  OCR) is what trips WeChat's anti-screenshot risk control, so it is fully
      *  disabled and handled by a short-circuit notice instead of an adapter (see
      *  [maybeCapture] / [onAccessibilityEvent]). [WeChatAdapter] is kept in the
      *  codebase for a possible future restore, just not used here. */
-    private val adapters = listOf(QQAdapter(), XAdapter(), FeishuAdapter()).associateBy { it.pkg }
+    private val adapters = listOf(QQAdapter(), XAdapter(), FeishuAdapter(), SoulAdapter()).associateBy { it.pkg }
 
     /** Submit to the worker, ignoring rejection after the service is torn down
      *  (a stale overlay callback must never crash the process). */
@@ -112,8 +143,18 @@ open class ChatCaptureService : AccessibilityService() {
         val title = if (adapter != null) {
             val snapshot = adapter.extract(root, resources) ?: return null
             messagesSignature = snapshot.takeIf { it.messages.isNotEmpty() }?.signature()
-            // A loading/unknown title cannot prove which conversation is open.
-            snapshot.title?.takeUnless { isTransientTitle(it) } ?: return null
+            // A loading/unknown title cannot prove which conversation is open —
+            // unless the SAME app+window already has a known one: animated
+            // headers swap in skeleton/transient titles for a beat (#68), and
+            // unbinding the session there killed in-flight analyses. Keep the
+            // previously verified title instead.
+            val fresh = snapshot.title?.takeUnless { isTransientTitle(it) }
+            if (fresh != null) fresh
+            else {
+                val known = session.target
+                if (known != null && known.pkg == pkg && known.windowId == root.windowId &&
+                    !known.title.isNullOrBlank()) known.title else return null
+            }
         } else {
             findTitleInActionBar(root, Int.MAX_VALUE, resources.displayMetrics.widthPixels,
                 resources, 0.15, 0.85)
@@ -124,7 +165,12 @@ open class ChatCaptureService : AccessibilityService() {
     private fun isCurrent(token: ConversationSession.Token): Boolean {
         if (destroyed || !prefs.enabled || !session.accepts(token)) return false
         val live = rootInActiveWindow?.let { targetFor(it) }
-        if (live != token.target || !prefs.isAllowed(currentSnapshot?.title ?: live.title)) {
+        // A null re-extract is a transient accessibility glitch (list animation,
+        // node cache miss), NOT proof the chat was left — hiding there killed
+        // freshly rendered candidates on Soul and QQ. Identity checks apply
+        // only when we actually got a reading.
+        if (live != null && (!live.sameConversation(token.target) ||
+            !prefs.isAllowed(currentSnapshot?.title ?: live.title))) {
             leaveConversation()
             overlay?.hide()
             return false
@@ -139,6 +185,21 @@ open class ChatCaptureService : AccessibilityService() {
 
     private val debounce = Runnable { runAnalysis() }
     private var pendingSnapshot: ChatSnapshot? = null
+
+    /**
+     * #18: WINDOW_STATE_CHANGED blips — the notification shade, a permission
+     * dialog, a split-screen handle — are transient, but the drop branch below
+     * used to tear the bubble down the instant one arrived, and an open panel
+     * was lost mid-read. Hide only if the screen is STILL a drop-zone after a
+     * short grace period; any chat-app event in between cancels the hide.
+     */
+    private val confirmAwayHide = Runnable {
+        val fg = rootInActiveWindow?.packageName?.toString()
+        val stillAway = fg == null || fg == packageName ||
+            fg.contains("launcher", ignoreCase = true) ||
+            fg == "com.miui.home" || fg == "com.android.systemui"
+        if (stillAway) overlay?.hide()
+    }
     @Volatile private var currentSnapshot: ChatSnapshot? = null
     private var foregroundPkg: String? = null
 
@@ -206,6 +267,15 @@ open class ChatCaptureService : AccessibilityService() {
         if (!prefs.enabled) { leaveConversation(); overlay?.hide(); return }
 
         val type = event.eventType
+        // #18-4: our own overlay redraws ("generating…" → judgment → candidates)
+        // emit WINDOW_CONTENT_CHANGED / VIEW_SCROLLED carrying our package name.
+        // Reacting to them woke the service in a loop: re-read → re-analyze →
+        // redraw → …, which pinned the panel on "generating" forever. Window-state
+        // events keep flowing: the fg == packageName branch above still hides the
+        // bubble inside our own settings screens.
+        if (event.packageName?.toString() == packageName &&
+            (type == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED ||
+             type == AccessibilityEvent.TYPE_VIEW_SCROLLED)) return
         // Decide "did we leave the chat app" from the REAL active window, not the
         // event's package. The event package can be an IME (e.g. com.tencent.wetype)
         // or the status bar while the chat app is still foreground — keying off it
@@ -233,7 +303,14 @@ open class ChatCaptureService : AccessibilityService() {
                     fg.contains("launcher", ignoreCase = true) ||
                     fg == "com.miui.home" ||
                     fg == "com.android.systemui"
-                if (drop) overlay?.hide() else overlay?.showIdle(null)
+                if (drop) {
+                    // Grace period instead of an instant tear-down (see [confirmAwayHide]).
+                    main.removeCallbacks(confirmAwayHide)
+                    main.postDelayed(confirmAwayHide, FOREGROUND_CONFIRM_MS)
+                } else {
+                    main.removeCallbacks(confirmAwayHide)
+                    overlay?.showIdle(null)
+                }
                 return
             }
         }
@@ -246,6 +323,8 @@ open class ChatCaptureService : AccessibilityService() {
     }
 
     private fun maybeCapture() {
+        // The chat app is back (or never left): a pending hide confirmation is moot.
+        main.removeCallbacks(confirmAwayHide)
         val root = rootInActiveWindow ?: run { leaveConversation(); overlay?.hide(); return }
         val pkg = root.packageName?.toString()
         // WeChat is fully disabled — no tree read, no screenshot, no OCR, no fill.
@@ -361,7 +440,12 @@ open class ChatCaptureService : AccessibilityService() {
 
     private fun runAnalysis() {
         val snapshot = pendingSnapshot ?: return
-        if (analyzing || destroyed || !prefs.enabled) return
+        if (analyzing || destroyed || !prefs.enabled) {
+            // A lost round used to strand analyzing=true here forever, with
+            // nothing in logcat saying why updates stopped — never again.
+            if (analyzing) Log.w(TAG, "round skipped: previous round still in flight")
+            return
+        }
         val previous = session.token() ?: return
         if (!isCurrent(previous)) return
         if (!prefs.hasKey()) { overlay?.showError("未设置判断接口密钥，去设置里填"); return }
@@ -389,26 +473,45 @@ open class ChatCaptureService : AccessibilityService() {
                     }
                 }
                 submitAnalysis {
-                    val judgment = client.judge(snapshot, rel, ctx)
+                    val judgment = try {
+                        withHardTimeout(ROUND_TIMEOUT_MS, "判断接口") { client.judge(snapshot, rel, ctx) }
+                    } catch (e: Exception) {
+                        Log.w(TAG, "judge round failed: ${e.message}")
+                        null
+                    }
                     main.post {
                         if (isCurrent(token)) {
-                            if (judgment.error != null) overlay?.showError(judgment.error)
-                            else overlay?.showJudgment(judgment)
-                            completed()
+                            when {
+                                judgment == null -> overlay?.showError("判断接口超时，请重试")
+                                judgment.error != null -> overlay?.showError(judgment.error)
+                                else -> overlay?.showJudgment(judgment)
+                            }
                         }
+                        // Outside the guard: a stale session must never strand
+                        // analyzing=true — that bricked every later round.
+                        completed()
                     }
                 }
                 submitAnalysis {
                     var replyError: String? = null
-                    val ranked = try { client.draftAndRank(snapshot, rel, ctx) } catch (e: Exception) {
+                    val t0 = SystemClock.elapsedRealtime()
+                    val ranked = try {
+                        withHardTimeout(ROUND_TIMEOUT_MS, "回复接口") {
+                            client.draftAndRank(snapshot, rel, ctx)
+                        }
+                    } catch (e: Exception) {
                         replyError = e.message ?: e.javaClass.simpleName
+                        Log.w(TAG, "reply failed after ${SystemClock.elapsedRealtime() - t0}ms: $replyError")
                         emptyList()
+                    }
+                    if (replyError == null) {
+                        Log.i(TAG, "reply ok after ${SystemClock.elapsedRealtime() - t0}ms ranked=${ranked.size}")
                     }
                     main.post {
                         if (isCurrent(token)) {
                             overlay?.showReplies(ranked, replyError) { text -> fillInput(token, text) }
-                            completed()
                         }
+                        completed() // outside the guard: see the judge round
                     }
                 }
             }
@@ -717,6 +820,14 @@ open class ChatCaptureService : AccessibilityService() {
     companion object {
         private const val TAG = "JEVASSIST"
 
+        /** Hard ceiling on one round's judge/reply HTTP. HttpURLConnection bounds
+         *  connect/read per attempt but NOT DNS resolution, so a wedged lookup
+         *  could hold a round's callback forever (panel stuck on 生成中, every
+         *  later round silently dropped). Deliberately shorter than HttpJson's
+         *  own worst retry tail (~165s): a reply that takes >2min is worthless
+         *  anyway — better a clear timeout the user can retry from. */
+        private const val ROUND_TIMEOUT_MS = 120_000L
+
         /** WeChat's package. Reading it (node tree / screenshot / OCR) is what
          *  trips WeChat's anti-screenshot risk control, so it is fully disabled:
          *  no adapter, no capture, only a one-time "not supported" notice. */
@@ -726,6 +837,10 @@ open class ChatCaptureService : AccessibilityService() {
          *  punctuation; steers the user to a still-supported app. */
         private const val WECHAT_DISABLED_MSG =
             "微信已限制读取，请在别的软件上使用"
+
+        /** How long a transient non-chat foreground must persist before the
+         *  bubble is taken away (#18). */
+        private const val FOREGROUND_CONFIRM_MS = 1500L
 
         /** Whole-screen OCR keeps the middle: no action bar, no input area. */
         private const val TOP_CROP = 0.12f

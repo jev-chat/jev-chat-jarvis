@@ -7,7 +7,19 @@ internal class ConversationSession {
         val windowId: Int,
         val title: String?,
         val messagesSignature: String? = null
-    )
+    ) {
+        /**
+         * Conversation identity = app + window + chat title. Animated list nodes,
+         * read receipts and timestamp ticks change [messagesSignature] between two
+         * extractions of the SAME chat; treating that as "left the conversation"
+         * invalidated in-flight analyses the instant their result came back, so
+         * candidates flashed and the overlay hid itself (seen on Soul and QQ
+         * alike). Content changes are handled by the snapshot-signature path in
+         * the capture service, which re-runs analysis for genuinely new messages.
+         */
+        fun sameConversation(other: Target): Boolean =
+            pkg == other.pkg && windowId == other.windowId && title == other.title
+    }
     data class Token(val target: Target, val revision: Long)
 
     var target: Target? = null
@@ -15,7 +27,9 @@ internal class ConversationSession {
     private var revision = 0L
 
     fun observe(next: Target?): Boolean {
-        if (target == next) return false
+        val changed = if (target == null || next == null) target != next
+                      else !target!!.sameConversation(next)
+        if (!changed) { target = next; return false }
         target = next
         invalidate()
         return true
@@ -30,6 +44,8 @@ internal class ConversationSession {
         return token()
     }
 
-    fun accepts(token: Token): Boolean =
-        token.target == target && token.revision == revision
+    fun accepts(token: Token): Boolean {
+        val current = target ?: return false
+        return token.target.sameConversation(current) && token.revision == revision
+    }
 }
