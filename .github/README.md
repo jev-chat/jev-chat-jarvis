@@ -4,7 +4,7 @@
 
 # jev-chat
 
-### The chat decision assistant for WhatsApp, QQ, Feishu, X and more, on Android, Windows, macOS and iOS
+### The chat decision assistant
 
 **Read them first, then reply. Before you answer, Jev works out what the other person really means, how risky the moment is and how to respond, then drafts replies you can fill in with one tap. Whether to send is always up to you.**
 

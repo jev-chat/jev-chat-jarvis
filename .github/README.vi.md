@@ -4,7 +4,7 @@
 
 # jev-chat
 
-### Trợ lý ra quyết định khi trò chuyện cho WhatsApp, QQ, Feishu, X và nhiều ứng dụng khác, trên Android, Windows, macOS và iOS
+### Trợ lý ra quyết định khi trò chuyện
 
 **Đọc hiểu người kia trước, rồi mới trả lời. Trước khi bạn đáp, Jev xác định người kia thật sự muốn nói gì, tình huống rủi ro đến đâu và nên đáp thế nào, rồi soạn sẵn câu trả lời để bạn điền vào bằng một chạm. Gửi hay không luôn do bạn quyết định.**
 
