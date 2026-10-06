@@ -6,7 +6,7 @@
 
 **Read them first, then reply.**
 
-Jev reads the chat on your screen, works out what the other person means and how to respond, and drafts replies for you to pick from. It fills your choice into the message box. Whether to send is up to you.
+Jev reads the chat on your screen, works out what the other person means and how to respond, and drafts replies for you to pick from. It fills your choice into the message box. Whether to send is up to you. Available on Android, Windows, macOS and iOS.
 
 [![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
 [![Global edition](https://img.shields.io/badge/Global%20edition-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
@@ -19,9 +19,23 @@ Jev reads the chat on your screen, works out what the other person means and how
 
 </div>
 
+## What Is Jev
+
+Jev is a chat decision assistant. At its core is the Jev judgment model: before you reply, it works out what the other person really wants, how risky the conversation is and how you should respond, and only then drafts replies. Every Jev app only prepares the reply. You decide whether to send it.
+
+| Platform | Product | How you use it | Status |
+| :--- | :--- | :--- | :--- |
+| Android | [Jev for WhatsApp](../global/README.md) (global edition) | Overlay on WhatsApp chats in English | Preview v0.1.0 |
+| Android | [Jev Chat Assistant](../cn/README.en.md) (Chinese edition) | Overlay on QQ, Feishu, X and WhatsApp | v1.7 |
+| Windows | [Jev for Windows](https://github.com/jev-chat/jev-chat-windows) | Sits beside your chat window and reads it with screenshots and on-device OCR | Released |
+| macOS | [Jev for macOS](https://github.com/jev-chat/jev-chat-jarvis-mac) | Overlay that reads the chat on screen and judges with a local model | Released (Apple Silicon) |
+| iOS | [Jev Keyboard](https://github.com/jev-chat/jev-chat-jarvis-ios) | A custom keyboard: copy a message and see intent, risk and replies on the keyboard | Source only, build it yourself |
+
+Both Android editions live in this repository. The other platforms have their own repositories.
+
 ## How It Works
 
-1. **Read.** Jev reads the conversation shown on your screen through Android's accessibility service. It does not modify the chat app, log in to it or read its database.
+1. **Read.** Jev reads the conversation on your screen: through the accessibility service on Android, the chat window on desktop (screenshots with on-device OCR, or system text APIs), and the message you copy on iOS. It does not modify the chat app or log in to it.
 2. **Judge first.** Before any reply is written, a judgment model works out what the other person really wants, how risky the moment is and the best way to respond.
 3. **Draft, check, rank.** Jev drafts replies, checks them against that judgment and ranks them. Tap one to fill it into the message box. You press send.
 
@@ -35,15 +49,15 @@ Jev reads the chat on your screen, works out what the other person means and how
 
 ## Download
 
-| | Jev for WhatsApp (global edition) | Jev Chat Assistant (Chinese edition) |
-| :--- | :---: | :---: |
-| Best for | Chats in English | Chats in Chinese |
-| Chat apps | WhatsApp | QQ, Feishu, X, WhatsApp |
-| App language | English | Chinese |
-| Download | [**v0.1.0 APK**](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | [**v1.7 APK**](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) |
-| Docs | [Guide](../global/README.md) · [Changelog](../global/CHANGELOG.md) | [Guide](../cn/README.en.md) · [Changelog](../cn/CHANGELOG.md) |
+| Platform | Download | Requirements | Docs |
+| :--- | :--- | :--- | :--- |
+| Android · global edition | [**v0.1.0 APK**](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | Android 11+ | [Guide](../global/README.md) · [Changelog](../global/CHANGELOG.md) |
+| Android · Chinese edition | [**v1.7 APK**](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | Android 11+ · ARM64 | [Guide](../cn/README.en.md) · [Changelog](../cn/CHANGELOG.md) |
+| Windows | [Releases](https://github.com/jev-chat/jev-chat-windows/releases) | Windows 10 1903+ / 11 | [Project](https://github.com/jev-chat/jev-chat-windows) |
+| macOS | [Releases](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) | macOS 13+ · Apple Silicon | [Project](https://github.com/jev-chat/jev-chat-jarvis-mac) |
+| iOS | Build from source | Xcode | [Project](https://github.com/jev-chat/jev-chat-jarvis-ios) |
 
-Both editions need Android 11 or later and can be installed side by side. The global edition is built by [@smgonthebeat](https://github.com/smgonthebeat). Also available: [Jev for Windows](https://github.com/jev-chat/jev-chat-windows) · [Jev for macOS](https://github.com/jev-chat/jev-chat-jarvis-mac).
+The two Android editions can be installed side by side. The global edition is built by [@smgonthebeat](https://github.com/smgonthebeat).
 
 ## Sponsors
 
@@ -71,9 +85,9 @@ Both editions need Android 11 or later and can be installed side by side. The gl
 
 ## Privacy and Risk
 
-- Chat text, plus any background you turn on, goes only to the model provider you configure, with your own key. We run no server and never receive your chats.
-- The Chinese edition reads some apps with on-device OCR. Screenshots never leave the phone.
-- Privacy policies: [global edition](../global/PRIVACY.md) · [Chinese edition](../cn/PRIVACY.md)
+- Android: chat text, plus any background you turn on, goes only to the model provider you configure, with your own key. We run no server and never receive your chats. Screenshots used for OCR never leave the phone.
+- Windows, macOS and iOS: see each project's README for how it handles data.
+- Privacy policies (Android): [global edition](../global/PRIVACY.md) · [Chinese edition](../cn/PRIVACY.md)
 
 > **Use at your own risk:** Using Jev inside third-party apps such as QQ, Feishu, X, or WhatsApp may not comply with those apps' terms of service, and your account could be restricted or banned. Decide for yourself whether to use it.
 

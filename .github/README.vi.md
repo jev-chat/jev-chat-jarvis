@@ -6,7 +6,7 @@
 
 **Đọc hiểu người kia trước, rồi mới trả lời.**
 
-Jev đọc cuộc trò chuyện trên màn hình, hiểu người kia muốn gì và nên đáp thế nào, rồi soạn sẵn vài câu trả lời để bạn chọn. Câu bạn chọn được điền vào ô nhập; gửi hay không là do bạn.
+Jev đọc cuộc trò chuyện trên màn hình, hiểu người kia muốn gì và nên đáp thế nào, rồi soạn sẵn vài câu trả lời để bạn chọn. Câu bạn chọn được điền vào ô nhập; gửi hay không là do bạn. Có trên Android, Windows, macOS và iOS.
 
 [![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
 [![Bản quốc tế](https://img.shields.io/badge/Bản%20quốc%20tế-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
@@ -19,9 +19,23 @@ Jev đọc cuộc trò chuyện trên màn hình, hiểu người kia muốn gì
 
 </div>
 
+## Jev là gì
+
+Jev là công cụ hỗ trợ ra quyết định khi trò chuyện. Cốt lõi là mô hình đánh giá Jev: trước khi bạn trả lời, nó xác định người kia thật sự muốn gì, cuộc trò chuyện rủi ro đến đâu và bạn nên đáp thế nào, rồi mới soạn câu trả lời. Mọi ứng dụng Jev chỉ chuẩn bị câu trả lời; gửi hay không là do bạn.
+
+| Nền tảng | Sản phẩm | Cách dùng | Trạng thái |
+| :--- | :--- | :--- | :--- |
+| Android | [Jev for WhatsApp](../global/README.md) (bản quốc tế) | Cửa sổ nổi cho các cuộc trò chuyện WhatsApp bằng tiếng Anh | Bản xem trước v0.1.0 |
+| Android | [Jev Chat Assistant](../cn/README.vi.md) (bản tiếng Trung) | Cửa sổ nổi cho QQ, Feishu, X, WhatsApp | v1.7 |
+| Windows | [Jev cho Windows](https://github.com/jev-chat/jev-chat-windows) | Đặt cạnh cửa sổ chat, đọc tin nhắn bằng ảnh chụp cửa sổ và OCR trên máy | Đã phát hành |
+| macOS | [Jev cho macOS](https://github.com/jev-chat/jev-chat-jarvis-mac) | Cửa sổ nổi đọc cuộc trò chuyện trên màn hình, đánh giá bằng mô hình chạy trên máy | Đã phát hành (chip Apple) |
+| iOS | [Bàn phím Jev](https://github.com/jev-chat/jev-chat-jarvis-ios) | Bàn phím tùy chỉnh: sao chép tin nhắn để xem ý định, rủi ro và câu trả lời ngay trên bàn phím | Chỉ có mã nguồn, cần tự build |
+
+Hai phiên bản Android nằm trong kho mã này; các nền tảng khác có kho mã riêng.
+
 ## Cách hoạt động
 
-1. **Đọc.** Jev đọc cuộc trò chuyện đang hiển thị trên màn hình qua dịch vụ trợ năng của Android. Không sửa ứng dụng chat, không đăng nhập tài khoản, không đọc cơ sở dữ liệu của nó.
+1. **Đọc.** Jev đọc cuộc trò chuyện trên màn hình: qua dịch vụ trợ năng trên Android, qua cửa sổ chat trên máy tính (ảnh chụp kèm OCR trên máy, hoặc giao diện văn bản của hệ thống), và qua tin nhắn bạn sao chép trên iOS. Không sửa ứng dụng chat và không đăng nhập vào đó.
 2. **Đánh giá trước.** Trước khi viết câu trả lời, mô hình đánh giá xác định người kia thật sự muốn gì, tình huống rủi ro đến đâu và nên đáp thế nào.
 3. **Soạn, kiểm tra, xếp hạng.** Jev soạn vài câu trả lời, kiểm tra theo kết quả đánh giá rồi xếp hạng. Chạm vào một câu để điền vào ô nhập. Bạn tự nhấn gửi.
 
@@ -35,15 +49,15 @@ Jev đọc cuộc trò chuyện trên màn hình, hiểu người kia muốn gì
 
 ## Tải về
 
-| | Jev for WhatsApp (bản quốc tế) | Jev Chat Assistant (bản tiếng Trung) |
-| :--- | :---: | :---: |
-| Phù hợp với | Trò chuyện bằng tiếng Anh | Trò chuyện bằng tiếng Trung |
-| Ứng dụng chat | WhatsApp | QQ, Feishu, X, WhatsApp |
-| Ngôn ngữ giao diện | Tiếng Anh | Tiếng Trung |
-| Tải về | [**APK v0.1.0**](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | [**APK v1.7**](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) |
-| Tài liệu | [Hướng dẫn (tiếng Anh)](../global/README.md) · [Nhật ký thay đổi](../global/CHANGELOG.md) | [Hướng dẫn](../cn/README.vi.md) · [Nhật ký thay đổi](../cn/CHANGELOG.md) |
+| Nền tảng | Tải về | Yêu cầu | Tài liệu |
+| :--- | :--- | :--- | :--- |
+| Android · bản quốc tế | [**APK v0.1.0**](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | Android 11+ | [Hướng dẫn (tiếng Anh)](../global/README.md) · [Nhật ký thay đổi](../global/CHANGELOG.md) |
+| Android · bản tiếng Trung | [**APK v1.7**](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | Android 11+ · ARM64 | [Hướng dẫn](../cn/README.vi.md) · [Nhật ký thay đổi](../cn/CHANGELOG.md) |
+| Windows | [Trang phát hành](https://github.com/jev-chat/jev-chat-windows/releases) | Windows 10 1903+ / 11 | [Dự án](https://github.com/jev-chat/jev-chat-windows) |
+| macOS | [Trang phát hành](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) | macOS 13+ · chip Apple | [Dự án](https://github.com/jev-chat/jev-chat-jarvis-mac) |
+| iOS | Tự build từ mã nguồn | Xcode | [Dự án](https://github.com/jev-chat/jev-chat-jarvis-ios) |
 
-Cả hai phiên bản cần Android 11 trở lên và có thể cài cùng lúc trên một điện thoại. Bản quốc tế do [@smgonthebeat](https://github.com/smgonthebeat) phát triển. Ngoài ra còn có [bản Windows](https://github.com/jev-chat/jev-chat-windows) · [bản macOS](https://github.com/jev-chat/jev-chat-jarvis-mac).
+Hai phiên bản Android có thể cài cùng lúc trên một điện thoại. Bản quốc tế do [@smgonthebeat](https://github.com/smgonthebeat) phát triển.
 
 ## ❤️Nhà tài trợ
 
@@ -71,9 +85,9 @@ Cả hai phiên bản cần Android 11 trở lên và có thể cài cùng lúc 
 
 ## Quyền riêng tư và rủi ro
 
-- Nội dung trò chuyện và thông tin nền bạn bật chỉ được gửi tới nhà cung cấp mô hình do bạn cấu hình, bằng khóa của chính bạn. Chúng tôi không vận hành máy chủ nào và không nhận được cuộc trò chuyện của bạn.
-- Bản tiếng Trung đọc một số ứng dụng bằng OCR ngay trên điện thoại. Ảnh chụp màn hình không rời khỏi máy.
-- Chính sách quyền riêng tư: [bản quốc tế](../global/PRIVACY.md) · [bản tiếng Trung](../cn/PRIVACY.md)
+- Android: nội dung trò chuyện và thông tin nền bạn bật chỉ được gửi tới nhà cung cấp mô hình do bạn cấu hình, bằng khóa của chính bạn. Chúng tôi không vận hành máy chủ nào và không nhận được cuộc trò chuyện của bạn. Ảnh chụp dùng cho OCR không rời khỏi điện thoại.
+- Windows, macOS và iOS: xem README của từng dự án để biết cách xử lý dữ liệu.
+- Chính sách quyền riêng tư (Android): [bản quốc tế](../global/PRIVACY.md) · [bản tiếng Trung](../cn/PRIVACY.md)
 
 > **Rủi ro khi sử dụng:** Dùng trợ lý trong các ứng dụng bên thứ ba như QQ, 飞书, X hoặc WhatsApp có thể không phù hợp với thỏa thuận người dùng của ứng dụng đó, tài khoản có thể bị hạn chế hoặc khóa. Hãy tự cân nhắc trước khi sử dụng.
 

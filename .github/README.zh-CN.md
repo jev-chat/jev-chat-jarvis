@@ -6,7 +6,7 @@
 
 **回消息之前，先看懂对方。**
 
-Jev 读取你屏幕上的聊天，判断对方的真实意图和该怎么回，起草几条回复让你挑，再把你选的那条填进输入框。发不发，由你决定。
+Jev 读取你屏幕上的聊天，判断对方的真实意图和该怎么回，起草几条回复让你挑，再把你选的那条填进输入框。发不发，由你决定。支持 Android、Windows、macOS 和 iOS。
 
 [![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
 [![海外版](https://img.shields.io/badge/海外版-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
@@ -19,9 +19,23 @@ Jev 读取你屏幕上的聊天，判断对方的真实意图和该怎么回，�
 
 </div>
 
+## Jev 是什么
+
+Jev 是一套聊天辅助决策工具，核心是 Jev 判断模型：回消息之前，先判断对方真正想要什么、这段对话风险有多大、你该怎么回，然后才起草候选回复。每个端都只帮你准备回复，发不发由你决定。
+
+| 端 | 产品 | 怎么用 | 状态 |
+| :--- | :--- | :--- | :--- |
+| Android | [Jev for WhatsApp](../global/README.zh-CN.md)（海外版） | 悬浮窗，用于 WhatsApp 英文聊天 | 预览版 v0.1.0 |
+| Android | [Jev 聊天助手](../cn/README.md)（国内版） | 悬浮窗，用于 QQ、飞书、X、WhatsApp | v1.7 |
+| Windows | [Jev 聊天助手 Windows 版](https://github.com/jev-chat/jev-chat-windows) | 挂在聊天窗口旁，靠窗口截图和本地文字识别读消息 | 已发布 |
+| macOS | [Jev 聊天助手 macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac) | 悬浮窗，读屏幕上的聊天，用本地模型判断 | 已发布（Apple 芯片） |
+| iOS | [Jev 键盘](https://github.com/jev-chat/jev-chat-jarvis-ios) | 自定义键盘：复制对方的消息，键盘上直接出意图、风险和候选回复 | 只有源码，需自行编译 |
+
+两个 Android 版本在这个仓库里，其他端各有自己的仓库。
+
 ## 它怎么工作
 
-1. **读取**：通过安卓无障碍服务读取屏幕上正在显示的对话。不改聊天软件，不登录它的账号，不读它的数据库。
+1. **读取**：读取屏幕上正在显示的对话。Android 用无障碍服务，电脑端读聊天窗口（截图加本地文字识别，或系统文本接口），iOS 读你复制的消息。不改聊天软件，也不登录它的账号。
 2. **先判断**：写回复之前，判断模型先看清对方真正想要什么、这句话风险有多大、怎么回最合适。
 3. **起草、检查、排序**：按判断结果起草几条回复，检查后排好序。点一下填进输入框，发送键由你自己按。
 
@@ -35,15 +49,15 @@ Jev 读取你屏幕上的聊天，判断对方的真实意图和该怎么回，�
 
 ## 下载
 
-| | Jev for WhatsApp（海外版） | Jev 聊天助手（国内版） |
-| :--- | :---: | :---: |
-| 适合 | 用英文聊天 | 用中文聊天 |
-| 支持的 App | WhatsApp | QQ、飞书、X、WhatsApp |
-| 界面语言 | 英文 | 中文 |
-| 下载 | [**v0.1.0 APK**](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | [**v1.7 APK**](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) |
-| 文档 | [说明](../global/README.zh-CN.md) · [更新日志](../global/CHANGELOG.md) | [使用说明](../cn/README.md) · [更新日志](../cn/CHANGELOG.md) |
+| 端 | 下载 | 要求 | 文档 |
+| :--- | :--- | :--- | :--- |
+| Android · 海外版 | [**v0.1.0 APK**](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | Android 11+ | [说明](../global/README.zh-CN.md) · [更新日志](../global/CHANGELOG.md) |
+| Android · 国内版 | [**v1.7 APK**](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | Android 11+ · ARM64 | [使用说明](../cn/README.md) · [更新日志](../cn/CHANGELOG.md) |
+| Windows | [发布页](https://github.com/jev-chat/jev-chat-windows/releases) | Windows 10 1903+ / 11 | [项目说明](https://github.com/jev-chat/jev-chat-windows) |
+| macOS | [发布页](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) | macOS 13+ · Apple 芯片 | [项目说明](https://github.com/jev-chat/jev-chat-jarvis-mac) |
+| iOS | 自行编译 | Xcode | [项目说明](https://github.com/jev-chat/jev-chat-jarvis-ios) |
 
-两个版本都需要 Android 11 及以上，可以装在同一台手机上。海外版由 [@smgonthebeat](https://github.com/smgonthebeat) 开发。另有 [Windows 版](https://github.com/jev-chat/jev-chat-windows) · [macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac)。
+两个 Android 版本可以装在同一台手机上。海外版由 [@smgonthebeat](https://github.com/smgonthebeat) 开发。
 
 ## ❤️赞助商
 
@@ -71,9 +85,9 @@ Jev 读取你屏幕上的聊天，判断对方的真实意图和该怎么回，�
 
 ## 隐私与风险
 
-- 聊天文字和你开启的背景信息，只发给你自己配置的模型服务商，用的是你自己的密钥。作者不运营服务器，收不到你的聊天。
-- 国内版有些 App 靠手机本地 OCR 识别，截图不出手机。
-- 隐私政策：[海外版](../global/PRIVACY.md) · [国内版](../cn/PRIVACY.md)
+- Android：聊天文字和你开启的背景信息，只发给你自己配置的模型服务商，用的是你自己的密钥。作者不运营服务器，收不到你的聊天。用来识别文字的截图不出手机。
+- Windows、macOS、iOS 怎么处理数据，见各自的项目说明。
+- 隐私政策（Android）：[海外版](../global/PRIVACY.md) · [国内版](../cn/PRIVACY.md)
 
 > **使用风险**：在 QQ、飞书、X、WhatsApp 等第三方 App 里使用本助手，可能不符合该 App 的用户协议，账号有被限制或封禁的风险，请自行判断是否使用。
 
