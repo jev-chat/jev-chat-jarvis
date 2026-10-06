@@ -38,12 +38,7 @@ Jev đọc cuộc trò chuyện trên màn hình, hiểu người kia muốn gì
 
 <div align="center">
 
-[![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
-[![Bản quốc tế](https://img.shields.io/badge/Bản%20quốc%20tế-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
-[![Bản tiếng Trung](https://img.shields.io/badge/Bản%20tiếng%20Trung-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
-[![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
-
-[Trang web](https://chatjevs.com) · [Tải về](#tải-về) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
+[Trang web](https://chatjevs.com) · [Tải về](#tải-về) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases) · [![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
 
 </div>
 
@@ -116,3 +111,9 @@ Copyright © 2026 Finderchangchang và những người đóng góp cho jev-chat
 - Không dùng tên “Jev 聊天助手”, “jev-chat” hoặc tên miền chatjevs.com để gợi ý rằng sản phẩm do tác giả gốc phát hành hoặc chứng thực.
 
 **Quyền riêng tư và miễn trừ trách nhiệm**: khi kích hoạt phân tích, nội dung trò chuyện và thông tin nền đang bật sẽ được gửi tới nhà cung cấp mô hình bên thứ ba do bạn tự cấu hình; ảnh chụp màn hình chỉ được OCR trên máy. Vui lòng đọc [chính sách quyền riêng tư](../cn/PRIVACY.md) cùng chính sách của nhà cung cấp đã chọn và tuân thủ điều khoản của QQ, X, 飞书, WhatsApp và các phần mềm khác cùng pháp luật và quy định địa phương. Tác giả không chịu trách nhiệm về hành vi xử lý dữ liệu hoặc hậu quả sử dụng của nhà cung cấp bên thứ ba.
+
+<div align="center">
+
+[![Bản quốc tế](https://img.shields.io/badge/Bản%20quốc%20tế-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md) [![Bản tiếng Trung](https://img.shields.io/badge/Bản%20tiếng%20Trung-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md) [![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
+
+</div>

@@ -38,12 +38,7 @@ Jev 读取你屏幕上的聊天，判断对方的真实意图和该怎么回，�
 
 <div align="center">
 
-[![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
-[![海外版](https://img.shields.io/badge/海外版-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
-[![国内版](https://img.shields.io/badge/国内版-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
-[![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
-
-[官网](https://chatjevs.com) · [下载](#下载) · [安装与设置指南](https://chatjevs.com/guides/android-setup.html) · [候选回复使用建议](https://chatjevs.com/guides/review-ai-replies.html) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
+[官网](https://chatjevs.com) · [下载](#下载) · [安装与设置指南](https://chatjevs.com/guides/android-setup.html) · [候选回复使用建议](https://chatjevs.com/guides/review-ai-replies.html) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases) · [![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
 
 </div>
 
@@ -142,3 +137,9 @@ Copyright © 2026 Finderchangchang 与 jev-chat 贡献者。代码以 [MIT](../L
 - 不要用「Jev 聊天助手」「jev-chat」名称或 chatjevs.com 域名暗示由原作者出品或背书。
 
 **隐私与免责声明**：触发分析时，聊天文字和启用的背景信息会发送到你自行配置的第三方模型服务商；截图仅在本机 OCR。请阅读[隐私政策](../cn/PRIVACY.md)以及所选服务商的政策，并遵守 QQ、X、飞书、WhatsApp 等软件的用户协议与当地法律法规；因违反第三方 App 用户协议导致的账号限制等后果由使用者自行承担。作者不对第三方服务商的数据处理行为或使用后果负责。
+
+<div align="center">
+
+[![海外版](https://img.shields.io/badge/海外版-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md) [![国内版](https://img.shields.io/badge/国内版-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md) [![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
+
+</div>
