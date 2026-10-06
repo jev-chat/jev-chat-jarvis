@@ -1,39 +1,35 @@
 <div align="center">
 
-<img src="assets/images/logo.png" width="150" alt="Jev 聊天助手" />
+<img src="assets/images/logo.png" width="140" alt="Jev 聊天助手" />
 
 # Jev 聊天助手
 
-**Jev 对话副驾：在支持的平台分析聊天并给出回复建议；各端功能见对应项目说明，发送由你决定。**
+**回消息之前，先看懂对方。**
+
+Jev 读取你屏幕上的聊天，判断对方的真实意图和该怎么回，起草几条回复让你挑，再把你选的那条填进输入框。发不发，由你决定。
 
 [![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
-[![Forks](https://img.shields.io/github/forks/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Forks)](https://github.com/jev-chat/jev-chat-jarvis/forks)
-[![海外版](https://img.shields.io/badge/%E6%B5%B7%E5%A4%96%E7%89%88-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
-[![Version](https://img.shields.io/badge/%E5%9B%BD%E5%86%85%E7%89%88-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
+[![海外版](https://img.shields.io/badge/海外版-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
+[![国内版](https://img.shields.io/badge/国内版-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
 [![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
 
-[官网](https://chatjevs.com) · [安装与设置指南](https://chatjevs.com/guides/android-setup.html) · [候选回复使用建议](https://chatjevs.com/guides/review-ai-replies.html) · 隐私政策：[海外版](../global/PRIVACY.md) · [国内版](../cn/PRIVACY.md) · 更新日志：[海外版](../global/CHANGELOG.md) · [国内版](../cn/CHANGELOG.md)
+[官网](https://chatjevs.com) · [安装与设置指南](https://chatjevs.com/guides/android-setup.html) · [候选回复使用建议](https://chatjevs.com/guides/review-ai-replies.html) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
 
 [English](README.md) · **简体中文** · [Tiếng Việt](README.vi.md)
 
 </div>
 
-## 选择版本
+## 下载
 
-| 海外版 · Android | 国内版 · Android | Windows | macOS |
-| :---: | :---: | :---: | :---: |
-| [下载 v0.1.0 APK](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | [下载 v1.7 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | [获取 Windows 版](https://github.com/jev-chat/jev-chat-windows/releases) | [获取 macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
-| 英文界面 · WhatsApp | 中文界面 · QQ / 飞书 / X / WhatsApp | 聊天窗口旁的回复辅助 | 消息意图识别悬浮窗 |
-| Android 11+ · [说明](../global/README.zh-CN.md) | Android 11+ · ARM64 · [使用说明](../cn/README.md) | Windows 10 1903+ / 11 · [说明](https://github.com/jev-chat/jev-chat-windows#使用说明) | macOS 13+ · Apple Silicon · [说明](https://github.com/jev-chat/jev-chat-jarvis-mac#用法) |
+| | Jev for WhatsApp（海外版） | Jev 聊天助手（国内版） |
+| :--- | :---: | :---: |
+| 适合 | 用英文聊天 | 用中文聊天 |
+| 支持的 App | WhatsApp | QQ、飞书、X、WhatsApp |
+| 界面语言 | 英文 | 中文 |
+| 下载 | [**v0.1.0 APK**](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | [**v1.7 APK**](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) |
+| 文档 | [说明](../global/README.zh-CN.md) · [更新日志](../global/CHANGELOG.md) | [使用说明](../cn/README.md) · [更新日志](../cn/CHANGELOG.md) |
 
-两个 Android 版本都在这个仓库里开发，可以装在同一台手机上：
-
-- **海外版**（[`global/`](../global/)，Jev for WhatsApp）：面向英文用户，由 [@smgonthebeat](https://github.com/smgonthebeat) 主导开发。读取屏幕上的聊天，判断对方要什么，起草两条回复并逐条检查打分，把你选的那条填进输入框。读取方式、判断题库和回复语料都按海外的聊天习惯单独设计，先支持 WhatsApp，之后接入更多海外聊天 App。
-- **国内版**（[`cn/`](../cn/)）：面向中文用户，支持国内常用的聊天 App；用 WhatsApp 跟外国朋友、客户聊天也能用。
-
-如果项目对你有帮助，欢迎点击本仓库右上角的 **Star**，支持后续维护。获取和使用无需先加星或关注。
-
-**安装教程 · 交流更新：**[海外版说明](../global/README.zh-CN.md) · [国内版安装说明](../cn/README.md#快速开始) · [Windows 项目说明](https://github.com/jev-chat/jev-chat-windows#使用说明) · [macOS 项目说明](https://github.com/jev-chat/jev-chat-jarvis-mac#用法) · [交流群与公众号](#交流群--需求收集)。
+两个版本都需要 Android 11 及以上，可以装在同一台手机上。海外版由 [@smgonthebeat](https://github.com/smgonthebeat) 开发。另有 [Windows 版](https://github.com/jev-chat/jev-chat-windows) · [macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac)。
 
 ## ❤️赞助商
 
@@ -59,7 +55,11 @@
 
 </details>
 
-## 截图
+## 它怎么工作
+
+1. **读取**：通过安卓无障碍服务读取屏幕上正在显示的对话。不改聊天软件，不登录它的账号，不读它的数据库。
+2. **先判断**：写回复之前，判断模型先看清对方真正想要什么、这句话风险有多大、怎么回最合适。
+3. **起草、检查、排序**：按判断结果起草几条回复，检查后排好序。点一下填进输入框，发送键由你自己按。
 
 <table align="center">
 <tr>
@@ -69,17 +69,19 @@
 </tr>
 </table>
 
-## 为什么用它
+## 隐私与风险
 
-- **它先判断，再写字。** 大多数工具直接让模型编一句回复。Jev 先用判断模型给出对方真实意图、危险等级、该不该马上回，再据此起草回复。
-- **不动你的聊天软件。** 不 hook、不改包、不走任何 App 的接口或账号、不读数据库，只用系统无障碍服务读「屏幕上正在显示的对话」。
-- **发送权永远在你手里。** 程序只把回复填进输入框，从不自动发送，不碰转账 / 红包 / 收款。
+- 聊天文字和你开启的背景信息，只发给你自己配置的模型服务商，用的是你自己的密钥。作者不运营服务器，收不到你的聊天。
+- 国内版有些 App 靠手机本地 OCR 识别，截图不出手机。
+- 隐私政策：[海外版](../global/PRIVACY.md) · [国内版](../cn/PRIVACY.md)
 
 > **使用风险**：在 QQ、飞书、X、WhatsApp 等第三方 App 里使用本助手，可能不符合该 App 的用户协议，账号有被限制或封禁的风险，请自行判断是否使用。
 
 ## 交流群 / 需求收集
 
-海外版的问题请用 [WhatsApp 问题模板](https://github.com/jev-chat/jev-chat-jarvis/issues/new?template=whatsapp-assistant-bug.md) 提 issue。
+- 海外版的问题：用 [WhatsApp 问题模板](https://github.com/jev-chat/jev-chat-jarvis/issues/new?template=whatsapp-assistant-bug.md) 提 issue。
+- 其他问题：[提 issue](https://github.com/jev-chat/jev-chat-jarvis/issues)，或者公众号私信。
+- 如果项目对你有帮助，欢迎点右上角的 **Star**，支持后续维护。获取和使用无需先加星或关注。
 
 **扫码关注公众号可查看项目更新；需要联系时请公众号私信。** 合作、赞助、反馈、进群失败、二维码过期，都走公众号私信，其它渠道不一定看得到。
 
@@ -103,15 +105,6 @@
 </tr></table>
 
 </details>
-
-## 姊妹项目
-
-同在 [jev-chat](https://github.com/jev-chat) 组织下：
-
-- [Jev 聊天助手 macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac)：消息意图识别悬浮窗，看屏 + 本地小模型判断意图和风险，再按话术生成回复候选，纯只读。
-- [Jev 聊天助手 Windows 版](https://github.com/jev-chat/jev-chat-windows)：聊天窗口旁挂的回复辅助，窗口截图 + 本地离线 OCR，3 条候选一键填入，发送永远手动。
-
-隐私政策见[海外版](../global/PRIVACY.md)和[国内版](../cn/PRIVACY.md)（说明读取了什么、发给谁、存在哪里、怎么删除）。
 
 ## 友情链接
 
