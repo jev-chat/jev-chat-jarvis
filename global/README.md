@@ -19,11 +19,11 @@
 
 | Android |
 | :---: |
-| [Download the APK (v0.1.0)](https://github.com/jev-chat/jev-chat-jarvis/releases/tag/whatsapp-v0.1.0) |
+| Release coming soon |
 | Android 11+ · any CPU · 10.6 MB · English chats |
 
 This is the English, WhatsApp-only edition of Jev. It is a separate app from the
-Chinese [Jev Chat Assistant](../.github/README.en.md) (QQ, X, Feishu) in the repository root:
+Chinese edition ([`cn/`](../cn/README.en.md): QQ, X, Feishu, WhatsApp) in the same repository:
 its own package (`com.jev.overseas`), its own engine and its own build. Both can be
 installed on the same phone.
 
@@ -117,9 +117,8 @@ Jev only reads chats on your own device that you can see yourself.
 
 ## Quick start
 
-**1. Install.** Download the signed release APK:
-[jev-whatsapp-v0.1.0-release.apk](https://github.com/jev-chat/jev-chat-jarvis/releases/tag/whatsapp-v0.1.0)
-(Android 11+). Or with adb:
+**1. Install.** The signed release APK (Android 11+) will be published on the
+[Releases](https://github.com/jev-chat/jev-chat-jarvis/releases) page soon. Install it from there, or with adb:
 
 ```bash
 adb install -r jev-whatsapp-v0.1.0-release.apk
@@ -347,7 +346,7 @@ which chats and situations you would most like Jev to handle.
 
 In the [jev-chat](https://github.com/jev-chat) organisation:
 
-- [Jev Chat Assistant for Android](../.github/README.en.md): QQ, X and Feishu, for chats in Chinese.
+- [Jev Chat Assistant, Chinese edition](../cn/README.en.md): QQ, X, Feishu and WhatsApp, for chats in Chinese.
 - [Jev for macOS](https://github.com/jev-chat/jev-chat-jarvis-mac) and
   [Jev for Windows](https://github.com/jev-chat/jev-chat-windows): desktop chat windows.
 

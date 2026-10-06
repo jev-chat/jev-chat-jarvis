@@ -1,129 +1,132 @@
 <div align="center">
 
-<img src="assets/images/logo.png" width="150" alt="Jev 聊天助手" />
+<img src="assets/images/logo.png" width="150" alt="Jev Chat Assistant" />
 
-# Jev 聊天助手
+# Jev Chat Assistant
 
-**Jev 对话副驾：在支持的平台分析聊天并给出回复建议；各端功能见对应项目说明，发送由你决定。**
+**A conversation copilot for your phone. Jev works alongside your chat apps, helps you understand what the other person means, and suggests what to say next. Tap to fill in a reply. You decide whether to send it.**
 
 [![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
 [![Forks](https://img.shields.io/github/forks/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Forks)](https://github.com/jev-chat/jev-chat-jarvis/forks)
-[![Version](https://img.shields.io/badge/%E5%9B%BD%E5%86%85%E7%89%88-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
+[![Global edition](https://img.shields.io/badge/Global%20edition-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Chinese%20edition-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
+[![Android](https://img.shields.io/badge/Android-11%2B-3DDC84?style=flat-square&logo=android&logoColor=white)](../global/README.md#quick-start)
 [![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
 
-[官网](https://chatjevs.com) · [安装与设置指南](https://chatjevs.com/guides/android-setup.html) · [候选回复使用建议](https://chatjevs.com/guides/review-ai-replies.html) · [隐私政策](../cn/PRIVACY.md) · [更新日志](../cn/CHANGELOG.md)
+[Website](https://chatjevs.com) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases) · Changelogs: [global](../global/CHANGELOG.md) · [Chinese](../cn/CHANGELOG.md) · [macOS](https://github.com/jev-chat/jev-chat-mac) · [Windows](https://github.com/jev-chat/jev-chat-windows)
 
-**简体中文** · [English](README.en.md) · [Tiếng Việt](README.vi.md)
+**English** · [简体中文](README.zh-CN.md) · [Tiếng Việt](README.vi.md)
 
 </div>
 
-## 选择版本
+## Choose Your Edition
 
-| 国内版 · Android | 海外版 · Android | Windows | macOS |
+| Global edition · Android | Chinese edition · Android | Windows | macOS |
 | :---: | :---: | :---: | :---: |
-| [下载 v1.7 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | 即将推出 | [获取 Windows 版](https://github.com/jev-chat/jev-chat-windows/releases) | [获取 macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
-| 中文界面 · QQ / 飞书 / X / WhatsApp | 英文界面 · 先支持 WhatsApp | 聊天窗口旁的回复辅助 | 消息意图识别悬浮窗 |
-| Android 11+ · ARM64 · [使用说明](../cn/README.md) | [@smgonthebeat](https://github.com/smgonthebeat) 主导开发 | Windows 10 1903+ / 11 · [说明](https://github.com/jev-chat/jev-chat-windows#使用说明) | macOS 13+ · Apple Silicon · [说明](https://github.com/jev-chat/jev-chat-jarvis-mac#用法) |
+| Release coming soon | [Download v1.7 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | [Get Jev for Windows](https://github.com/jev-chat/jev-chat-windows/releases) | [Get Jev for macOS](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
+| English UI · WhatsApp | Chinese UI · QQ / Feishu / X / WhatsApp | Reply helper beside your chat window | Message intent overlay |
+| Android 11+ · [Guide](../global/README.md) | Android 11+ · ARM64 · [Guide](../cn/README.en.md) | Windows 10 1903+ / 11 | macOS 13+ · Apple Silicon |
 
-两个 Android 版本都在这个仓库里开发，可以装在同一台手机上：
+Both Android editions live in this repository and can be installed side by side on the same phone:
 
-- **国内版**（[`cn/`](../cn/)）：面向中文用户，支持国内常用的聊天 App；用 WhatsApp 跟外国朋友、客户聊天也能用。
-- **海外版**（`global/`，即将推出）：面向英文用户。读取方式、判断题库和回复语料都按海外的聊天习惯单独设计，先支持 WhatsApp，之后接入更多海外聊天 App。
+- **Global edition** ([`global/`](../global/), Jev for WhatsApp): built for English-speaking users by [@smgonthebeat](https://github.com/smgonthebeat). It reads the chat on screen, works out what the other person wants, drafts two replies, checks and scores them, and fills the one you pick into the message box. Message reading, the assessment question bank and the reply corpus are designed around how people chat outside China. WhatsApp comes first, with more chat apps to follow.
+- **Chinese edition** ([`cn/`](../cn/)): built for Chinese-speaking users and the chat apps popular in China. It also works on WhatsApp, with a Chinese interface.
 
-如果项目对你有帮助，欢迎点击本仓库右上角的 **Star**，支持后续维护。获取和使用无需先加星或关注。
+If Jev is useful to you, a **Star** on this repository helps us keep it going. You don't need to star or follow anything to download or use it.
 
-**安装教程 · 交流更新：**[国内版安装说明](../cn/README.md#快速开始) · [Windows 项目说明](https://github.com/jev-chat/jev-chat-windows#使用说明) · [macOS 项目说明](https://github.com/jev-chat/jev-chat-jarvis-mac#用法) · [交流群与公众号](#交流群--需求收集)。
+## Sponsors
 
-## ❤️赞助商
-
-> [想出现在这里？](#交流群--需求收集)
+> [Interested in sponsoring the project?](#community-and-feedback)
 
 <details open>
-<summary>点击折叠</summary>
+<summary>Show or hide sponsors</summary>
 
 <table>
 <tr>
-<td width="240" align="center"><a href="https://open.bocha.cn"><img src="assets/images/sponsors/bocha.png" alt="博查" width="200"></a></td>
-<td>感谢 <b>博查</b> 赞助了本项目！博查是一个给 AI 用的搜索引擎，让你的 AI 应用连接世界知识，获得干净、准确、高质量的搜索结果。提供 Web Search API、Bocha Jev API 等多种联网搜索和模型服务。<a href="https://open.bocha.cn">open.bocha.cn</a></td>
+<td width="240" align="center"><a href="https://open.bocha.cn"><img src="assets/images/sponsors/bocha.png" alt="Bocha" width="200"></a></td>
+<td>Thanks to <b>Bocha</b> for sponsoring this project! Bocha is a search engine for AI, giving your applications access to information from across the web with clean, accurate, high-quality results. Its services include the Web Search API, Bocha Jev API, and other search and model APIs. <a href="https://open.bocha.cn">open.bocha.cn</a></td>
 </tr>
 <tr>
-<td width="240" align="center"><a href="https://faka.rainlanguage.top"><img src="assets/images/sponsors/xiaoyou.png" alt="小优店铺" width="200"></a></td>
-<td>感谢 <b>小优店铺</b> 赞助了本项目！小优店铺是一家数字商品与账号服务店铺，为本项目的用户提供选购渠道。<a href="https://faka.rainlanguage.top">点此前往</a>。</td>
+<td width="240" align="center"><a href="https://faka.rainlanguage.top"><img src="assets/images/sponsors/xiaoyou.png" alt="Xiaoyou Store" width="200"></a></td>
+<td>Thanks to <b>Xiaoyou Store</b> for sponsoring this project! Xiaoyou Store sells digital products and account services, with a selection available to users of this project. <a href="https://faka.rainlanguage.top">Visit the store</a>.</td>
 </tr>
 <tr>
-<td width="240" align="center"><a href="https://agent.ai-tools.cn"><img src="assets/images/sponsors/vytal.jpg" alt="速创猫 Vytal" width="200"></a></td>
-<td>感谢 <b>速创猫 Vytal</b> 赞助了本项目！速创猫 Vytal 是专业的 AI 视频工作流平台，提供可批量复用的视频工作流，降低内容制作门槛，服务内容创作者、培训机构及中小团队。<a href="https://agent.ai-tools.cn">点此前往</a>。</td>
+<td width="240" align="center"><a href="https://agent.ai-tools.cn"><img src="assets/images/sponsors/vytal.jpg" alt="Vytal" width="200"></a></td>
+<td>Thanks to <b>Vytal</b> for sponsoring this project! Vytal is an AI video workflow platform with reusable workflows for batch production, making video creation more accessible to content creators, training providers, and small teams. <a href="https://agent.ai-tools.cn">Visit Vytal</a>.</td>
 </tr>
 </table>
 
 </details>
 
-## 截图（国内版）
+## Screenshots
 
 <table align="center">
 <tr>
-<td align="center"><img src="assets/images/overlay.png" width="300" alt="悬浮窗：聊天上方的 Jev 分析面板" /><br/><sub>悬浮窗：危险等级、对方真实意图、排好序的 3 条候选回复</sub></td>
-<td align="center"><img src="assets/images/settings.png" width="300" alt="设置页" /><br/><sub>设置页：判断 / 回复 / 视觉三路接口分别可配</sub></td>
+<td align="center"><img src="../global/docs/images/states/02-decide.png" width="230" alt="Global edition: what they want, then your options" /><br/><sub>Global edition: what they want, then your options</sub></td>
+<td align="center"><img src="../global/docs/images/states/04-results.png" width="230" alt="Global edition: two replies, scored out of 5" /><br/><sub>Global edition: two replies, scored out of 5</sub></td>
+<td align="center"><img src="assets/images/overlay.png" width="230" alt="Chinese edition: risk level, intent and three ranked replies" /><br/><sub>Chinese edition: risk level, intent and three ranked replies</sub></td>
 </tr>
 </table>
 
-## 为什么用它
+## Why Jev?
 
-- **它先判断，再写字。** 大多数工具直接让模型编一句回复。Jev 先用判断模型给出对方真实意图、危险等级、该不该马上回，再据此起草回复。
-- **不动你的聊天软件。** 不 hook、不改包、不走任何 App 的接口或账号、不读数据库，只用系统无障碍服务读「屏幕上正在显示的对话」。
-- **发送权永远在你手里。** 程序只把回复填进输入框，从不自动发送，不碰转账 / 红包 / 收款。
+- **It assesses the conversation before drafting a reply.** Most tools simply ask a model to write a response. Jev first uses an assessment model to identify the other person's intent, gauge the risk, and decide whether a reply can wait. That assessment guides its suggestions.
+- **It leaves your chat apps alone.** No hooking, modified app packages, access to app APIs or accounts, or database reads. Jev uses Android's accessibility service to read the conversation currently visible on your screen.
+- **You're always in control of sending.** Jev only fills in the text field. It never sends messages automatically or interacts with transfers, red packets, or payment collection.
 
-> **使用风险**：在 QQ、飞书、X、WhatsApp 等第三方 App 里使用本助手，可能不符合该 App 的用户协议，账号有被限制或封禁的风险，请自行判断是否使用。
+> **Use at your own risk:** Using Jev inside third-party apps such as QQ, Feishu, X, or WhatsApp may not comply with those apps' terms of service, and your account could be restricted or banned. Decide for yourself whether to use it.
 
-## 交流群 / 需求收集
+## Community and Feedback
 
-**扫码关注公众号可查看项目更新；需要联系时请公众号私信。** 合作、赞助、反馈、进群失败、二维码过期，都走公众号私信，其它渠道不一定看得到。
+For the global edition, report problems with the [WhatsApp bug template](https://github.com/jev-chat/jev-chat-jarvis/issues/new?template=whatsapp-assistant-bug.md).
 
-<p align="center"><img src="assets/images/mp-qr.png" width="180" alt="公众号二维码" /></p>
+**Please get in touch by messaging the WeChat official account.** Use it for partnerships, sponsorships, feedback, trouble joining a group, or expired QR codes. Messages sent elsewhere may be missed.
 
-想听真实需求：你在哪个聊天 App 上最想要这个副驾？希望它判断什么、怎么提示、什么绝对不能碰？公众号私信直接说。
+<p align="center"><img src="assets/images/mp-qr.png" width="180" alt="WeChat official account QR code" /></p>
+
+We'd love to hear what you actually need. Which chat app would you most like to use Jev with? What should it pick up on, how should it alert you, and what should it never touch? Send your thoughts to the official account.
 
 <details>
-<summary>点击展开交流群二维码（都已满或已过期，进群请公众号私信要新码）</summary>
+<summary>Show community group QR codes. These groups are full or their QR codes have expired; message the official account for a current code.</summary>
 
 <table align="center"><tr>
-  <td align="center"><img src="assets/images/group-1.png" width="80" alt="1 群" /><br/><sub>1 群</sub></td>
-  <td align="center"><img src="assets/images/group-2.png" width="80" alt="2 群" /><br/><sub>2 群</sub></td>
-  <td align="center"><img src="assets/images/group-3.png" width="80" alt="3 群" /><br/><sub>3 群</sub></td>
-  <td align="center"><img src="assets/images/group-4.png" width="80" alt="4 群" /><br/><sub>4 群</sub></td>
-  <td align="center"><img src="assets/images/group-5.png" width="80" alt="5 群" /><br/><sub>5 群</sub></td>
-  <td align="center"><img src="assets/images/group-6.png" width="80" alt="6 群" /><br/><sub>6 群</sub></td>
-  <td align="center"><img src="assets/images/group-7.png" width="80" alt="7 群" /><br/><sub>7 群</sub></td>
-  <td align="center"><img src="assets/images/group-8.png" width="80" alt="8 群" /><br/><sub>8 群</sub></td>
-  <td align="center"><img src="assets/images/group-9.png" width="80" alt="9 群" /><br/><sub>9 群</sub></td>
+  <td align="center"><img src="assets/images/group-1.png" width="80" alt="Group 1" /><br/><sub>Group 1</sub></td>
+  <td align="center"><img src="assets/images/group-2.png" width="80" alt="Group 2" /><br/><sub>Group 2</sub></td>
+  <td align="center"><img src="assets/images/group-3.png" width="80" alt="Group 3" /><br/><sub>Group 3</sub></td>
+  <td align="center"><img src="assets/images/group-4.png" width="80" alt="Group 4" /><br/><sub>Group 4</sub></td>
+  <td align="center"><img src="assets/images/group-5.png" width="80" alt="Group 5" /><br/><sub>Group 5</sub></td>
+  <td align="center"><img src="assets/images/group-6.png" width="80" alt="Group 6" /><br/><sub>Group 6</sub></td>
+  <td align="center"><img src="assets/images/group-7.png" width="80" alt="Group 7" /><br/><sub>Group 7</sub></td>
+  <td align="center"><img src="assets/images/group-8.png" width="80" alt="Group 8" /><br/><sub>Group 8</sub></td>
+  <td align="center"><img src="assets/images/group-9.png" width="80" alt="Group 9" /><br/><sub>Group 9</sub></td>
 </tr></table>
 
 </details>
 
-## 姊妹项目
+## Related Projects
 
-同在 [jev-chat](https://github.com/jev-chat) 组织下：
+Also part of the [jev-chat](https://github.com/jev-chat) organization:
 
-- [Jev 聊天助手 macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac)：消息意图识别悬浮窗，看屏 + 本地小模型判断意图和风险，再按话术生成回复候选，纯只读。
-- [Jev 聊天助手 Windows 版](https://github.com/jev-chat/jev-chat-windows)：聊天窗口旁挂的回复辅助，窗口截图 + 本地离线 OCR，3 条候选一键填入，发送永远手动。
+- [Jev Chat Assistant for macOS](https://github.com/jev-chat/jev-chat-jarvis-mac): A read-only overlay that reads the screen, uses a small local model to assess intent and risk, and generates suggested replies based on conversation guidance.
+- [Jev Chat Assistant for Windows](https://github.com/jev-chat/jev-chat-windows): A reply assistant that sits beside your chat window. Uses window screenshots and local offline OCR, with three suggested replies you can insert with a click. Sending is always manual.
 
-隐私政策见 [PRIVACY.md](../cn/PRIVACY.md)（说明读取了什么、发给谁、存在哪里、怎么删除）。
+See the privacy policies of the [global edition](../global/PRIVACY.md) and the [Chinese edition](../cn/PRIVACY.md) for details on what is read, where it is sent and stored, and how to delete it.
 
-## 友情链接
+## Friend Links
 
 <table>
 <tr>
-<td width="150" align="center"><a href="https://github.com/lanyijianke"><img src="assets/images/friends/lanyijianke.jpg" width="100" alt="蓝衣剑客" /></a><br/><b>蓝衣剑客</b></td>
-<td>资深 AI 专家、作家，火山引擎领航 KOL、阿里云 Agent 创客、WaytoAGI 核心创作者。深耕软件开发、系统架构与项目管理，著有《豆包高效办公》《Kimi 高效办公》等畅销 AI 书籍，获京东图书 2025 年度超级新书、2025 机工创作之星；曾参与多项 AI 领域标准及国家级报告起草，为数十家世界百强企业提供企业级 AI 咨询与实施。<br/><br/>GitHub：<a href="https://github.com/lanyijianke">@lanyijianke</a> · 微信：lanyijianke1992</td>
+<td width="150" align="center"><a href="https://github.com/lanyijianke"><img src="assets/images/friends/lanyijianke.jpg" width="100" alt="Lanyi Jianke" /></a><br/><b>Lanyi Jianke</b></td>
+<td>Senior AI expert and author; Volcengine Navigator KOL, Alibaba Cloud Agent Maker, and core WaytoAGI creator. Deeply experienced in software development, system architecture, and project management. Author of bestselling AI books including <i>Efficient Office Work with Doubao</i> and <i>Efficient Office Work with Kimi</i>; winner of JD Books' 2025 Super New Book award and 2025 CMPress Creation Star. He has contributed to AI standards and national-level reports, and has provided enterprise AI consulting and implementation for dozens of Fortune Global 100 companies.<br/><br/>GitHub: <a href="https://github.com/lanyijianke">@lanyijianke</a> · Email: <a href="mailto:lanyijianke@outlook.com">lanyijianke@outlook.com</a></td>
 </tr>
 </table>
 
-## 版权与许可
+## Copyright and License
 
-Copyright © 2026 Finderchangchang 与 jev-chat 贡献者。代码以 [MIT](../LICENSE) 协议开源，另见 [NOTICE](../NOTICE)。 贡献者名单见 [CONTRIBUTORS](CONTRIBUTORS.md)。
+Copyright © 2026 Finderchangchang and the jev-chat contributors. The code is available under the [MIT License](../LICENSE). See also [NOTICE](../NOTICE). Contributors are listed in [CONTRIBUTORS](CONTRIBUTORS.md).
 
-- **可以商用**：个人和公司都可以使用、修改、再分发，或集成进自己的产品，不需要付费或事先授权。
-- **必须注明出处**：分发或商用时保留 LICENSE 与 NOTICE，并在产品「关于」页、说明文档或发布页写明来源。推荐写法：`基于 Jev 聊天助手（https://github.com/jev-chat/jev-chat-jarvis）二次开发`。
-- 不要用「Jev 聊天助手」「jev-chat」名称或 chatjevs.com 域名暗示由原作者出品或背书。
+- **Commercial use is allowed:** Individuals and companies may use, modify, redistribute, or integrate the code into their own products without payment or prior permission.
+- **Attribution is required:** Keep LICENSE and NOTICE when distributing or using the project commercially, and credit the source in your product's About page, documentation, or release page. Suggested wording: `Based on Jev Chat Assistant (https://github.com/jev-chat/jev-chat-jarvis)`.
+- Do not use the names "Jev Chat Assistant" ("Jev 聊天助手") or "jev-chat", or the domain chatjevs.com, to imply that your product was made or endorsed by the original authors.
 
-**隐私与免责声明**：触发分析时，聊天文字和启用的背景信息会发送到你自行配置的第三方模型服务商；截图仅在本机 OCR。请阅读[隐私政策](../cn/PRIVACY.md)以及所选服务商的政策，并遵守 QQ、X、飞书、WhatsApp 等软件的用户协议与当地法律法规；因违反第三方 App 用户协议导致的账号限制等后果由使用者自行承担。作者不对第三方服务商的数据处理行为或使用后果负责。
+**Disclaimer:** This project only processes conversations on your own device that you are authorized to view. Follow the terms of service of QQ, X, Feishu, WhatsApp, and any other apps you use, as well as applicable local laws and regulations. The authors accept no responsibility for the consequences of its use.

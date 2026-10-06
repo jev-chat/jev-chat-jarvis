@@ -4,7 +4,7 @@
 
 # Jev 聊天助手 · 国内版（Android）
 
-[← 返回总览](../.github/README.md) · [下载 v1.7 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) · [更新日志](CHANGELOG.md) · [隐私政策](PRIVACY.md)
+[← 返回总览](../.github/README.zh-CN.md) · [下载 v1.7 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) · [更新日志](CHANGELOG.md) · [隐私政策](PRIVACY.md)
 
 **简体中文** · [English](README.en.md) · [Tiếng Việt](README.vi.md)
 
@@ -216,4 +216,4 @@ JDK 17 + Android SDK（platform 35 / build-tools 35）。
 
 ---
 
-赞助商、交流群、姊妹项目与许可说明见[总览](../.github/README.md)。
+赞助商、交流群、姊妹项目与许可说明见[总览](../.github/README.zh-CN.md)。

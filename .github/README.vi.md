@@ -8,13 +8,14 @@
 
 [![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
 [![Forks](https://img.shields.io/github/forks/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Forks)](https://github.com/jev-chat/jev-chat-jarvis/forks)
+[![Bản quốc tế](https://img.shields.io/badge/B%E1%BA%A3n%20qu%E1%BB%91c%20t%E1%BA%BF-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
 [![Version](https://img.shields.io/badge/B%E1%BA%A3n%20ti%E1%BA%BFng%20Trung-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
-[![Android](https://img.shields.io/badge/Android-11%2B-3DDC84?style=flat-square&logo=android&logoColor=white)](../cn/README.vi.md#bắt-đầu-nhanh)
+[![Android](https://img.shields.io/badge/Android-11%2B-3DDC84?style=flat-square&logo=android&logoColor=white)](../global/README.md#quick-start)
 [![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
 
-[Trang web](https://chatjevs.com) · [Chính sách quyền riêng tư](../cn/PRIVACY.md) · [Phiên bản trước](https://github.com/jev-chat/jev-chat-jarvis/releases) · [Nhật ký thay đổi](../cn/CHANGELOG.md) · [Bản macOS](https://github.com/jev-chat/jev-chat-jarvis-mac) · [Bản Windows](https://github.com/jev-chat/jev-chat-windows)
+[Trang web](https://chatjevs.com) · Quyền riêng tư: [bản quốc tế](../global/PRIVACY.md) · [bản tiếng Trung](../cn/PRIVACY.md) · [Phiên bản trước](https://github.com/jev-chat/jev-chat-jarvis/releases) · Nhật ký thay đổi: [bản quốc tế](../global/CHANGELOG.md) · [bản tiếng Trung](../cn/CHANGELOG.md) · [Bản macOS](https://github.com/jev-chat/jev-chat-jarvis-mac) · [Bản Windows](https://github.com/jev-chat/jev-chat-windows)
 
-[简体中文](README.md) · [English](README.en.md) · **Tiếng Việt**
+[English](README.md) · [简体中文](README.zh-CN.md) · **Tiếng Việt**
 
 </div>
 
@@ -22,13 +23,13 @@
 
 | Bản quốc tế · Android | Bản tiếng Trung · Android | Windows | macOS |
 | :---: | :---: | :---: | :---: |
-| Sắp ra mắt | [Tải APK v1.7](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | [Tải bản Windows](https://github.com/jev-chat/jev-chat-windows/releases) | [Tải bản macOS](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
-| Giao diện tiếng Anh · Bắt đầu với WhatsApp | Giao diện tiếng Trung · QQ / 飞书 / X / WhatsApp | Hỗ trợ trả lời bên cạnh cửa sổ chat | Cửa sổ nổi nhận diện ý định tin nhắn |
-| Do [@smgonthebeat](https://github.com/smgonthebeat) phát triển chính | Android 11+ · ARM64 · [Hướng dẫn](../cn/README.vi.md) | Windows 10 1903+ / 11 | macOS 13+ · Apple Silicon |
+| Sắp phát hành | [Tải APK v1.7](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | [Tải bản Windows](https://github.com/jev-chat/jev-chat-windows/releases) | [Tải bản macOS](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
+| Giao diện tiếng Anh · WhatsApp | Giao diện tiếng Trung · QQ / 飞书 / X / WhatsApp | Hỗ trợ trả lời bên cạnh cửa sổ chat | Cửa sổ nổi nhận diện ý định tin nhắn |
+| Android 11+ · [Hướng dẫn (tiếng Anh)](../global/README.md) | Android 11+ · ARM64 · [Hướng dẫn](../cn/README.vi.md) | Windows 10 1903+ / 11 | macOS 13+ · Apple Silicon |
 
 Cả hai phiên bản Android đều được phát triển trong kho mã này và có thể cài cùng lúc trên một điện thoại:
 
-- **Bản quốc tế** (`global/`, sắp ra mắt): dành cho người dùng nói tiếng Anh. Cách đọc tin nhắn, bộ câu hỏi đánh giá và kho câu trả lời được thiết kế riêng theo thói quen trò chuyện ngoài Trung Quốc. Bắt đầu với WhatsApp, sau đó sẽ hỗ trợ thêm các ứng dụng chat khác.
+- **Bản quốc tế** ([`global/`](../global/), Jev for WhatsApp): dành cho người dùng nói tiếng Anh, do [@smgonthebeat](https://github.com/smgonthebeat) phát triển chính. Ứng dụng đọc cuộc trò chuyện trên màn hình, hiểu người kia muốn gì, soạn hai câu trả lời, kiểm tra và chấm điểm từng câu, rồi điền câu bạn chọn vào ô nhập. Cách đọc tin nhắn, bộ câu hỏi đánh giá và kho câu trả lời được thiết kế riêng theo thói quen trò chuyện ngoài Trung Quốc. Bắt đầu với WhatsApp, sau đó sẽ hỗ trợ thêm các ứng dụng chat khác.
 - **Bản tiếng Trung** ([`cn/`](../cn/)): dành cho người dùng nói tiếng Trung và các ứng dụng chat phổ biến ở Trung Quốc; cũng dùng được trên WhatsApp với giao diện tiếng Trung.
 
 Nếu dự án hữu ích với bạn, hãy nhấn **Star** ở góc trên bên phải kho mã để ủng hộ việc duy trì. Không cần Star hay theo dõi mới được tải và sử dụng.
@@ -57,12 +58,13 @@ Nếu dự án hữu ích với bạn, hãy nhấn **Star** ở góc trên bên 
 
 </details>
 
-## Ảnh chụp màn hình (bản tiếng Trung)
+## Ảnh chụp màn hình
 
 <table align="center">
 <tr>
-<td align="center"><img src="assets/images/overlay.png" width="300" alt="Cửa sổ nổi: khung phân tích Jev phía trên cuộc trò chuyện" /><br/><sub>Cửa sổ nổi: mức độ nguy hiểm, ý định thật của đối phương và 3 câu trả lời đã được xếp hạng</sub></td>
-<td align="center"><img src="assets/images/settings.png" width="300" alt="Trang cài đặt" /><br/><sub>Trang cài đặt: có thể cấu hình riêng API phân tích, trả lời và thị giác</sub></td>
+<td align="center"><img src="../global/docs/images/states/02-decide.png" width="230" alt="Bản quốc tế: người kia muốn gì và các lựa chọn của bạn" /><br/><sub>Bản quốc tế: người kia muốn gì và các lựa chọn của bạn</sub></td>
+<td align="center"><img src="../global/docs/images/states/04-results.png" width="230" alt="Bản quốc tế: hai câu trả lời, chấm trên thang 5" /><br/><sub>Bản quốc tế: hai câu trả lời, chấm trên thang 5</sub></td>
+<td align="center"><img src="assets/images/overlay.png" width="230" alt="Bản tiếng Trung: mức độ rủi ro, ý định và ba câu trả lời đã xếp hạng" /><br/><sub>Bản tiếng Trung: mức độ rủi ro, ý định và ba câu trả lời đã xếp hạng</sub></td>
 </tr>
 </table>
 
@@ -75,6 +77,8 @@ Nếu dự án hữu ích với bạn, hãy nhấn **Star** ở góc trên bên 
 > **Rủi ro khi sử dụng:** Dùng trợ lý trong các ứng dụng bên thứ ba như QQ, 飞书, X hoặc WhatsApp có thể không phù hợp với thỏa thuận người dùng của ứng dụng đó, tài khoản có thể bị hạn chế hoặc khóa. Hãy tự cân nhắc trước khi sử dụng.
 
 ## Nhóm trao đổi / Thu thập yêu cầu
+
+Với bản quốc tế, hãy báo lỗi bằng [mẫu báo lỗi WhatsApp](https://github.com/jev-chat/jev-chat-jarvis/issues/new?template=whatsapp-assistant-bug.md).
 
 **Nếu cần liên hệ, hãy nhắn tin riêng qua tài khoản công khai chính thức trên WeChat.** Hợp tác, tài trợ, phản hồi, không tham gia được nhóm, mã QR hết hạn đều phải nhắn tin riêng qua tài khoản công khai chính thức trên WeChat; các kênh khác không bảo đảm nhận được.
 
@@ -106,7 +110,7 @@ Cùng thuộc tổ chức [jev-chat](https://github.com/jev-chat):
 - [Jev 聊天助手 bản macOS](https://github.com/jev-chat/jev-chat-jarvis-mac): cửa sổ nổi nhận diện ý định tin nhắn, xem màn hình + mô hình nhỏ cục bộ để phân tích ý định và rủi ro, sau đó tạo các câu trả lời ứng viên theo kịch bản; hoàn toàn chỉ đọc.
 - [Jev 聊天助手 bản Windows](https://github.com/jev-chat/jev-chat-windows): trợ lý trả lời đặt bên cạnh cửa sổ chat, chụp màn hình cửa sổ + OCR ngoại tuyến cục bộ, điền 3 câu trả lời ứng viên bằng một chạm, thao tác gửi luôn thủ công.
 
-Xem [chính sách quyền riêng tư](../cn/PRIVACY.md) để biết nội dung nào được đọc, gửi đi, lưu ở đâu và cách xóa.
+Xem chính sách quyền riêng tư của [bản quốc tế](../global/PRIVACY.md) và [bản tiếng Trung](../cn/PRIVACY.md) để biết nội dung nào được đọc, gửi đi, lưu ở đâu và cách xóa.
 
 ## Liên kết thân thiện
 

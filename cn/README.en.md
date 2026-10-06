@@ -4,7 +4,7 @@
 
 # Jev Chat Assistant · Chinese Edition (Android)
 
-[← Back to overview](../.github/README.en.md) · [Download v1.7 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) · [Changelog](CHANGELOG.md) · [Privacy policy](PRIVACY.md)
+[← Back to overview](../.github/README.md) · [Download v1.7 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) · [Changelog](CHANGELOG.md) · [Privacy policy](PRIVACY.md)
 
 [简体中文](README.md) · **English** · [Tiếng Việt](README.vi.md)
 
@@ -226,4 +226,4 @@ Requires JDK 17 and the Android SDK (platform 35 / build-tools 35).
 
 ---
 
-Sponsors, community, related projects and license: see the [overview](../.github/README.en.md).
+Sponsors, community, related projects and license: see the [overview](../.github/README.md).
