@@ -19,9 +19,33 @@ Jev đọc cuộc trò chuyện trên màn hình, hiểu người kia muốn gì
 
 </div>
 
-## Jev là gì
+## ❤️Nhà tài trợ
 
-Jev là công cụ hỗ trợ ra quyết định khi trò chuyện. Cốt lõi là mô hình đánh giá Jev: trước khi bạn trả lời, nó xác định người kia thật sự muốn gì, cuộc trò chuyện rủi ro đến đâu và bạn nên đáp thế nào, rồi mới soạn câu trả lời. Mọi ứng dụng Jev chỉ chuẩn bị câu trả lời; gửi hay không là do bạn.
+> [Muốn xuất hiện ở đây?](#nhóm-trao-đổi--thu-thập-yêu-cầu)
+
+<details open>
+<summary>Nhấn để thu gọn</summary>
+
+<table>
+<tr>
+<td width="240" align="center"><a href="https://open.bocha.cn"><img src="assets/images/sponsors/bocha.png" alt="博查" width="200"></a></td>
+<td>Cảm ơn <b>博查</b> đã tài trợ cho dự án này! 博查 là một công cụ tìm kiếm dành cho AI, giúp ứng dụng AI của bạn kết nối với tri thức thế giới và tiếp cận kết quả tìm kiếm sạch, chính xác, chất lượng cao. Cung cấp Web Search API, Bocha Jev API cùng nhiều dịch vụ tìm kiếm trực tuyến và dịch vụ mô hình khác. <a href="https://open.bocha.cn">open.bocha.cn</a></td>
+</tr>
+<tr>
+<td width="240" align="center"><a href="https://faka.rainlanguage.top"><img src="assets/images/sponsors/xiaoyou.png" alt="小优店铺" width="200"></a></td>
+<td>Cảm ơn <b>小优店铺</b> đã tài trợ cho dự án này! 小优店铺 là một cửa hàng cung cấp sản phẩm số và dịch vụ tài khoản, cung cấp cho người dùng dự án một kênh mua sắm. <a href="https://faka.rainlanguage.top">Truy cập tại đây</a>.</td>
+</tr>
+<tr>
+<td width="240" align="center"><a href="https://agent.ai-tools.cn"><img src="assets/images/sponsors/vytal.jpg" alt="速创猫 Vytal" width="200"></a></td>
+<td>Cảm ơn <b>速创猫 Vytal</b> đã tài trợ cho dự án này! 速创猫 Vytal là nền tảng quy trình làm việc video chuyên nghiệp bằng AI, cung cấp quy trình video có thể tái sử dụng hàng loạt, giúp giảm rào cản sản xuất nội dung và phục vụ nhà sáng tạo nội dung, cơ sở đào tạo cùng các nhóm vừa và nhỏ. <a href="https://agent.ai-tools.cn">Truy cập tại đây</a>.</td>
+</tr>
+</table>
+
+</details>
+
+## jev-chat là gì
+
+jev-chat là công cụ hỗ trợ ra quyết định khi trò chuyện. Cốt lõi là mô hình đánh giá Jev: trước khi bạn trả lời, nó xác định người kia thật sự muốn gì, cuộc trò chuyện rủi ro đến đâu và bạn nên đáp thế nào, rồi mới soạn câu trả lời. Mọi ứng dụng jev-chat chỉ chuẩn bị câu trả lời; gửi hay không là do bạn.
 
 | Nền tảng | Sản phẩm | Cách dùng | Trạng thái |
 | :--- | :--- | :--- | :--- |
@@ -58,30 +82,6 @@ Hai phiên bản Android nằm trong kho mã này; các nền tảng khác có k
 | iOS | Tự build từ mã nguồn | Xcode | [Dự án](https://github.com/jev-chat/jev-chat-jarvis-ios) |
 
 Hai phiên bản Android có thể cài cùng lúc trên một điện thoại. Bản quốc tế do [@smgonthebeat](https://github.com/smgonthebeat) phát triển.
-
-## ❤️Nhà tài trợ
-
-> [Muốn xuất hiện ở đây?](#nhóm-trao-đổi--thu-thập-yêu-cầu)
-
-<details open>
-<summary>Nhấn để thu gọn</summary>
-
-<table>
-<tr>
-<td width="240" align="center"><a href="https://open.bocha.cn"><img src="assets/images/sponsors/bocha.png" alt="博查" width="200"></a></td>
-<td>Cảm ơn <b>博查</b> đã tài trợ cho dự án này! 博查 là một công cụ tìm kiếm dành cho AI, giúp ứng dụng AI của bạn kết nối với tri thức thế giới và tiếp cận kết quả tìm kiếm sạch, chính xác, chất lượng cao. Cung cấp Web Search API, Bocha Jev API cùng nhiều dịch vụ tìm kiếm trực tuyến và dịch vụ mô hình khác. <a href="https://open.bocha.cn">open.bocha.cn</a></td>
-</tr>
-<tr>
-<td width="240" align="center"><a href="https://faka.rainlanguage.top"><img src="assets/images/sponsors/xiaoyou.png" alt="小优店铺" width="200"></a></td>
-<td>Cảm ơn <b>小优店铺</b> đã tài trợ cho dự án này! 小优店铺 là một cửa hàng cung cấp sản phẩm số và dịch vụ tài khoản, cung cấp cho người dùng dự án một kênh mua sắm. <a href="https://faka.rainlanguage.top">Truy cập tại đây</a>.</td>
-</tr>
-<tr>
-<td width="240" align="center"><a href="https://agent.ai-tools.cn"><img src="assets/images/sponsors/vytal.jpg" alt="速创猫 Vytal" width="200"></a></td>
-<td>Cảm ơn <b>速创猫 Vytal</b> đã tài trợ cho dự án này! 速创猫 Vytal là nền tảng quy trình làm việc video chuyên nghiệp bằng AI, cung cấp quy trình video có thể tái sử dụng hàng loạt, giúp giảm rào cản sản xuất nội dung và phục vụ nhà sáng tạo nội dung, cơ sở đào tạo cùng các nhóm vừa và nhỏ. <a href="https://agent.ai-tools.cn">Truy cập tại đây</a>.</td>
-</tr>
-</table>
-
-</details>
 
 ## Quyền riêng tư và rủi ro
 

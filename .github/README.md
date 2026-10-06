@@ -19,9 +19,33 @@ Jev reads the chat on your screen, works out what the other person means and how
 
 </div>
 
-## What Is Jev
+## Sponsors
 
-Jev is a chat decision assistant. At its core is the Jev judgment model: before you reply, it works out what the other person really wants, how risky the conversation is and how you should respond, and only then drafts replies. Every Jev app only prepares the reply. You decide whether to send it.
+> [Interested in sponsoring the project?](#community-and-feedback)
+
+<details open>
+<summary>Show or hide sponsors</summary>
+
+<table>
+<tr>
+<td width="240" align="center"><a href="https://open.bocha.cn"><img src="assets/images/sponsors/bocha.png" alt="Bocha" width="200"></a></td>
+<td>Thanks to <b>Bocha</b> for sponsoring this project! Bocha is a search engine for AI, giving your applications access to information from across the web with clean, accurate, high-quality results. Its services include the Web Search API, Bocha Jev API, and other search and model APIs. <a href="https://open.bocha.cn">open.bocha.cn</a></td>
+</tr>
+<tr>
+<td width="240" align="center"><a href="https://faka.rainlanguage.top"><img src="assets/images/sponsors/xiaoyou.png" alt="Xiaoyou Store" width="200"></a></td>
+<td>Thanks to <b>Xiaoyou Store</b> for sponsoring this project! Xiaoyou Store sells digital products and account services, with a selection available to users of this project. <a href="https://faka.rainlanguage.top">Visit the store</a>.</td>
+</tr>
+<tr>
+<td width="240" align="center"><a href="https://agent.ai-tools.cn"><img src="assets/images/sponsors/vytal.jpg" alt="Vytal" width="200"></a></td>
+<td>Thanks to <b>Vytal</b> for sponsoring this project! Vytal is an AI video workflow platform with reusable workflows for batch production, making video creation more accessible to content creators, training providers, and small teams. <a href="https://agent.ai-tools.cn">Visit Vytal</a>.</td>
+</tr>
+</table>
+
+</details>
+
+## What Is jev-chat
+
+jev-chat is a chat decision assistant. At its core is the Jev judgment model: before you reply, it works out what the other person really wants, how risky the conversation is and how you should respond, and only then drafts replies. Every jev-chat app only prepares the reply. You decide whether to send it.
 
 | Platform | Product | How you use it | Status |
 | :--- | :--- | :--- | :--- |
@@ -58,30 +82,6 @@ Both Android editions live in this repository. The other platforms have their ow
 | iOS | Build from source | Xcode | [Project](https://github.com/jev-chat/jev-chat-jarvis-ios) |
 
 The two Android editions can be installed side by side. The global edition is built by [@smgonthebeat](https://github.com/smgonthebeat).
-
-## Sponsors
-
-> [Interested in sponsoring the project?](#community-and-feedback)
-
-<details open>
-<summary>Show or hide sponsors</summary>
-
-<table>
-<tr>
-<td width="240" align="center"><a href="https://open.bocha.cn"><img src="assets/images/sponsors/bocha.png" alt="Bocha" width="200"></a></td>
-<td>Thanks to <b>Bocha</b> for sponsoring this project! Bocha is a search engine for AI, giving your applications access to information from across the web with clean, accurate, high-quality results. Its services include the Web Search API, Bocha Jev API, and other search and model APIs. <a href="https://open.bocha.cn">open.bocha.cn</a></td>
-</tr>
-<tr>
-<td width="240" align="center"><a href="https://faka.rainlanguage.top"><img src="assets/images/sponsors/xiaoyou.png" alt="Xiaoyou Store" width="200"></a></td>
-<td>Thanks to <b>Xiaoyou Store</b> for sponsoring this project! Xiaoyou Store sells digital products and account services, with a selection available to users of this project. <a href="https://faka.rainlanguage.top">Visit the store</a>.</td>
-</tr>
-<tr>
-<td width="240" align="center"><a href="https://agent.ai-tools.cn"><img src="assets/images/sponsors/vytal.jpg" alt="Vytal" width="200"></a></td>
-<td>Thanks to <b>Vytal</b> for sponsoring this project! Vytal is an AI video workflow platform with reusable workflows for batch production, making video creation more accessible to content creators, training providers, and small teams. <a href="https://agent.ai-tools.cn">Visit Vytal</a>.</td>
-</tr>
-</table>
-
-</details>
 
 ## Privacy and Risk
 

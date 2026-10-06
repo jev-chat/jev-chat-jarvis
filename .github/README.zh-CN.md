@@ -19,9 +19,33 @@ Jev 读取你屏幕上的聊天，判断对方的真实意图和该怎么回，�
 
 </div>
 
-## Jev 是什么
+## ❤️赞助商
 
-Jev 是一套聊天辅助决策工具，核心是 Jev 判断模型：回消息之前，先判断对方真正想要什么、这段对话风险有多大、你该怎么回，然后才起草候选回复。每个端都只帮你准备回复，发不发由你决定。
+> [想出现在这里？](#交流群--需求收集)
+
+<details open>
+<summary>点击折叠</summary>
+
+<table>
+<tr>
+<td width="240" align="center"><a href="https://open.bocha.cn"><img src="assets/images/sponsors/bocha.png" alt="博查" width="200"></a></td>
+<td>感谢 <b>博查</b> 赞助了本项目！博查是一个给 AI 用的搜索引擎，让你的 AI 应用连接世界知识，获得干净、准确、高质量的搜索结果。提供 Web Search API、Bocha Jev API 等多种联网搜索和模型服务。<a href="https://open.bocha.cn">open.bocha.cn</a></td>
+</tr>
+<tr>
+<td width="240" align="center"><a href="https://faka.rainlanguage.top"><img src="assets/images/sponsors/xiaoyou.png" alt="小优店铺" width="200"></a></td>
+<td>感谢 <b>小优店铺</b> 赞助了本项目！小优店铺是一家数字商品与账号服务店铺，为本项目的用户提供选购渠道。<a href="https://faka.rainlanguage.top">点此前往</a>。</td>
+</tr>
+<tr>
+<td width="240" align="center"><a href="https://agent.ai-tools.cn"><img src="assets/images/sponsors/vytal.jpg" alt="速创猫 Vytal" width="200"></a></td>
+<td>感谢 <b>速创猫 Vytal</b> 赞助了本项目！速创猫 Vytal 是专业的 AI 视频工作流平台，提供可批量复用的视频工作流，降低内容制作门槛，服务内容创作者、培训机构及中小团队。<a href="https://agent.ai-tools.cn">点此前往</a>。</td>
+</tr>
+</table>
+
+</details>
+
+## jev-chat 是什么
+
+jev-chat 是一套聊天辅助决策工具，核心是 Jev 判断模型：回消息之前，先判断对方真正想要什么、这段对话风险有多大、你该怎么回，然后才起草候选回复。每个端都只帮你准备回复，发不发由你决定。
 
 | 端 | 产品 | 怎么用 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -58,30 +82,6 @@ Jev 是一套聊天辅助决策工具，核心是 Jev 判断模型：回消息�
 | iOS | 自行编译 | Xcode | [项目说明](https://github.com/jev-chat/jev-chat-jarvis-ios) |
 
 两个 Android 版本可以装在同一台手机上。海外版由 [@smgonthebeat](https://github.com/smgonthebeat) 开发。
-
-## ❤️赞助商
-
-> [想出现在这里？](#交流群--需求收集)
-
-<details open>
-<summary>点击折叠</summary>
-
-<table>
-<tr>
-<td width="240" align="center"><a href="https://open.bocha.cn"><img src="assets/images/sponsors/bocha.png" alt="博查" width="200"></a></td>
-<td>感谢 <b>博查</b> 赞助了本项目！博查是一个给 AI 用的搜索引擎，让你的 AI 应用连接世界知识，获得干净、准确、高质量的搜索结果。提供 Web Search API、Bocha Jev API 等多种联网搜索和模型服务。<a href="https://open.bocha.cn">open.bocha.cn</a></td>
-</tr>
-<tr>
-<td width="240" align="center"><a href="https://faka.rainlanguage.top"><img src="assets/images/sponsors/xiaoyou.png" alt="小优店铺" width="200"></a></td>
-<td>感谢 <b>小优店铺</b> 赞助了本项目！小优店铺是一家数字商品与账号服务店铺，为本项目的用户提供选购渠道。<a href="https://faka.rainlanguage.top">点此前往</a>。</td>
-</tr>
-<tr>
-<td width="240" align="center"><a href="https://agent.ai-tools.cn"><img src="assets/images/sponsors/vytal.jpg" alt="速创猫 Vytal" width="200"></a></td>
-<td>感谢 <b>速创猫 Vytal</b> 赞助了本项目！速创猫 Vytal 是专业的 AI 视频工作流平台，提供可批量复用的视频工作流，降低内容制作门槛，服务内容创作者、培训机构及中小团队。<a href="https://agent.ai-tools.cn">点此前往</a>。</td>
-</tr>
-</table>
-
-</details>
 
 ## 隐私与风险
 
