@@ -21,7 +21,7 @@ one-to-one chats in English.
 - A file sent on its own is answered from the messages around it.
 - Fill writes the chosen reply into WhatsApp's message box after checking that the
   same chat is open. Jev never sends.
-- Signed release APK in `apk/` (Android 11+, any CPU).
+- Signed release APK on the [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases/tag/global-v0.1.0) page (Android 11+, any CPU).
 - README in English and Chinese, with the panel states rendered by the app.
 - OpenRouter key stored encrypted with an Android Keystore key; no backups; a local
   diagnostic log without chat text, shareable as a bug report.

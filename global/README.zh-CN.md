@@ -19,7 +19,7 @@
 
 | Android |
 | :---: |
-| 安装包即将发布 |
+| [下载 APK（v0.1.0）](https://github.com/jev-chat/jev-chat-jarvis/releases/tag/global-v0.1.0) |
 | Android 11+ · 不限 CPU 架构 · 10.6 MB · 英文聊天 |
 
 这是 Jev 的英文版，只支持 WhatsApp。它和同一仓库里的国内版 [Jev 聊天助手](../cn/README.md)（`cn/`：QQ、X、飞书、WhatsApp）是两个独立的 App：包名不同（`com.jev.overseas`），引擎和构建也各自独立，可以同时装在一台手机上。
@@ -100,7 +100,7 @@ Jev 只读你自己手机上、你自己能看到的聊天。
 
 ## 快速开始
 
-**1. 安装。** 签好名的 release 包（Android 11+）即将发布在 [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases) 页面，下载后直接安装，也可以用 adb：
+**1. 安装。** 下载签好名的 release 包：[jev-whatsapp-v0.1.0-release.apk](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk)（Android 11+）。也可以用 adb：
 
 ```bash
 adb install -r jev-whatsapp-v0.1.0-release.apk

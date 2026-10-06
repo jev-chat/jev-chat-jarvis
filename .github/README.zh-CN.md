@@ -22,7 +22,7 @@
 
 | 海外版 · Android | 国内版 · Android | Windows | macOS |
 | :---: | :---: | :---: | :---: |
-| 安装包即将发布 | [下载 v1.7 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | [获取 Windows 版](https://github.com/jev-chat/jev-chat-windows/releases) | [获取 macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
+| [下载 v0.1.0 APK](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | [下载 v1.7 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | [获取 Windows 版](https://github.com/jev-chat/jev-chat-windows/releases) | [获取 macOS 版](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
 | 英文界面 · WhatsApp | 中文界面 · QQ / 飞书 / X / WhatsApp | 聊天窗口旁的回复辅助 | 消息意图识别悬浮窗 |
 | Android 11+ · [说明](../global/README.zh-CN.md) | Android 11+ · ARM64 · [使用说明](../cn/README.md) | Windows 10 1903+ / 11 · [说明](https://github.com/jev-chat/jev-chat-windows#使用说明) | macOS 13+ · Apple Silicon · [说明](https://github.com/jev-chat/jev-chat-jarvis-mac#用法) |
 

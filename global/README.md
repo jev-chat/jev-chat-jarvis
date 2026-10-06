@@ -19,7 +19,7 @@
 
 | Android |
 | :---: |
-| Release coming soon |
+| [Download the APK (v0.1.0)](https://github.com/jev-chat/jev-chat-jarvis/releases/tag/global-v0.1.0) |
 | Android 11+ · any CPU · 10.6 MB · English chats |
 
 This is the English, WhatsApp-only edition of Jev. It is a separate app from the
@@ -117,8 +117,9 @@ Jev only reads chats on your own device that you can see yourself.
 
 ## Quick start
 
-**1. Install.** The signed release APK (Android 11+) will be published on the
-[Releases](https://github.com/jev-chat/jev-chat-jarvis/releases) page soon. Install it from there, or with adb:
+**1. Install.** Download the signed release APK:
+[jev-whatsapp-v0.1.0-release.apk](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk)
+(Android 11+). Or with adb:
 
 ```bash
 adb install -r jev-whatsapp-v0.1.0-release.apk

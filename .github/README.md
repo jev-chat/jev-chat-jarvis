@@ -23,7 +23,7 @@
 
 | Global edition · Android | Chinese edition · Android | Windows | macOS |
 | :---: | :---: | :---: | :---: |
-| Release coming soon | [Download v1.7 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | [Get Jev for Windows](https://github.com/jev-chat/jev-chat-windows/releases) | [Get Jev for macOS](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
+| [Download v0.1.0 APK](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | [Download v1.7 APK](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | [Get Jev for Windows](https://github.com/jev-chat/jev-chat-windows/releases) | [Get Jev for macOS](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
 | English UI · WhatsApp | Chinese UI · QQ / Feishu / X / WhatsApp | Reply helper beside your chat window | Message intent overlay |
 | Android 11+ · [Guide](../global/README.md) | Android 11+ · ARM64 · [Guide](../cn/README.en.md) | Windows 10 1903+ / 11 | macOS 13+ · Apple Silicon |
 

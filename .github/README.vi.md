@@ -23,7 +23,7 @@
 
 | Bản quốc tế · Android | Bản tiếng Trung · Android | Windows | macOS |
 | :---: | :---: | :---: | :---: |
-| Sắp phát hành | [Tải APK v1.7](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | [Tải bản Windows](https://github.com/jev-chat/jev-chat-windows/releases) | [Tải bản macOS](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
+| [Tải APK v0.1.0](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | [Tải APK v1.7](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | [Tải bản Windows](https://github.com/jev-chat/jev-chat-windows/releases) | [Tải bản macOS](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) |
 | Giao diện tiếng Anh · WhatsApp | Giao diện tiếng Trung · QQ / 飞书 / X / WhatsApp | Hỗ trợ trả lời bên cạnh cửa sổ chat | Cửa sổ nổi nhận diện ý định tin nhắn |
 | Android 11+ · [Hướng dẫn (tiếng Anh)](../global/README.md) | Android 11+ · ARM64 · [Hướng dẫn](../cn/README.vi.md) | Windows 10 1903+ / 11 | macOS 13+ · Apple Silicon |
 
