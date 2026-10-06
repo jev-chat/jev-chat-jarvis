@@ -1,18 +1,28 @@
 <div align="center">
 
-<img src="assets/images/logo.png" width="140" alt="Jev Chat Assistant" />
+<img src="assets/images/logo.png" width="120" alt="jev-chat" />
 
-# Jev Chat Assistant
+# jev-chat
 
-**Read them first, then reply.**
+### The chat decision assistant for WhatsApp, QQ, Feishu, X and more, on Android, Windows, macOS and iOS
 
-Jev reads the chat on your screen, works out what the other person means and how to respond, and drafts replies for you to pick from. It fills your choice into the message box. Whether to send is up to you. Available on Android, Windows, macOS and iOS.
+**Read them first, then reply. Before you answer, Jev works out what the other person really means, how risky the moment is and how to respond, then drafts replies you can fill in with one tap. Whether to send is always up to you.**
 
-**English** · [简体中文](README.zh-CN.md) · [Tiếng Việt](README.vi.md)
+[![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
+[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20Windows%20%7C%20macOS%20%7C%20iOS-lightgrey?style=flat-square)](#download--installation)
+[![Global edition](https://img.shields.io/badge/Global%20edition-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
+[![Chinese edition](https://img.shields.io/badge/Chinese%20edition-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
+[![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
+
+### 🌐 Official website: **[chatjevs.com](https://chatjevs.com)**
+
+English | [简体中文](README.zh-CN.md) | [Tiếng Việt](README.vi.md) | [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
+
+**[Download](#download--installation) · [Products](#products) · [How It Works](#how-it-works) · [Privacy](#privacy-and-risk) · [Community](#community-and-feedback)**
 
 </div>
 
-## Sponsors
+## ❤️Sponsors
 
 > [Interested in sponsoring the project?](#community-and-feedback)
 
@@ -36,15 +46,20 @@ Jev reads the chat on your screen, works out what the other person means and how
 
 </details>
 
-<div align="center">
+## Why jev-chat?
 
-[Website](https://chatjevs.com) · [Download](#download) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases) · [![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
+When a message lands, the hard part is not typing. It is working out what the other person really means: are they upset, testing you, or just chatting? Most AI tools skip that step and go straight to writing a reply.
 
-</div>
+**jev-chat** judges first. Its Jev judgment model reads the conversation and works out the other person's intent, the risk in the moment and the best way to respond. Only then does it draft replies, and it fills the one you pick into the message box.
 
-## What Is jev-chat
+- **Judge before writing** — intent, risk, what they need and the best action come before any draft
+- **Checked, ranked replies** — every draft is checked against that judgment and ranked, so the best fit comes first
+- **Works where you chat** — WhatsApp, QQ, Feishu and X on Android; chat windows on Windows and macOS; any app through the iOS keyboard
+- **You press send** — jev-chat only fills the input box and never sends on its own
+- **Your keys, no server of ours** — requests go only to the model provider you configure, with your own key
+- **Open source** — MIT licensed, five apps across Android, Windows, macOS and iOS
 
-jev-chat is a chat decision assistant. At its core is the Jev judgment model: before you reply, it works out what the other person really wants, how risky the conversation is and how you should respond, and only then drafts replies. Every jev-chat app only prepares the reply. You decide whether to send it.
+## Products
 
 | Platform | Product | How you use it | Status |
 | :--- | :--- | :--- | :--- |
@@ -56,31 +71,48 @@ jev-chat is a chat decision assistant. At its core is the Jev judgment model: be
 
 Both Android editions live in this repository. The other platforms have their own repositories.
 
+## Screenshots
+
+| Global edition · analysis | Global edition · scored replies | Chinese edition · overlay |
+| :---: | :---: | :---: |
+| <img src="../global/docs/images/states/02-decide.png" width="230" alt="Global edition · analysis" /> | <img src="../global/docs/images/states/04-results.png" width="230" alt="Global edition · scored replies" /> | <img src="assets/images/overlay.png" width="230" alt="Chinese edition · overlay" /> |
+
+## Download & Installation
+
+### System Requirements
+
+- **Android**: Android 11 or later (the Chinese edition needs an ARM64 phone)
+- **Windows**: Windows 10 1903 or later, or Windows 11
+- **macOS**: macOS 13 or later on Apple Silicon
+- **iOS**: build it yourself with Xcode
+
+### Android Users
+
+| | Global edition | Chinese edition |
+| :--- | :--- | :--- |
+| For | Chats in English on WhatsApp | Chats in Chinese on QQ, Feishu, X and WhatsApp |
+| Download | [jev-whatsapp-v0.1.0-release.apk](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | [jev-assistant-v1.7-release.apk](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) |
+| Guide | [Global edition README](../global/README.md) | [Chinese edition README](../cn/README.en.md) |
+
+Both can be installed on the same phone. After installing, open the app and follow its guide to turn on the accessibility service and the overlay permission. The global edition is built by [@smgonthebeat](https://github.com/smgonthebeat).
+
+### Windows Users
+
+Download the latest version from the [Releases](https://github.com/jev-chat/jev-chat-windows/releases) page. See the [project README](https://github.com/jev-chat/jev-chat-windows) for setup.
+
+### macOS Users
+
+Download the latest version from the [Releases](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) page. Apple Silicon only. See the [project README](https://github.com/jev-chat/jev-chat-jarvis-mac) for setup.
+
+### iOS Users
+
+There is no App Store build yet. Build the keyboard from [source](https://github.com/jev-chat/jev-chat-jarvis-ios) with Xcode.
+
 ## How It Works
 
 1. **Read.** Jev reads the conversation on your screen: through the accessibility service on Android, the chat window on desktop (screenshots with on-device OCR, or system text APIs), and the message you copy on iOS. It does not modify the chat app or log in to it.
 2. **Judge first.** Before any reply is written, a judgment model works out what the other person really wants, how risky the moment is and the best way to respond.
 3. **Draft, check, rank.** Jev drafts replies, checks them against that judgment and ranks them. Tap one to fill it into the message box. You press send.
-
-<table align="center">
-<tr>
-<td align="center"><img src="../global/docs/images/states/02-decide.png" width="230" alt="Global edition: what they want, then your options" /><br/><sub>Global edition: what they want, then your options</sub></td>
-<td align="center"><img src="../global/docs/images/states/04-results.png" width="230" alt="Global edition: two replies, scored out of 5" /><br/><sub>Global edition: two replies, scored out of 5</sub></td>
-<td align="center"><img src="assets/images/overlay.png" width="230" alt="Chinese edition: risk level, intent and three ranked replies" /><br/><sub>Chinese edition: risk level, intent and three ranked replies</sub></td>
-</tr>
-</table>
-
-## Download
-
-| Platform | Download | Requirements | Docs |
-| :--- | :--- | :--- | :--- |
-| Android · global edition | [**v0.1.0 APK**](https://github.com/jev-chat/jev-chat-jarvis/releases/download/global-v0.1.0/jev-whatsapp-v0.1.0-release.apk) | Android 11+ | [Guide](../global/README.md) · [Changelog](../global/CHANGELOG.md) |
-| Android · Chinese edition | [**v1.7 APK**](https://raw.githubusercontent.com/jev-chat/jev-chat-jarvis/main/cn/apk/jev-assistant-v1.7-release.apk) | Android 11+ · ARM64 | [Guide](../cn/README.en.md) · [Changelog](../cn/CHANGELOG.md) |
-| Windows | [Releases](https://github.com/jev-chat/jev-chat-windows/releases) | Windows 10 1903+ / 11 | [Project](https://github.com/jev-chat/jev-chat-windows) |
-| macOS | [Releases](https://github.com/jev-chat/jev-chat-jarvis-mac/releases) | macOS 13+ · Apple Silicon | [Project](https://github.com/jev-chat/jev-chat-jarvis-mac) |
-| iOS | Build from source | Xcode | [Project](https://github.com/jev-chat/jev-chat-jarvis-ios) |
-
-The two Android editions can be installed side by side. The global edition is built by [@smgonthebeat](https://github.com/smgonthebeat).
 
 ## Privacy and Risk
 
@@ -94,6 +126,7 @@ The two Android editions can be installed side by side. The global edition is bu
 
 - Problems with the global edition: [report them with the WhatsApp bug template](https://github.com/jev-chat/jev-chat-jarvis/issues/new?template=whatsapp-assistant-bug.md).
 - Anything else: [open an issue](https://github.com/jev-chat/jev-chat-jarvis/issues).
+- Pull requests are welcome. For a new feature, open an issue first so we can talk it through.
 - If Jev helps you, a **Star** on this repository helps us keep going.
 
 **Please get in touch by messaging the WeChat official account.** Use it for partnerships, sponsorships or feedback. Messages sent elsewhere may be missed.
@@ -101,6 +134,10 @@ The two Android editions can be installed side by side. The global edition is bu
 <p align="center"><img src="assets/images/mp-qr.png" width="180" alt="WeChat official account QR code" /></p>
 
 We'd love to hear what you actually need. Which chat app would you most like to use Jev with? What should it pick up on, how should it alert you, and what should it never touch? Send your thoughts to the official account.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=jev-chat/jev-chat-jarvis&type=Date)](https://www.star-history.com/#jev-chat/jev-chat-jarvis&Date)
 
 ## Copyright and License
 
@@ -111,9 +148,3 @@ Copyright © 2026 Finderchangchang and the jev-chat contributors. The code is av
 - Do not use the names "Jev Chat Assistant" ("Jev 聊天助手") or "jev-chat", or the domain chatjevs.com, to imply that your product was made or endorsed by the original authors.
 
 **Disclaimer:** This project only processes conversations on your own device that you are authorized to view. Follow the terms of service of QQ, X, Feishu, WhatsApp, and any other apps you use, as well as applicable local laws and regulations. The authors accept no responsibility for the consequences of its use.
-
-<div align="center">
-
-[![Global edition](https://img.shields.io/badge/Global%20edition-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md) [![Chinese edition](https://img.shields.io/badge/Chinese%20edition-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md) [![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
-
-</div>
