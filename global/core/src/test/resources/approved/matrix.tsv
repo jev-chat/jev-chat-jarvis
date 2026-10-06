@@ -1,0 +1,170 @@
+# Hand-written from the approved matrices (jev-scene-frameworks-confirmed_v4.md, user-confirmed 2026-10-02),
+# with the 2026-10-03 decisions (revision spec v2 §5). Never regenerate this file from the code.
+# position: ABOVE / AT / RARE / CUE / DEPENDS, or - when the scene gives no reading. next: CHOOSE / DIRECT / NO_REPLY.
+# kind=tone: behavior is the tone question expected for a very short reply (- for none); conflict=yes means tense.
+kind	scene	relationship	conflict	behavior	extra_hits	position	next	doc_row	source	status
+behavior	work	senior	no	W01		AT	CHOOSE	要交付	jev-scene-frameworks-confirmed_v4.md:82	approved
+behavior	work	peer	no	W01		AT	CHOOSE	要交付	jev-scene-frameworks-confirmed_v4.md:82	approved
+behavior	work	report	no	W01		RARE	CHOOSE	要交付	jev-scene-frameworks-confirmed_v4.md:82	approved
+behavior	work	client_or_external	no	W01		AT	CHOOSE	要交付	jev-scene-frameworks-confirmed_v4.md:82	approved
+behavior	work	senior	no	W04		AT	CHOOSE	给你新增工作	jev-scene-frameworks-confirmed_v4.md:83	approved
+behavior	work	peer	no	W04		ABOVE	CHOOSE	给你新增工作	jev-scene-frameworks-confirmed_v4.md:83	approved
+behavior	work	report	no	W04		ABOVE	CHOOSE	给你新增工作	jev-scene-frameworks-confirmed_v4.md:83	approved
+behavior	work	client_or_external	no	W04		ABOVE	CHOOSE	给你新增工作	jev-scene-frameworks-confirmed_v4.md:83	approved
+behavior	work	senior	no	W02		AT	CHOOSE	问进度	jev-scene-frameworks-confirmed_v4.md:84	approved
+behavior	work	peer	no	W02		AT	CHOOSE	问进度	jev-scene-frameworks-confirmed_v4.md:84	approved
+behavior	work	report	no	W02		RARE	CHOOSE	问进度	jev-scene-frameworks-confirmed_v4.md:84	approved
+behavior	work	client_or_external	no	W02		AT	CHOOSE	问进度	jev-scene-frameworks-confirmed_v4.md:84	approved
+behavior	work	senior	no	W06		AT	CHOOSE	指出问题	jev-scene-frameworks-confirmed_v4.md:85	approved
+behavior	work	peer	no	W06		AT	CHOOSE	指出问题	jev-scene-frameworks-confirmed_v4.md:85	approved
+behavior	work	report	no	W06		RARE	CHOOSE	指出问题	jev-scene-frameworks-confirmed_v4.md:85	approved
+behavior	work	client_or_external	no	W06		ABOVE	CHOOSE	指出问题	jev-scene-frameworks-confirmed_v4.md:85	approved
+behavior	work	senior	no	W12		CUE	CHOOSE	提到要上报	jev-scene-frameworks-confirmed_v4.md:86	approved
+behavior	work	peer	no	W12		ABOVE	CHOOSE	提到要上报	jev-scene-frameworks-confirmed_v4.md:86	approved
+behavior	work	report	no	W12		RARE	CHOOSE	提到要上报	jev-scene-frameworks-confirmed_v4.md:86	approved
+behavior	work	client_or_external	no	W12		ABOVE	CHOOSE	提到要上报	jev-scene-frameworks-confirmed_v4.md:86	approved
+behavior	work	senior	no	W13	W02	CUE	CHOOSE	重复催促	jev-scene-frameworks-confirmed_v4.md:87	approved
+behavior	work	peer	no	W13	W02	CUE	CHOOSE	重复催促	jev-scene-frameworks-confirmed_v4.md:87	approved
+behavior	work	report	no	W13	W02	RARE	CHOOSE	重复催促	jev-scene-frameworks-confirmed_v4.md:87	approved
+behavior	work	client_or_external	no	W13	W02	CUE	CHOOSE	重复催促	jev-scene-frameworks-confirmed_v4.md:87	approved
+behavior	work	senior	no	W09		-	NO_REPLY	Noted.、k（常态，不判断）	jev-scene-frameworks-confirmed_v4.md:88	approved
+behavior	work	peer	no	W09		-	NO_REPLY	Noted.、k（常态，不判断）	jev-scene-frameworks-confirmed_v4.md:88	approved
+behavior	work	report	no	W09		-	NO_REPLY	Noted.、k（常态，不判断）	jev-scene-frameworks-confirmed_v4.md:88	approved
+behavior	work	client_or_external	no	W09		-	NO_REPLY	Noted.、k（常态，不判断）	jev-scene-frameworks-confirmed_v4.md:88	approved
+tone	work	senior	no	tone.impatience		-	-	Per my last email（可能不耐烦）	jev-scene-frameworks-confirmed_v4.md:89	approved
+tone	work	peer	no	tone.impatience		-	-	Per my last email（可能不耐烦）	jev-scene-frameworks-confirmed_v4.md:89	approved
+tone	work	report	no	tone.impatience		-	-	Per my last email（可能不耐烦）	jev-scene-frameworks-confirmed_v4.md:89	approved
+tone	work	client_or_external	no	tone.impatience		-	-	Per my last email（可能不耐烦）	jev-scene-frameworks-confirmed_v4.md:89	approved
+behavior	romance	just_connected	no	R06		ABOVE	CHOOSE	表达想念	jev-scene-frameworks-confirmed_v4.md:110	approved
+behavior	romance	talking	no	R06		ABOVE	CHOOSE	表达想念	jev-scene-frameworks-confirmed_v4.md:110	approved
+behavior	romance	dating	no	R06		AT	DIRECT	表达想念	jev-scene-frameworks-confirmed_v4.md:110	approved
+behavior	romance	established	no	R06		AT	DIRECT	表达想念	jev-scene-frameworks-confirmed_v4.md:110	approved
+behavior	romance	ex_friends	no	R06		ABOVE	CHOOSE	表达想念	jev-scene-frameworks-confirmed_v4.md:110	approved
+behavior	romance	ex_distant	no	R06		ABOVE	CHOOSE	表达想念	jev-scene-frameworks-confirmed_v4.md:110	approved
+behavior	romance	just_connected	no	R23		ABOVE	CHOOSE	说爱你	jev-scene-frameworks-confirmed_v4.md:111	approved
+behavior	romance	talking	no	R23		ABOVE	CHOOSE	说爱你	jev-scene-frameworks-confirmed_v4.md:111	approved
+behavior	romance	dating	no	R23		ABOVE	CHOOSE	说爱你	jev-scene-frameworks-confirmed_v4.md:111	approved
+behavior	romance	established	no	R23		AT	DIRECT	说爱你	jev-scene-frameworks-confirmed_v4.md:111	approved
+behavior	romance	ex_friends	no	R23		ABOVE	CHOOSE	说爱你	jev-scene-frameworks-confirmed_v4.md:111	approved
+behavior	romance	ex_distant	no	R23		ABOVE	CHOOSE	说爱你	jev-scene-frameworks-confirmed_v4.md:111	approved
+behavior	romance	just_connected	no	R05		ABOVE	CHOOSE	说暧昧的话	jev-scene-frameworks-confirmed_v4.md:112	approved
+behavior	romance	talking	no	R05		AT	DIRECT	说暧昧的话	jev-scene-frameworks-confirmed_v4.md:112	approved
+behavior	romance	dating	no	R05		AT	DIRECT	说暧昧的话	jev-scene-frameworks-confirmed_v4.md:112	approved
+behavior	romance	established	no	R05		AT	DIRECT	说暧昧的话	jev-scene-frameworks-confirmed_v4.md:112	approved
+behavior	romance	ex_friends	no	R05		ABOVE	CHOOSE	说暧昧的话	jev-scene-frameworks-confirmed_v4.md:112	approved
+behavior	romance	ex_distant	no	R05		ABOVE	CHOOSE	说暧昧的话	jev-scene-frameworks-confirmed_v4.md:112	approved
+behavior	romance	just_connected	no	R07		ABOVE	CHOOSE	想见面（日常安排仍涉及时间，要你先选）	jev-scene-frameworks-confirmed_v4.md:113	approved
+behavior	romance	talking	no	R07		ABOVE	CHOOSE	想见面（日常安排仍涉及时间，要你先选）	jev-scene-frameworks-confirmed_v4.md:113	approved
+behavior	romance	dating	no	R07		AT	CHOOSE	想见面（日常安排仍涉及时间，要你先选）	jev-scene-frameworks-confirmed_v4.md:113	approved
+behavior	romance	established	no	R07		AT	CHOOSE	想见面（日常安排仍涉及时间，要你先选）	jev-scene-frameworks-confirmed_v4.md:113	approved
+behavior	romance	ex_friends	no	R07		ABOVE	CHOOSE	想见面（日常安排仍涉及时间，要你先选）	jev-scene-frameworks-confirmed_v4.md:113	approved
+behavior	romance	ex_distant	no	R07		ABOVE	CHOOSE	想见面（日常安排仍涉及时间，要你先选）	jev-scene-frameworks-confirmed_v4.md:113	approved
+behavior	romance	just_connected	no	R01		AT	DIRECT	日常聊天（前任·很少联系：不平常）	jev-scene-frameworks-confirmed_v4.md:114	approved
+behavior	romance	talking	no	R01		AT	DIRECT	日常聊天（前任·很少联系：不平常）	jev-scene-frameworks-confirmed_v4.md:114	approved
+behavior	romance	dating	no	R01		AT	DIRECT	日常聊天（前任·很少联系：不平常）	jev-scene-frameworks-confirmed_v4.md:114	approved
+behavior	romance	established	no	R01		AT	DIRECT	日常聊天（前任·很少联系：不平常）	jev-scene-frameworks-confirmed_v4.md:114	approved
+behavior	romance	ex_friends	no	R01		AT	DIRECT	日常聊天（前任·很少联系：不平常）	jev-scene-frameworks-confirmed_v4.md:114	approved
+behavior	romance	ex_distant	no	R01		RARE	DIRECT	日常聊天（前任·很少联系：不平常）	jev-scene-frameworks-confirmed_v4.md:114	approved
+tone	romance	just_connected	no	tone.low_effort		-	-	很短的回复	jev-scene-frameworks-confirmed_v4.md:115	approved
+tone	romance	talking	no	tone.low_effort		-	-	很短的回复	jev-scene-frameworks-confirmed_v4.md:115	approved
+tone	romance	dating	no	tone.displeasure		-	-	很短的回复	jev-scene-frameworks-confirmed_v4.md:115	approved
+tone	romance	established	no	tone.displeasure		-	-	很短的回复	jev-scene-frameworks-confirmed_v4.md:115	approved
+tone	romance	ex_friends	no	-		-	-	很短的回复	jev-scene-frameworks-confirmed_v4.md:115	approved
+tone	romance	ex_distant	no	-		-	-	很短的回复	jev-scene-frameworks-confirmed_v4.md:115	approved
+tone	romance	ex_friends	yes	-		-	-	很短的回复：前任 常态，不判断（吵架中也不判断）	jev-scene-frameworks-confirmed_v4.md:115	approved
+tone	romance	ex_distant	yes	-		-	-	很短的回复：前任 常态，不判断（吵架中也不判断）	jev-scene-frameworks-confirmed_v4.md:115	approved
+behavior	romance	just_connected	no	R08		?	?	想要更多联系：不在 matrix 里，分类待用户确认	jev-scene-frameworks-confirmed_v4.md:-	pending
+behavior	romance	talking	no	R08		?	?	想要更多联系：不在 matrix 里，分类待用户确认	jev-scene-frameworks-confirmed_v4.md:-	pending
+behavior	romance	dating	no	R08		?	?	想要更多联系：不在 matrix 里，分类待用户确认	jev-scene-frameworks-confirmed_v4.md:-	pending
+behavior	romance	established	no	R08		?	?	想要更多联系：不在 matrix 里，分类待用户确认	jev-scene-frameworks-confirmed_v4.md:-	pending
+behavior	romance	ex_friends	no	R08		?	?	想要更多联系：不在 matrix 里，分类待用户确认	jev-scene-frameworks-confirmed_v4.md:-	pending
+behavior	romance	ex_distant	no	R08		?	?	想要更多联系：不在 matrix 里，分类待用户确认	jev-scene-frameworks-confirmed_v4.md:-	pending
+behavior	friends	new	no	F05		ABOVE	CHOOSE	调侃你（普通朋友：看聊天记录里的习惯）	jev-scene-frameworks-confirmed_v4.md:135	approved
+behavior	friends	regular	no	F05		DEPENDS	CHOOSE	调侃你（普通朋友：看聊天记录里的习惯）	jev-scene-frameworks-confirmed_v4.md:135	approved
+behavior	friends	close	no	F05		AT	DIRECT	调侃你（普通朋友：看聊天记录里的习惯）	jev-scene-frameworks-confirmed_v4.md:135	approved
+behavior	friends	new	no	F10		ABOVE	CHOOSE	wtf、you idiot（普通朋友：看前文）	jev-scene-frameworks-confirmed_v4.md:136	approved
+behavior	friends	regular	no	F10		DEPENDS	CHOOSE	wtf、you idiot（普通朋友：看前文）	jev-scene-frameworks-confirmed_v4.md:136	approved
+behavior	friends	close	no	F10		AT	DIRECT	wtf、you idiot（普通朋友：看前文）	jev-scene-frameworks-confirmed_v4.md:136	approved
+behavior	friends	close	yes	F10		ABOVE	CHOOSE	wtf、you idiot：好朋友 闹矛盾时除外	jev-scene-frameworks-confirmed_v4.md:136	approved
+behavior	friends	new	no	F06		ABOVE	CHOOSE	请你帮大忙（好朋友：常态，仍然要你决定）	jev-scene-frameworks-confirmed_v4.md:137	approved
+behavior	friends	regular	no	F06		ABOVE	CHOOSE	请你帮大忙（好朋友：常态，仍然要你决定）	jev-scene-frameworks-confirmed_v4.md:137	approved
+behavior	friends	close	no	F06		AT	CHOOSE	请你帮大忙（好朋友：常态，仍然要你决定）	jev-scene-frameworks-confirmed_v4.md:137	approved
+behavior	friends	new	no	F03		ABOVE	CHOOSE	倾诉私人的事	jev-scene-frameworks-confirmed_v4.md:138	approved
+behavior	friends	regular	no	F03		AT	DIRECT	倾诉私人的事	jev-scene-frameworks-confirmed_v4.md:138	approved
+behavior	friends	close	no	F03		AT	DIRECT	倾诉私人的事	jev-scene-frameworks-confirmed_v4.md:138	approved
+behavior	friends	new	no	F08		ABOVE	CHOOSE	说想你、在乎你	jev-scene-frameworks-confirmed_v4.md:139	approved
+behavior	friends	regular	no	F08		AT	DIRECT	说想你、在乎你	jev-scene-frameworks-confirmed_v4.md:139	approved
+behavior	friends	close	no	F08		AT	DIRECT	说想你、在乎你	jev-scene-frameworks-confirmed_v4.md:139	approved
+behavior	friends	new	no	F09		ABOVE	CHOOSE	表示喜欢你（必须先选）	jev-scene-frameworks-confirmed_v4.md:140	approved
+behavior	friends	regular	no	F09		ABOVE	CHOOSE	表示喜欢你（必须先选）	jev-scene-frameworks-confirmed_v4.md:140	approved
+behavior	friends	close	no	F09		ABOVE	CHOOSE	表示喜欢你（必须先选）	jev-scene-frameworks-confirmed_v4.md:140	approved
+behavior	friends	new	no	F01		AT	CHOOSE	邀请你（常态；去不去是你的决定）	jev-scene-frameworks-confirmed_v4.md:141	approved
+behavior	friends	regular	no	F01		AT	CHOOSE	邀请你（常态；去不去是你的决定）	jev-scene-frameworks-confirmed_v4.md:141	approved
+behavior	friends	close	no	F01		AT	CHOOSE	邀请你（常态；去不去是你的决定）	jev-scene-frameworks-confirmed_v4.md:141	approved
+behavior	friends	new	no	F07		AT	DIRECT	临时取消	jev-scene-frameworks-confirmed_v4.md:142	approved
+behavior	friends	regular	no	F07		AT	DIRECT	临时取消	jev-scene-frameworks-confirmed_v4.md:142	approved
+behavior	friends	close	no	F07		AT	DIRECT	临时取消	jev-scene-frameworks-confirmed_v4.md:142	approved
+behavior	friends	close	no	cancelled_before	F07	CUE	DIRECT	临时取消：好朋友 多次出现时显示为线索	jev-scene-frameworks-confirmed_v4.md:142	approved
+absent	friends	new	no	cancelled_before		-	-	临时取消的线索只对好朋友	jev-scene-frameworks-confirmed_v4.md:142	approved
+absent	friends	regular	no	cancelled_before		-	-	临时取消的线索只对好朋友	jev-scene-frameworks-confirmed_v4.md:142	approved
+tone	friends	new	yes	-		-	-	很短的回复：新认识 常态，不判断	jev-scene-frameworks-confirmed_v4.md:143	approved
+tone	friends	regular	yes	-		-	-	很短的回复：普通朋友 常态，不判断	jev-scene-frameworks-confirmed_v4.md:143	approved
+tone	friends	close	no	-		-	-	很短的回复：好朋友 平时常态	jev-scene-frameworks-confirmed_v4.md:143	approved
+tone	friends	close	yes	tone.displeasure		-	-	很短的回复：好朋友 闹矛盾时可能带不满	jev-scene-frameworks-confirmed_v4.md:143	approved
+behavior	family	parent_or_elder	no	A01		AT	DIRECT	关心你的日常	jev-scene-frameworks-confirmed_v4.md:160	approved
+behavior	family	sibling_or_peer	no	A01		AT	DIRECT	关心你的日常	jev-scene-frameworks-confirmed_v4.md:160	approved
+behavior	family	child_or_younger	no	A01		RARE	DIRECT	关心你的日常	jev-scene-frameworks-confirmed_v4.md:160	approved
+behavior	family	partner_family	no	A01		AT	DIRECT	关心你的日常	jev-scene-frameworks-confirmed_v4.md:160	approved
+behavior	family	parent_or_elder	no	A02		AT	CHOOSE	过问个人决定（父母：谈不谈由你定；同辈：看关系）	jev-scene-frameworks-confirmed_v4.md:161	approved
+behavior	family	sibling_or_peer	no	A02		DEPENDS	CHOOSE	过问个人决定（父母：谈不谈由你定；同辈：看关系）	jev-scene-frameworks-confirmed_v4.md:161	approved
+behavior	family	child_or_younger	no	A02		ABOVE	CHOOSE	过问个人决定（父母：谈不谈由你定；同辈：看关系）	jev-scene-frameworks-confirmed_v4.md:161	approved
+behavior	family	partner_family	no	A02		ABOVE	CHOOSE	过问个人决定（父母：谈不谈由你定；同辈：看关系）	jev-scene-frameworks-confirmed_v4.md:161	approved
+behavior	family	parent_or_elder	no	A03		AT	CHOOSE	没问就给建议	jev-scene-frameworks-confirmed_v4.md:162	approved
+behavior	family	sibling_or_peer	no	A03		AT	CHOOSE	没问就给建议	jev-scene-frameworks-confirmed_v4.md:162	approved
+behavior	family	child_or_younger	no	A03		RARE	CHOOSE	没问就给建议	jev-scene-frameworks-confirmed_v4.md:162	approved
+behavior	family	partner_family	no	A03		ABOVE	CHOOSE	没问就给建议	jev-scene-frameworks-confirmed_v4.md:162	approved
+behavior	family	parent_or_elder	no	A04		AT	CHOOSE	要你回家或打电话（仍要你决定）	jev-scene-frameworks-confirmed_v4.md:163	approved
+behavior	family	sibling_or_peer	no	A04		AT	CHOOSE	要你回家或打电话（仍要你决定）	jev-scene-frameworks-confirmed_v4.md:163	approved
+behavior	family	child_or_younger	no	A04		AT	CHOOSE	要你回家或打电话（仍要你决定）	jev-scene-frameworks-confirmed_v4.md:163	approved
+behavior	family	partner_family	no	A04		AT	CHOOSE	要你回家或打电话（仍要你决定）	jev-scene-frameworks-confirmed_v4.md:163	approved
+behavior	family	parent_or_elder	no	A05		AT	CHOOSE	要你出钱或出力	jev-scene-frameworks-confirmed_v4.md:164	approved
+behavior	family	sibling_or_peer	no	A05		AT	CHOOSE	要你出钱或出力	jev-scene-frameworks-confirmed_v4.md:164	approved
+behavior	family	child_or_younger	no	A05		AT	CHOOSE	要你出钱或出力	jev-scene-frameworks-confirmed_v4.md:164	approved
+behavior	family	partner_family	no	A05		ABOVE	CHOOSE	要你出钱或出力	jev-scene-frameworks-confirmed_v4.md:164	approved
+behavior	family	parent_or_elder	no	A08	A04	CUE	CHOOSE	内疚式的话（施压线索）	jev-scene-frameworks-confirmed_v4.md:165	approved
+behavior	family	sibling_or_peer	no	A08	A04	CUE	CHOOSE	内疚式的话（施压线索）	jev-scene-frameworks-confirmed_v4.md:165	approved
+behavior	family	child_or_younger	no	A08	A04	CUE	CHOOSE	内疚式的话（施压线索）	jev-scene-frameworks-confirmed_v4.md:165	approved
+behavior	family	partner_family	no	A08	A04	CUE	CHOOSE	内疚式的话（施压线索）	jev-scene-frameworks-confirmed_v4.md:165	approved
+behavior	family	parent_or_elder	no	A09	A04	CUE	CHOOSE	和别人比较（施压线索）	jev-scene-frameworks-confirmed_v4.md:165	approved
+behavior	family	sibling_or_peer	no	A09	A04	CUE	CHOOSE	和别人比较（施压线索）	jev-scene-frameworks-confirmed_v4.md:165	approved
+behavior	family	child_or_younger	no	A09	A04	CUE	CHOOSE	和别人比较（施压线索）	jev-scene-frameworks-confirmed_v4.md:165	approved
+behavior	family	partner_family	no	A09	A04	CUE	CHOOSE	和别人比较（施压线索）	jev-scene-frameworks-confirmed_v4.md:165	approved
+behavior	family	parent_or_elder	no	A10		DEPENDS	CHOOSE	调侃你（父母：看家里的习惯）	jev-scene-frameworks-confirmed_v4.md:166	approved
+behavior	family	sibling_or_peer	no	A10		AT	DIRECT	调侃你（父母：看家里的习惯）	jev-scene-frameworks-confirmed_v4.md:166	approved
+behavior	family	child_or_younger	no	A10		AT	DIRECT	调侃你（父母：看家里的习惯）	jev-scene-frameworks-confirmed_v4.md:166	approved
+behavior	family	partner_family	no	A10		ABOVE	CHOOSE	调侃你（父母：看家里的习惯）	jev-scene-frameworks-confirmed_v4.md:166	approved
+tone	family	parent_or_elder	yes	-		-	-	很短的回复：父母 常态，不判断	jev-scene-frameworks-confirmed_v4.md:167	approved
+tone	family	sibling_or_peer	no	-		-	-	很短的回复：同辈 平时常态	jev-scene-frameworks-confirmed_v4.md:167	approved
+tone	family	sibling_or_peer	yes	tone.displeasure		-	-	很短的回复：同辈 刚有不合时可能带不满	jev-scene-frameworks-confirmed_v4.md:167	approved
+tone	family	child_or_younger	yes	tone.displeasure		-	-	很短的回复：晚辈 同左	jev-scene-frameworks-confirmed_v4.md:167	approved
+tone	family	partner_family	yes	-		-	-	很短的回复：伴侣的家人 常态，不判断	jev-scene-frameworks-confirmed_v4.md:167	approved
+tone	family	none	yes	-		-	-	没选关系：不查表	jev-scene-frameworks-confirmed_v4.md:167	approved
+behavior	general	unspecified	no	K01		-	DIRECT	日常聊天、寒暄（直接生成）	jev-scene-frameworks-confirmed_v4.md:177	approved
+behavior	general	unspecified	no	K02		-	CHOOSE	在问你	jev-scene-frameworks-confirmed_v4.md:178	approved
+behavior	general	unspecified	no	K04		-	CHOOSE	约时间	jev-scene-frameworks-confirmed_v4.md:179	approved
+notice	general	unspecified	no	K01		-	CHOOSE	miss you 这类话：不做解读，提示选场景	jev-scene-frameworks-confirmed_v4.md:183	approved
+tone	general	unspecified	yes	-		-	-	很短的回复：不判断语气	jev-scene-frameworks-confirmed_v4.md:184	approved
+behavior	general	errands	no	K01		-	DIRECT	日常聊天、寒暄（直接生成）	jev-scene-frameworks-confirmed_v4.md:177	approved
+behavior	general	errands	no	K02		-	CHOOSE	在问你	jev-scene-frameworks-confirmed_v4.md:178	approved
+behavior	general	errands	no	K04		-	CHOOSE	约时间	jev-scene-frameworks-confirmed_v4.md:179	approved
+notice	general	errands	no	K01		-	CHOOSE	miss you 这类话：不做解读，提示选场景	jev-scene-frameworks-confirmed_v4.md:183	approved
+tone	general	errands	yes	-		-	-	很短的回复：不判断语气	jev-scene-frameworks-confirmed_v4.md:184	approved
+behavior	general	errands	no	B04		-	CHOOSE	约时间（办事）	jev-scene-frameworks-confirmed_v4.md:179	approved
+behavior	general	errands	no	B01		-	CHOOSE	报价或说条件	jev-scene-frameworks-confirmed_v4.md:180	approved
+behavior	general	errands	no	B02		-	CHOOSE	要你付款	jev-scene-frameworks-confirmed_v4.md:181	approved
+behavior	general	errands	no	B03		-	CHOOSE	要你给材料	jev-scene-frameworks-confirmed_v4.md:181	approved
+behavior	general	errands	no	B06		-	CHOOSE	催你尽快决定	jev-scene-frameworks-confirmed_v4.md:182	approved
+absent	general	unspecified	no	B01		-	-	报价或说条件：不确定关系 不问这道题	jev-scene-frameworks-confirmed_v4.md:180	approved
+absent	general	unspecified	no	B02		-	-	要你付款：不确定关系 不问这道题	jev-scene-frameworks-confirmed_v4.md:181	approved
+absent	general	unspecified	no	B03		-	-	要你给材料：不确定关系 不问这道题	jev-scene-frameworks-confirmed_v4.md:181	approved
+absent	general	unspecified	no	B06		-	-	催你尽快决定：不确定关系 不问这道题	jev-scene-frameworks-confirmed_v4.md:182	approved

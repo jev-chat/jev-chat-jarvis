@@ -1,0 +1,88 @@
+# Hand-written from the apology table the user approved on 2026-10-03 (revision spec v2 §6.2). Never regenerate from code.
+# behavior: a behaviour id, "conflict" for the conflict options, or "pressure" for the Family pressure options.
+scene	behavior	stance	relationship	apology	note
+work	W01	more_time	senior	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W01	more_time	peer	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W01	more_time	client_or_external	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W01	more_time	report	OPTIONAL	对下属为 OPTIONAL
+work	W01	cannot	senior	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W01	cannot	peer	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W01	cannot	client_or_external	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W01	cannot	report	OPTIONAL	对下属为 OPTIONAL
+work	W02	late	senior	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W02	late	peer	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W02	late	client_or_external	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W02	late	report	OPTIONAL	对下属为 OPTIONAL
+work	W02	not_started	senior	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W02	not_started	peer	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W02	not_started	client_or_external	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W02	not_started	report	OPTIONAL	对下属为 OPTIONAL
+work	W07	other_time	senior	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W07	other_time	peer	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W07	other_time	client_or_external	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W07	other_time	report	OPTIONAL	对下属为 OPTIONAL
+work	W07	cannot_attend	senior	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W07	cannot_attend	peer	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W07	cannot_attend	client_or_external	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W07	cannot_attend	report	OPTIONAL	对下属为 OPTIONAL
+work	W06	acknowledge_fix	senior	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W06	acknowledge_fix	peer	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W06	acknowledge_fix	client_or_external	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+work	W06	acknowledge_fix	report	OPTIONAL	对下属为 OPTIONAL
+work	W04	decline	senior	EXPECTED	新增工作：拒绝（对上级）
+work	W04	decline	client_or_external	EXPECTED	新增工作：拒绝（对客户）
+work	W04	decline	peer	OPTIONAL	jev-v01-revision-spec_v2.md §6.2
+work	W04	decline	report	OPTIONAL	jev-v01-revision-spec_v2.md §6.2
+work	W06	disagree	senior	AVOID	jev-v01-revision-spec_v2.md §6.2
+work	W06	ask_what	senior	AVOID	jev-v01-revision-spec_v2.md §6.2
+work	W03	reject	senior	AVOID	jev-v01-revision-spec_v2.md §6.2
+work	conflict	state_my_side	senior	AVOID	jev-v01-revision-spec_v2.md §6.2
+work	W01	agree	senior	OPTIONAL	未列出：OPTIONAL
+friends	F01	not_going	regular	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+friends	F01	another_time	regular	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+friends	F06	no	regular	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+friends	K06	admit_apologise	regular	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+friends	K06	disagree	regular	AVOID	jev-v01-revision-spec_v2.md §6.2
+friends	K06	ask_first	regular	AVOID	jev-v01-revision-spec_v2.md §6.2
+friends	F05	not_funny	regular	AVOID	jev-v01-revision-spec_v2.md §6.2
+friends	F07	disappointed	regular	AVOID	jev-v01-revision-spec_v2.md §6.2
+friends	conflict	stand_firm	regular	AVOID	jev-v01-revision-spec_v2.md §6.2
+friends	conflict	say_upset	regular	AVOID	jev-v01-revision-spec_v2.md §6.2
+friends	F07	no_worries	regular	OPTIONAL	未列出：OPTIONAL
+family	A04	no	parent_or_elder	EXPECTED	对父母或长辈说不
+family	A04	no	partner_family	EXPECTED	对伴侣的家人说不
+family	A04	no	sibling_or_peer	OPTIONAL	jev-v01-revision-spec_v2.md §6.2
+family	A04	no	child_or_younger	OPTIONAL	jev-v01-revision-spec_v2.md §6.2
+family	A05	no	parent_or_elder	EXPECTED	对父母或长辈说不
+family	A05	no	partner_family	EXPECTED	对伴侣的家人说不
+family	A05	no	sibling_or_peer	OPTIONAL	jev-v01-revision-spec_v2.md §6.2
+family	A05	no	child_or_younger	OPTIONAL	jev-v01-revision-spec_v2.md §6.2
+family	K06	admit_apologise	parent_or_elder	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+family	pressure	feel_no_yield	parent_or_elder	AVOID	jev-v01-revision-spec_v2.md §6.2
+family	pressure	uncomfortable	parent_or_elder	AVOID	jev-v01-revision-spec_v2.md §6.2
+family	pressure	only_matter	parent_or_elder	AVOID	jev-v01-revision-spec_v2.md §6.2
+family	A02	not_discuss	parent_or_elder	AVOID	jev-v01-revision-spec_v2.md §6.2
+family	A02	my_decision	parent_or_elder	AVOID	jev-v01-revision-spec_v2.md §6.2
+family	conflict	stand_firm	parent_or_elder	AVOID	jev-v01-revision-spec_v2.md §6.2
+family	K06	disagree	parent_or_elder	AVOID	jev-v01-revision-spec_v2.md §6.2
+family	pressure	give_way	parent_or_elder	OPTIONAL	Give way 为 OPTIONAL
+romance	R07	dir_more_distance	talking	EXPECTED	拒绝见面
+romance	R04	no	dating	EXPECTED	拒绝见面（计划类的 No）
+romance	R13	not_now	dating	EXPECTED	现在不行
+romance	R11	admit_apologise	dating	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+romance	conflict	apologise	dating	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+romance	R11	disagree	dating	AVOID	jev-v01-revision-spec_v2.md §6.2
+romance	R11	ask_first	dating	AVOID	jev-v01-revision-spec_v2.md §6.2
+romance	R15	not_accept	dating	AVOID	jev-v01-revision-spec_v2.md §6.2
+romance	R16	practical_only	dating	AVOID	jev-v01-revision-spec_v2.md §6.2
+romance	conflict	stand_firm	dating	AVOID	jev-v01-revision-spec_v2.md §6.2
+romance	conflict	say_upset	dating	AVOID	jev-v01-revision-spec_v2.md §6.2
+general	K04	time_no	errands	EXPECTED	时间不行
+general	K05	no	errands	EXPECTED	拒绝帮忙
+general	K06	admit_apologise	errands	EXPECTED	jev-v01-revision-spec_v2.md §6.2
+general	B01	counter	errands	AVOID	jev-v01-revision-spec_v2.md §6.2
+general	B02	not_yet	errands	AVOID	jev-v01-revision-spec_v2.md §6.2
+general	B02	wont_pay	errands	AVOID	jev-v01-revision-spec_v2.md §6.2
+general	B03	wont_provide	errands	AVOID	jev-v01-revision-spec_v2.md §6.2
+general	B06	need_time	errands	AVOID	jev-v01-revision-spec_v2.md §6.2
+general	K06	disagree	errands	AVOID	jev-v01-revision-spec_v2.md §6.2

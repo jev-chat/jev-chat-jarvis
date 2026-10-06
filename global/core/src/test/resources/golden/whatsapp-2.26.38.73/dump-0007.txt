@@ -1,0 +1,13 @@
+page=CONVERSATION stable=false older=true newer=true
+note: 8 row(s) have children outside the row's own bounds
+note: Recording reports 10 row(s) moved during capture
+SELF    TEXT          06:53  "Got it, thanks for helping." clipped
+OTHER   TEXT          06:53  "Can you send me the report by Friday?"
+SELF    TEXT          06:54  "I'll check and let you know."
+OTHER   TEXT          06:54  "OK"
+OTHER   TEXT          06:54  "OK"
+SELF    TEXT          06:54  "OK"
+OTHER   TEXT          06:54  "Any update on this?" quote(SELF)="I'll check and let you know."
+SELF    TEXT          06:55  "Friday might be tight." quote(OTHER)="Can you send me the report by Friday?"
+OTHER   TEXT          06:55  "k."
+UNKNOWN IMAGE         -      - clipped INCOMPLETE

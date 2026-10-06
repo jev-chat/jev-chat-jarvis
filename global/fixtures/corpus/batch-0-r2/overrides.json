@@ -1,0 +1,31 @@
+{
+  "schema": "jev.corpus-review-overrides/1",
+  "batch": "batch-0-r2",
+  "reviewer": "Claude Fable 5.1",
+  "date": "2026-10-02",
+  "note": "Reviewer corrections applied on top of the author's labels when the batch is used. The batch files themselves are left as delivered.",
+  "cases": {
+    "RM-MX01-just_connected": {"move_behavior": {"R03": "unsure"}},
+    "RM-MX01-talking": {"move_behavior": {"R03": "unsure"}},
+    "RM-MX01-dating": {"move_behavior": {"R03": "unsure"}},
+    "RM-MX01-established": {"move_behavior": {"R03": "unsure"}},
+    "RM-MX02-just_connected": {"move_behavior": {"R03": "unsure"}},
+    "RM-MX02-talking": {"move_behavior": {"R03": "unsure"}},
+    "RM-MX02-dating": {"move_behavior": {"R03": "unsure"}},
+    "RM-MX02-established": {"move_behavior": {"R03": "unsure"}},
+    "WK-FR01-L0": {"move_behavior": {"W01": "true"}},
+    "WK-FR01-L1": {"friction_other_acceptable": [1, 2]},
+    "WK-FR01-L4": {"friction_other_acceptable": [3, 4]},
+    "WK-FR01-BD2": {"move_behavior": {"W12": "true", "W06": "unsure"}},
+    "WK-CD01": {"candidates": {"c1": {"must_include_met_unsure": [1]}}},
+    "RM-CD01": {"candidates": {
+      "c1": {"exclude_from_scoring": "Says 'I should have texted you back sooner', which may count as admits_fault; not a clean good candidate."},
+      "c2": {"must_include_met_unsure": [1]}
+    }}
+  },
+  "ladders": {
+    "WK-GL01": {"acceptable": {"2": [2, 3], "3": [2, 3], "4": [4, 5], "5": [4, 5]}},
+    "RM-GL01": {"acceptable": {"3": [2, 3], "4": [4, 5]}, "exclude_rungs": {"5": "States 'I don't have those feelings any more', which is not in user_facts."}},
+    "RM-EL01": {"exclude_rungs": {"2": "Padded rather than a warmth mismatch, and it does not say the user is not ready."}}
+  }
+}

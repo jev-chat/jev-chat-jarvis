@@ -1,0 +1,3 @@
+# Golden files and screen recordings are compared byte for byte, so keep LF on every OS.
+* text=auto eol=lf
+*.bat text eol=crlf
