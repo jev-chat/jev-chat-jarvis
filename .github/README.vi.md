@@ -10,8 +10,6 @@
 
 [![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
 [![Platform](https://img.shields.io/badge/platform-Android%20%7C%20Windows%20%7C%20macOS%20%7C%20iOS-lightgrey?style=flat-square)](#tải-về-và-cài-đặt)
-[![Bản quốc tế](https://img.shields.io/badge/Bản%20quốc%20tế-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
-[![Bản tiếng Trung](https://img.shields.io/badge/Bản%20tiếng%20Trung-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
 [![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
 
 ### 🌐 Trang web chính thức: **[chatjevs.com](https://chatjevs.com)**
