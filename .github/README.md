@@ -8,13 +8,6 @@
 
 Jev reads the chat on your screen, works out what the other person means and how to respond, and drafts replies for you to pick from. It fills your choice into the message box. Whether to send is up to you. Available on Android, Windows, macOS and iOS.
 
-[![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
-[![Global edition](https://img.shields.io/badge/Global%20edition-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
-[![Chinese edition](https://img.shields.io/badge/Chinese%20edition-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
-[![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
-
-[Website](https://chatjevs.com) · [Download](#download) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
-
 **English** · [简体中文](README.zh-CN.md) · [Tiếng Việt](README.vi.md)
 
 </div>
@@ -42,6 +35,17 @@ Jev reads the chat on your screen, works out what the other person means and how
 </table>
 
 </details>
+
+<div align="center">
+
+[![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
+[![Global edition](https://img.shields.io/badge/Global%20edition-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
+[![Chinese edition](https://img.shields.io/badge/Chinese%20edition-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
+[![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
+
+[Website](https://chatjevs.com) · [Download](#download) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
+
+</div>
 
 ## What Is jev-chat
 

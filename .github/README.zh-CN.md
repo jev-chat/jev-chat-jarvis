@@ -8,13 +8,6 @@
 
 Jev 读取你屏幕上的聊天，判断对方的真实意图和该怎么回，起草几条回复让你挑，再把你选的那条填进输入框。发不发，由你决定。支持 Android、Windows、macOS 和 iOS。
 
-[![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
-[![海外版](https://img.shields.io/badge/海外版-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
-[![国内版](https://img.shields.io/badge/国内版-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
-[![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
-
-[官网](https://chatjevs.com) · [下载](#下载) · [安装与设置指南](https://chatjevs.com/guides/android-setup.html) · [候选回复使用建议](https://chatjevs.com/guides/review-ai-replies.html) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
-
 [English](README.md) · **简体中文** · [Tiếng Việt](README.vi.md)
 
 </div>
@@ -42,6 +35,17 @@ Jev 读取你屏幕上的聊天，判断对方的真实意图和该怎么回，�
 </table>
 
 </details>
+
+<div align="center">
+
+[![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
+[![海外版](https://img.shields.io/badge/海外版-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
+[![国内版](https://img.shields.io/badge/国内版-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
+[![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
+
+[官网](https://chatjevs.com) · [下载](#下载) · [安装与设置指南](https://chatjevs.com/guides/android-setup.html) · [候选回复使用建议](https://chatjevs.com/guides/review-ai-replies.html) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
+
+</div>
 
 ## jev-chat 是什么
 

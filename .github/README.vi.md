@@ -8,13 +8,6 @@
 
 Jev đọc cuộc trò chuyện trên màn hình, hiểu người kia muốn gì và nên đáp thế nào, rồi soạn sẵn vài câu trả lời để bạn chọn. Câu bạn chọn được điền vào ô nhập; gửi hay không là do bạn. Có trên Android, Windows, macOS và iOS.
 
-[![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
-[![Bản quốc tế](https://img.shields.io/badge/Bản%20quốc%20tế-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
-[![Bản tiếng Trung](https://img.shields.io/badge/Bản%20tiếng%20Trung-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
-[![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
-
-[Trang web](https://chatjevs.com) · [Tải về](#tải-về) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
-
 [English](README.md) · [简体中文](README.zh-CN.md) · **Tiếng Việt**
 
 </div>
@@ -42,6 +35,17 @@ Jev đọc cuộc trò chuyện trên màn hình, hiểu người kia muốn gì
 </table>
 
 </details>
+
+<div align="center">
+
+[![Stars](https://img.shields.io/github/stars/jev-chat/jev-chat-jarvis?style=flat-square&logo=github&label=Stars)](https://github.com/jev-chat/jev-chat-jarvis/stargazers)
+[![Bản quốc tế](https://img.shields.io/badge/Bản%20quốc%20tế-v0.1.0-25D366?style=flat-square)](../global/CHANGELOG.md)
+[![Bản tiếng Trung](https://img.shields.io/badge/Bản%20tiếng%20Trung-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
+[![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
+
+[Trang web](https://chatjevs.com) · [Tải về](#tải-về) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
+
+</div>
 
 ## jev-chat là gì
 
