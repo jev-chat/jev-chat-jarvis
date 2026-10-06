@@ -13,11 +13,25 @@ Jev reads the chat on your screen, works out what the other person means and how
 [![Chinese edition](https://img.shields.io/badge/Chinese%20edition-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
 [![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
 
-[Website](https://chatjevs.com) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
+[Website](https://chatjevs.com) · [Download](#download) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
 
 **English** · [简体中文](README.zh-CN.md) · [Tiếng Việt](README.vi.md)
 
 </div>
+
+## How It Works
+
+1. **Read.** Jev reads the conversation shown on your screen through Android's accessibility service. It does not modify the chat app, log in to it or read its database.
+2. **Judge first.** Before any reply is written, a judgment model works out what the other person really wants, how risky the moment is and the best way to respond.
+3. **Draft, check, rank.** Jev drafts replies, checks them against that judgment and ranks them. Tap one to fill it into the message box. You press send.
+
+<table align="center">
+<tr>
+<td align="center"><img src="../global/docs/images/states/02-decide.png" width="230" alt="Global edition: what they want, then your options" /><br/><sub>Global edition: what they want, then your options</sub></td>
+<td align="center"><img src="../global/docs/images/states/04-results.png" width="230" alt="Global edition: two replies, scored out of 5" /><br/><sub>Global edition: two replies, scored out of 5</sub></td>
+<td align="center"><img src="assets/images/overlay.png" width="230" alt="Chinese edition: risk level, intent and three ranked replies" /><br/><sub>Chinese edition: risk level, intent and three ranked replies</sub></td>
+</tr>
+</table>
 
 ## Download
 
@@ -54,20 +68,6 @@ Both editions need Android 11 or later and can be installed side by side. The gl
 </table>
 
 </details>
-
-## How It Works
-
-1. **Read.** Jev reads the conversation shown on your screen through Android's accessibility service. It does not modify the chat app, log in to it or read its database.
-2. **Judge first.** Before any reply is written, a judgment model works out what the other person really wants, how risky the moment is and the best way to respond.
-3. **Draft, check, rank.** Jev drafts replies, checks them against that judgment and ranks them. Tap one to fill it into the message box. You press send.
-
-<table align="center">
-<tr>
-<td align="center"><img src="../global/docs/images/states/02-decide.png" width="230" alt="Global edition: what they want, then your options" /><br/><sub>Global edition: what they want, then your options</sub></td>
-<td align="center"><img src="../global/docs/images/states/04-results.png" width="230" alt="Global edition: two replies, scored out of 5" /><br/><sub>Global edition: two replies, scored out of 5</sub></td>
-<td align="center"><img src="assets/images/overlay.png" width="230" alt="Chinese edition: risk level, intent and three ranked replies" /><br/><sub>Chinese edition: risk level, intent and three ranked replies</sub></td>
-</tr>
-</table>
 
 ## Privacy and Risk
 

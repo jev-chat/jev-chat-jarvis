@@ -13,11 +13,25 @@ Jev 读取你屏幕上的聊天，判断对方的真实意图和该怎么回，�
 [![国内版](https://img.shields.io/badge/国内版-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
 [![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
 
-[官网](https://chatjevs.com) · [安装与设置指南](https://chatjevs.com/guides/android-setup.html) · [候选回复使用建议](https://chatjevs.com/guides/review-ai-replies.html) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
+[官网](https://chatjevs.com) · [下载](#下载) · [安装与设置指南](https://chatjevs.com/guides/android-setup.html) · [候选回复使用建议](https://chatjevs.com/guides/review-ai-replies.html) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
 
 [English](README.md) · **简体中文** · [Tiếng Việt](README.vi.md)
 
 </div>
+
+## 它怎么工作
+
+1. **读取**：通过安卓无障碍服务读取屏幕上正在显示的对话。不改聊天软件，不登录它的账号，不读它的数据库。
+2. **先判断**：写回复之前，判断模型先看清对方真正想要什么、这句话风险有多大、怎么回最合适。
+3. **起草、检查、排序**：按判断结果起草几条回复，检查后排好序。点一下填进输入框，发送键由你自己按。
+
+<table align="center">
+<tr>
+<td align="center"><img src="../global/docs/images/states/02-decide.png" width="230" alt="海外版：对方要什么、你想怎么回" /><br/><sub>海外版：对方要什么、你想怎么回</sub></td>
+<td align="center"><img src="../global/docs/images/states/04-results.png" width="230" alt="海外版：两条回复，按 5 分制打分" /><br/><sub>海外版：两条回复，按 5 分制打分</sub></td>
+<td align="center"><img src="assets/images/overlay.png" width="230" alt="国内版：危险等级、对方意图、排好序的 3 条候选" /><br/><sub>国内版：危险等级、对方意图、排好序的 3 条候选</sub></td>
+</tr>
+</table>
 
 ## 下载
 
@@ -54,20 +68,6 @@ Jev 读取你屏幕上的聊天，判断对方的真实意图和该怎么回，�
 </table>
 
 </details>
-
-## 它怎么工作
-
-1. **读取**：通过安卓无障碍服务读取屏幕上正在显示的对话。不改聊天软件，不登录它的账号，不读它的数据库。
-2. **先判断**：写回复之前，判断模型先看清对方真正想要什么、这句话风险有多大、怎么回最合适。
-3. **起草、检查、排序**：按判断结果起草几条回复，检查后排好序。点一下填进输入框，发送键由你自己按。
-
-<table align="center">
-<tr>
-<td align="center"><img src="../global/docs/images/states/02-decide.png" width="230" alt="海外版：对方要什么、你想怎么回" /><br/><sub>海外版：对方要什么、你想怎么回</sub></td>
-<td align="center"><img src="../global/docs/images/states/04-results.png" width="230" alt="海外版：两条回复，按 5 分制打分" /><br/><sub>海外版：两条回复，按 5 分制打分</sub></td>
-<td align="center"><img src="assets/images/overlay.png" width="230" alt="国内版：危险等级、对方意图、排好序的 3 条候选" /><br/><sub>国内版：危险等级、对方意图、排好序的 3 条候选</sub></td>
-</tr>
-</table>
 
 ## 隐私与风险
 

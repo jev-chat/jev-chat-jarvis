@@ -13,11 +13,25 @@ Jev đọc cuộc trò chuyện trên màn hình, hiểu người kia muốn gì
 [![Bản tiếng Trung](https://img.shields.io/badge/Bản%20tiếng%20Trung-v1.7-1f6feb?style=flat-square)](../cn/CHANGELOG.md)
 [![License](https://img.shields.io/github/license/jev-chat/jev-chat-jarvis?style=flat-square)](../LICENSE)
 
-[Trang web](https://chatjevs.com) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
+[Trang web](https://chatjevs.com) · [Tải về](#tải-về) · [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
 
 [English](README.md) · [简体中文](README.zh-CN.md) · **Tiếng Việt**
 
 </div>
+
+## Cách hoạt động
+
+1. **Đọc.** Jev đọc cuộc trò chuyện đang hiển thị trên màn hình qua dịch vụ trợ năng của Android. Không sửa ứng dụng chat, không đăng nhập tài khoản, không đọc cơ sở dữ liệu của nó.
+2. **Đánh giá trước.** Trước khi viết câu trả lời, mô hình đánh giá xác định người kia thật sự muốn gì, tình huống rủi ro đến đâu và nên đáp thế nào.
+3. **Soạn, kiểm tra, xếp hạng.** Jev soạn vài câu trả lời, kiểm tra theo kết quả đánh giá rồi xếp hạng. Chạm vào một câu để điền vào ô nhập. Bạn tự nhấn gửi.
+
+<table align="center">
+<tr>
+<td align="center"><img src="../global/docs/images/states/02-decide.png" width="230" alt="Bản quốc tế: người kia muốn gì và các lựa chọn của bạn" /><br/><sub>Bản quốc tế: người kia muốn gì và các lựa chọn của bạn</sub></td>
+<td align="center"><img src="../global/docs/images/states/04-results.png" width="230" alt="Bản quốc tế: hai câu trả lời, chấm trên thang 5" /><br/><sub>Bản quốc tế: hai câu trả lời, chấm trên thang 5</sub></td>
+<td align="center"><img src="assets/images/overlay.png" width="230" alt="Bản tiếng Trung: mức độ rủi ro, ý định và ba câu trả lời đã xếp hạng" /><br/><sub>Bản tiếng Trung: mức độ rủi ro, ý định và ba câu trả lời đã xếp hạng</sub></td>
+</tr>
+</table>
 
 ## Tải về
 
@@ -54,20 +68,6 @@ Cả hai phiên bản cần Android 11 trở lên và có thể cài cùng lúc 
 </table>
 
 </details>
-
-## Cách hoạt động
-
-1. **Đọc.** Jev đọc cuộc trò chuyện đang hiển thị trên màn hình qua dịch vụ trợ năng của Android. Không sửa ứng dụng chat, không đăng nhập tài khoản, không đọc cơ sở dữ liệu của nó.
-2. **Đánh giá trước.** Trước khi viết câu trả lời, mô hình đánh giá xác định người kia thật sự muốn gì, tình huống rủi ro đến đâu và nên đáp thế nào.
-3. **Soạn, kiểm tra, xếp hạng.** Jev soạn vài câu trả lời, kiểm tra theo kết quả đánh giá rồi xếp hạng. Chạm vào một câu để điền vào ô nhập. Bạn tự nhấn gửi.
-
-<table align="center">
-<tr>
-<td align="center"><img src="../global/docs/images/states/02-decide.png" width="230" alt="Bản quốc tế: người kia muốn gì và các lựa chọn của bạn" /><br/><sub>Bản quốc tế: người kia muốn gì và các lựa chọn của bạn</sub></td>
-<td align="center"><img src="../global/docs/images/states/04-results.png" width="230" alt="Bản quốc tế: hai câu trả lời, chấm trên thang 5" /><br/><sub>Bản quốc tế: hai câu trả lời, chấm trên thang 5</sub></td>
-<td align="center"><img src="assets/images/overlay.png" width="230" alt="Bản tiếng Trung: mức độ rủi ro, ý định và ba câu trả lời đã xếp hạng" /><br/><sub>Bản tiếng Trung: mức độ rủi ro, ý định và ba câu trả lời đã xếp hạng</sub></td>
-</tr>
-</table>
 
 ## Quyền riêng tư và rủi ro
 
