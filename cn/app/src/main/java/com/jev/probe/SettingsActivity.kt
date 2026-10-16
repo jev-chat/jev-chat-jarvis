@@ -115,6 +115,7 @@ class SettingsActivity : AppCompatActivity() {
         bochaBox.visibility = if (judgeProviderIdx == 1) View.VISIBLE else View.GONE
 
         val visionJudgeRow = toggleRow("看图判断（实验）", prefs.visionJudge)
+        val visionJudgeHint = text("当前判断接口不支持看图，会按文字判断。", 11f, accent)
 
         judgeCard.addView(pills(
             listOf("OpenRouter", "博查 Jev", "TypeSafe 直连", "Vercel", "OpenCode Zen", "自定义"), judgeProviderIdx) { idx ->
@@ -147,6 +148,7 @@ class SettingsActivity : AppCompatActivity() {
             }
             bochaBox.visibility = if (idx == 1) View.VISIBLE else View.GONE
             setToggleInteractive(visionJudgeRow, idx == 2)
+            visionJudgeHint.visibility = if (idx == 2) View.GONE else View.VISIBLE
         })
         judgeCard.addView(label("Base URL"))
         judgeCard.addView(judgeBaseEdit)
@@ -199,6 +201,8 @@ class SettingsActivity : AppCompatActivity() {
         judgeCard.addView(text(
             "判断接口选 TypeSafe 直连时可用。开启后，截屏识别时会把缩小后的截图一起发给 TypeSafe 做判断；候选回复仍由回复模型根据识别出的文字生成。TypeSafe 标注这是预览功能。",
             11f, sub))
+        judgeCard.addView(visionJudgeHint)
+        visionJudgeHint.visibility = if (judgeProviderIdx == 2) View.GONE else View.VISIBLE
         setToggleInteractive(visionJudgeRow, judgeProviderIdx == 2)
         root.addView(judgeCard)
 
@@ -313,6 +317,10 @@ class SettingsActivity : AppCompatActivity() {
             }
         })
         visionCard.addView(visionResult)
+        // v1.8: the vision route was never wired into the capture pipeline (OCR is
+        // on-device ML Kit) and judgment can now read the screenshot itself, so the
+        // card is hidden. Prefs and VisionClient stay for a later reply-side use.
+        visionCard.visibility = View.GONE
         root.addView(visionCard)
 
         // =================== 分析 ===================
