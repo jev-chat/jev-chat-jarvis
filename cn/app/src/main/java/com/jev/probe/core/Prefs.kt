@@ -20,7 +20,13 @@ class Prefs(context: Context, prefsName: String = PREFS_MAIN) {
      * throwaway instances behind the settings test buttons and the KB self-check
      * have nothing to carry over, and used to print one migration line per tap.
      */
-    init { if (prefsName == PREFS_MAIN) { migrateIfNeeded(); unseedBochaDefaultIfUnconfigured() } }
+    init {
+        if (prefsName == PREFS_MAIN) {
+            migrateIfNeeded()
+            unseedBochaDefaultIfUnconfigured()
+            RegionProfiles.migrate(kvStore())
+        }
+    }
 
     /**
      * v1.2 -> v1.3: the single `openrouter_key` becomes the judge route's key.
@@ -96,6 +102,23 @@ class Prefs(context: Context, prefsName: String = PREFS_MAIN) {
     var visionJudge: Boolean
         get() = sp.getBoolean(K_VISION_JUDGE, false)
         set(v) = sp.edit().putBoolean(K_VISION_JUDGE, v).apply()
+
+    /**
+     * Which settings-page tab is active: [RegionProfiles.REGION_INTL] or
+     * [RegionProfiles.REGION_CN]. Live judge/reply keys are still the ones
+     * runtime reads; this only remembers the tab. Default overseas.
+     */
+    var region: String
+        get() {
+            val v = sp.getString(RegionProfiles.K_REGION, RegionProfiles.REGION_INTL)
+            return if (v == RegionProfiles.REGION_CN) RegionProfiles.REGION_CN
+            else RegionProfiles.REGION_INTL
+        }
+        set(v) = sp.edit().putString(
+            RegionProfiles.K_REGION,
+            if (v == RegionProfiles.REGION_CN) RegionProfiles.REGION_CN
+            else RegionProfiles.REGION_INTL,
+        ).apply()
 
     /** Back-compat alias so older call sites keep compiling. */
     var openRouterKey: String
@@ -277,6 +300,22 @@ class Prefs(context: Context, prefsName: String = PREFS_MAIN) {
 
     /** Readiness gate: the judge route is the one that must be configured. */
     fun hasKey(): Boolean = judgeKey.isNotBlank()
+
+    /** String/bool facade over this file, for [RegionProfiles]. */
+    fun kvStore(): KvStore = SpKvStore()
+
+    private inner class SpKvStore : KvStore {
+        override fun get(key: String): String? = sp.getString(key, null)
+        override fun put(key: String, value: String) {
+            sp.edit().putString(key, value).apply()
+        }
+        override fun getBool(key: String, default: Boolean): Boolean =
+            if (sp.contains(key)) sp.getBoolean(key, default) else default
+        override fun putBool(key: String, value: Boolean) {
+            sp.edit().putBoolean(key, value).apply()
+        }
+        override fun contains(key: String): Boolean = sp.contains(key)
+    }
 
     companion object {
         private const val TAG = "JEVASSIST"

@@ -24,6 +24,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.jev.probe.core.ChatSnapshot
 import com.jev.probe.core.Msg
 import com.jev.probe.core.Prefs
+import com.jev.probe.core.RegionProfiles
+import com.jev.probe.core.RouteSnapshot
 import com.jev.probe.core.kb.KbSelfCheck
 import com.jev.probe.core.kb.KbStore
 import com.jev.probe.jev.JudgeClient
@@ -43,8 +45,9 @@ class SettingsActivity : AppCompatActivity() {
     private val sub = Color.parseColor("#6B7280")
     private val pillOff = Color.parseColor("#EEF1F5")
 
-    /** Selected provider index per card, held so Save can read it back. */
-    private var judgeProviderIdx = 0
+    private lateinit var profiles: RegionProfiles
+    /** Selected judge provider id for the *current* tab (`typesafe` / `openrouter` / …). */
+    private var currentJudgeProvider = Prefs.PROVIDER_TYPESAFE
 
     private fun dp(v: Int) = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP, v.toFloat(), resources.displayMetrics).roundToInt()
@@ -52,8 +55,10 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         prefs = Prefs(this)
+        profiles = RegionProfiles(prefs.kvStore())
         Log.i(TAG, "settings opened judgeKey.len=${prefs.judgeKey.length}" +
-            " replyKey.len=${prefs.replyKey.length} visionKey.len=${prefs.visionKey.length}")
+            " replyKey.len=${prefs.replyKey.length} visionKey.len=${prefs.visionKey.length}" +
+            " region=${profiles.activeRegion}")
         window.decorView.setBackgroundColor(Color.parseColor("#F2F3F5"))
 
         val scroll = ScrollView(this)
@@ -69,26 +74,24 @@ class SettingsActivity : AppCompatActivity() {
         // =================== 接口 ===================
         root.addView(section("接口"))
 
-        // --- 判断接口（Jev） ---
-        val judgeCard = card()
-        judgeCard.addView(cardTitle("判断接口（Jev）"))
-        judgeCard.addView(text("读对方消息、给意图判断和候选排序。必须配置。", 12f, sub))
-
-        val judgeBaseEdit = edit(prefs.judgeBaseUrl, Prefs.DEFAULT_JUDGE_BASE_OPENROUTER)
-        val judgeModelEdit = edit(prefs.judgeModel, Prefs.DEFAULT_JUDGE_MODEL_OPENROUTER)
-        judgeProviderIdx = when (prefs.judgeProvider) {
-            Prefs.PROVIDER_OPENROUTER -> 0
-            Prefs.PROVIDER_BOCHA -> 1
-            Prefs.PROVIDER_TYPESAFE -> 2
-            Prefs.PROVIDER_VERCEL -> 3
-            Prefs.PROVIDER_ZEN -> 4
-            Prefs.PROVIDER_CUSTOM -> 5
-            else -> 0
+        val snap0 = profiles.current()
+        currentJudgeProvider = snap0.judgeProvider.ifBlank {
+            if (profiles.activeRegion == RegionProfiles.REGION_CN) Prefs.PROVIDER_BOCHA
+            else Prefs.PROVIDER_TYPESAFE
         }
-        // Bocha promo block — official address + one-tap copy (limited-time free).
-        // Shown ONLY when Bocha Jev is the selected provider; picking any other
-        // provider hides it. It used to be added unconditionally, which made every
-        // tab look like it was still showing Bocha.
+
+        val judgeBaseEdit = edit(snap0.judgeBase, Prefs.DEFAULT_JUDGE_BASE_TYPESAFE)
+        val judgeModelEdit = edit(snap0.judgeModel, Prefs.DEFAULT_JUDGE_MODEL_TYPESAFE)
+        judgeKeyEdit = edit(snap0.judgeKey, "sk-...", password = true)
+        val replyBaseEdit = edit(snap0.replyBase, Prefs.DEFAULT_REPLY_BASE)
+        val replyModelEdit = edit(snap0.replyModel, Prefs.DEFAULT_REPLY_MODEL)
+        replyKeyEdit = edit(snap0.replyKey, "留空则用判断接口密钥", password = true)
+
+        val judgePillsHost = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        val replyPillsHost = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        var mainPillsHandle: PillsHandle? = null
+        var morePillsHandle: PillsHandle? = null
+
         val bochaBox = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         val bochaRow = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
@@ -112,68 +115,217 @@ class SettingsActivity : AppCompatActivity() {
         })
         bochaBox.addView(bochaRow)
         bochaBox.addView(text("去 jev.bocha.cn 领取限时免费 API Key", 11f, sub))
-        bochaBox.visibility = if (judgeProviderIdx == 1) View.VISIBLE else View.GONE
 
         val visionJudgeRow = toggleRow("看图判断（实验）", prefs.visionJudge)
         val visionJudgeHint = text("当前判断接口不支持看图，会按文字判断。", 11f, accent)
+        val visionBlock = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        visionBlock.addView(visionJudgeRow)
+        visionBlock.addView(text(
+            "判断接口选 TypeSafe 官方时可用。开启后，截屏识别时会把缩小后的截图一起发给 TypeSafe 做判断；候选回复仍由回复模型根据识别出的文字生成。TypeSafe 标注这是预览功能。",
+            11f, sub))
+        visionBlock.addView(visionJudgeHint)
 
-        judgeCard.addView(pills(
-            listOf("OpenRouter", "博查 Jev", "TypeSafe 直连", "Vercel", "OpenCode Zen", "自定义"), judgeProviderIdx) { idx ->
-            judgeProviderIdx = idx
-            when (idx) {
-                0 -> {
+        val moreHeader = text("更多 ▸", 13f, sub, bold = true).apply {
+            setPadding(0, dp(12), 0, dp(4))
+        }
+        val moreBody = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            visibility = View.GONE
+        }
+        val moreWrap = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        moreWrap.addView(moreHeader)
+        moreWrap.addView(moreBody)
+
+        val judgeResult = resultText()
+        val replyResult = resultText()
+
+        fun refreshVisionUi() {
+            val on = currentJudgeProvider == Prefs.PROVIDER_TYPESAFE
+            setToggleInteractive(visionJudgeRow, on)
+            visionJudgeHint.visibility = if (on) View.GONE else View.VISIBLE
+        }
+
+        fun setMoreOpen(open: Boolean) {
+            moreBody.visibility = if (open) View.VISIBLE else View.GONE
+            moreHeader.text = if (open) "更多 ▾" else "更多 ▸"
+        }
+
+        fun applyJudgePreset(provider: String) {
+            when (provider) {
+                Prefs.PROVIDER_OPENROUTER -> {
                     judgeBaseEdit.setText(Prefs.DEFAULT_JUDGE_BASE_OPENROUTER)
                     judgeModelEdit.setText(Prefs.DEFAULT_JUDGE_MODEL_OPENROUTER)
                 }
-                1 -> {
+                Prefs.PROVIDER_BOCHA -> {
                     judgeBaseEdit.setText(Prefs.DEFAULT_JUDGE_BASE_BOCHA)
                     judgeModelEdit.setText(Prefs.DEFAULT_JUDGE_MODEL_BOCHA)
                 }
-                2 -> {
+                Prefs.PROVIDER_TYPESAFE -> {
                     judgeBaseEdit.setText(Prefs.DEFAULT_JUDGE_BASE_TYPESAFE)
                     judgeModelEdit.setText(Prefs.DEFAULT_JUDGE_MODEL_TYPESAFE)
                 }
-                3 -> {
+                Prefs.PROVIDER_VERCEL -> {
                     judgeBaseEdit.setText(Prefs.DEFAULT_JUDGE_BASE_VERCEL)
                     judgeModelEdit.setText(Prefs.DEFAULT_JUDGE_MODEL_VERCEL)
                 }
-                4 -> {
+                Prefs.PROVIDER_ZEN -> {
                     judgeBaseEdit.setText(Prefs.DEFAULT_JUDGE_BASE_ZEN)
                     judgeModelEdit.setText(Prefs.DEFAULT_JUDGE_MODEL_ZEN)
                 }
-                // Custom POSTs the box verbatim, so a preset HOST left in the box
-                // would hit the API root. Expand it into the full endpoint the
-                // preset would have used; anything hand-typed is left alone.
-                5 -> judgeBaseEdit.setText(expandJudgeUrl(judgeBaseEdit.text.toString()))
+                Prefs.PROVIDER_CUSTOM ->
+                    judgeBaseEdit.setText(expandJudgeUrl(judgeBaseEdit.text.toString()))
             }
-            bochaBox.visibility = if (idx == 1) View.VISIBLE else View.GONE
-            setToggleInteractive(visionJudgeRow, idx == 2)
-            visionJudgeHint.visibility = if (idx == 2) View.GONE else View.VISIBLE
+        }
+
+        fun formSnapshot(): RouteSnapshot {
+            val base = judgeBaseEdit.text.toString().trim()
+            val provider = resolveJudgeProvider(currentJudgeProvider, base)
+            return RouteSnapshot(
+                judgeProvider = provider,
+                judgeBase = base,
+                judgeKey = judgeKeyEdit.text.toString().trim(),
+                judgeModel = judgeModelEdit.text.toString().trim(),
+                replyBase = replyBaseEdit.text.toString().trim(),
+                replyKey = replyKeyEdit.text.toString().trim(),
+                replyModel = replyModelEdit.text.toString().trim(),
+            )
+        }
+
+        fun rebuildJudgePills(region: String, provider: String) {
+            judgePillsHost.removeAllViews()
+            if (region == RegionProfiles.REGION_CN) {
+                judgePillsHost.visibility = View.GONE
+                return
+            }
+            judgePillsHost.visibility = View.VISIBLE
+            val mainIdx = when (provider) {
+                Prefs.PROVIDER_TYPESAFE -> 0
+                Prefs.PROVIDER_OPENROUTER -> 1
+                else -> -1
+            }
+            val handle = pills(
+                listOf("TypeSafe 官方 · 支持看图", "OpenRouter"), mainIdx) { idx ->
+                currentJudgeProvider =
+                    if (idx == 0) Prefs.PROVIDER_TYPESAFE else Prefs.PROVIDER_OPENROUTER
+                morePillsHandle?.paintNone()
+                applyJudgePreset(currentJudgeProvider)
+                refreshVisionUi()
+            }
+            if (mainIdx < 0) handle.paintNone()
+            mainPillsHandle = handle
+            judgePillsHost.addView(handle.view)
+        }
+
+        fun rebuildReplyPills(region: String, replyBase: String) {
+            replyPillsHost.removeAllViews()
+            val base = replyBase.trim().trimEnd('/')
+            if (region == RegionProfiles.REGION_INTL) {
+                val idx = if (base == Prefs.DEFAULT_REPLY_BASE) 0 else 1
+                replyPillsHost.addView(pills(listOf("OpenRouter", "自定义"), idx) { i ->
+                    if (i == 0) {
+                        replyBaseEdit.setText(Prefs.DEFAULT_REPLY_BASE)
+                        replyModelEdit.setText(Prefs.DEFAULT_REPLY_MODEL)
+                    }
+                }.view)
+            } else {
+                val idx = when (base) {
+                    Prefs.DEEPSEEK_BASE -> 0
+                    Prefs.DASHSCOPE_BASE -> 1
+                    else -> 2
+                }
+                replyPillsHost.addView(
+                    pills(listOf("DeepSeek 官方", "通义兼容", "自定义"), idx) { i ->
+                        when (i) {
+                            0 -> {
+                                replyBaseEdit.setText(Prefs.DEEPSEEK_BASE)
+                                replyModelEdit.setText(Prefs.DEEPSEEK_MODEL)
+                            }
+                            1 -> {
+                                replyBaseEdit.setText(Prefs.DASHSCOPE_BASE)
+                                replyModelEdit.setText(Prefs.DASHSCOPE_MODEL)
+                            }
+                        }
+                    }.view)
+            }
+        }
+
+        fun applySnapshot(snap: RouteSnapshot, region: String) {
+            currentJudgeProvider = snap.judgeProvider.ifBlank {
+                if (region == RegionProfiles.REGION_CN) Prefs.PROVIDER_BOCHA
+                else Prefs.PROVIDER_TYPESAFE
+            }
+            judgeBaseEdit.setText(snap.judgeBase)
+            judgeKeyEdit.setText(snap.judgeKey)
+            judgeModelEdit.setText(snap.judgeModel)
+            replyBaseEdit.setText(snap.replyBase)
+            replyKeyEdit.setText(snap.replyKey)
+            replyModelEdit.setText(snap.replyModel)
+            rebuildJudgePills(region, currentJudgeProvider)
+            rebuildReplyPills(region, snap.replyBase)
+            val cn = region == RegionProfiles.REGION_CN
+            bochaBox.visibility = if (cn) View.VISIBLE else View.GONE
+            moreWrap.visibility = if (cn) View.GONE else View.VISIBLE
+            visionBlock.visibility = if (cn) View.GONE else View.VISIBLE
+            refreshVisionUi()
+            val moreProv = currentJudgeProvider == Prefs.PROVIDER_VERCEL ||
+                currentJudgeProvider == Prefs.PROVIDER_ZEN ||
+                currentJudgeProvider == Prefs.PROVIDER_CUSTOM
+            setMoreOpen(!cn && moreProv)
+            val moreIdx = when (currentJudgeProvider) {
+                Prefs.PROVIDER_VERCEL -> 0
+                Prefs.PROVIDER_ZEN -> 1
+                Prefs.PROVIDER_CUSTOM -> 2
+                else -> -1
+            }
+            if (moreIdx < 0) morePillsHandle?.paintNone() else morePillsHandle?.paintSelected(moreIdx)
+            judgeResult.text = ""
+            replyResult.text = ""
+        }
+
+        val moreHandle = pills(listOf("Vercel", "OpenCode Zen", "自定义"), -1) { idx ->
+            currentJudgeProvider = when (idx) {
+                0 -> Prefs.PROVIDER_VERCEL
+                1 -> Prefs.PROVIDER_ZEN
+                else -> Prefs.PROVIDER_CUSTOM
+            }
+            mainPillsHandle?.paintNone()
+            applyJudgePreset(currentJudgeProvider)
+            refreshVisionUi()
+        }
+        morePillsHandle = moreHandle
+        moreBody.addView(moreHandle.view)
+        moreBody.addView(text(
+            "OpenRouter 拼 /alpha/decisions；博查 Jev / TypeSafe / Vercel / OpenCode Zen 拼 /v1/systemone；自定义按原样 POST。Vercel 用 AI Gateway 的密钥，OpenCode Zen 用 Zen 的密钥。",
+            11f, sub))
+        moreHeader.setOnClickListener { setMoreOpen(moreBody.visibility != View.VISIBLE) }
+
+        root.addView(regionTabs(profiles.activeRegion) { newRegion ->
+            if (newRegion == profiles.activeRegion) return@regionTabs
+            applySnapshot(profiles.switchTo(newRegion, formSnapshot()), newRegion)
         })
+
+        // --- 判断接口（Jev） ---
+        val judgeCard = card()
+        judgeCard.addView(cardTitle("判断接口（Jev）"))
+        judgeCard.addView(text("读对方消息、给意图判断和候选排序。必须配置。", 12f, sub))
+        judgeCard.addView(judgePillsHost)
+        judgeCard.addView(bochaBox)
         judgeCard.addView(label("Base URL"))
         judgeCard.addView(judgeBaseEdit)
-        judgeCard.addView(text("OpenRouter 拼 /alpha/decisions；博查 Jev / TypeSafe / Vercel / OpenCode Zen 拼 /v1/systemone；自定义按原样 POST。Vercel 用 AI Gateway 的密钥，OpenCode Zen 用 Zen 的密钥。",
-            11f, sub))
-        judgeCard.addView(bochaBox)
         judgeCard.addView(label("密钥"))
-        judgeCard.addView(edit(prefs.judgeKey, "sk-...", password = true).also { judgeKeyEdit = it })
+        judgeCard.addView(judgeKeyEdit)
         judgeCard.addView(label("模型"))
         judgeCard.addView(judgeModelEdit)
-        val judgeResult = resultText()
         judgeCard.addView(cardBtn("测试判断") {
             val base = judgeBaseEdit.text.toString().trim()
             val key = judgeKeyEdit.text.toString().trim()
             val model = judgeModelEdit.text.toString().trim()
             if (key.isBlank()) { judgeResult.text = "请先填密钥"; return@cardBtn }
             judgeResult.text = "测试中…"
-            // Provider follows the address when it is still a known preset host,
-            // so a stale pill selection cannot send a TypeSafe path to OpenRouter.
-            val provider = resolveJudgeProvider(judgeProviderIdx, base)
+            val provider = resolveJudgeProvider(currentJudgeProvider, base)
             if (provider == Prefs.PROVIDER_CUSTOM && base.isBlank()) {
                 judgeResult.text = "自定义档要填完整 URL（带路径）"; return@cardBtn
             }
-            // Custom means we know nothing about the endpoint — guessing a model
-            // name here would test something the user never asked for.
             if (provider == Prefs.PROVIDER_CUSTOM && model.isBlank()) {
                 judgeResult.text = "请填写模型名"; return@cardBtn
             }
@@ -197,51 +349,35 @@ class SettingsActivity : AppCompatActivity() {
             }
         })
         judgeCard.addView(judgeResult)
-        judgeCard.addView(visionJudgeRow)
-        judgeCard.addView(text(
-            "判断接口选 TypeSafe 直连时可用。开启后，截屏识别时会把缩小后的截图一起发给 TypeSafe 做判断；候选回复仍由回复模型根据识别出的文字生成。TypeSafe 标注这是预览功能。",
-            11f, sub))
-        judgeCard.addView(visionJudgeHint)
-        visionJudgeHint.visibility = if (judgeProviderIdx == 2) View.GONE else View.VISIBLE
-        setToggleInteractive(visionJudgeRow, judgeProviderIdx == 2)
+        judgeCard.addView(visionBlock)
+        judgeCard.addView(moreWrap)
         root.addView(judgeCard)
 
         // --- 回复接口 ---
         val replyCard = card()
         replyCard.addView(cardTitle("回复接口"))
         replyCard.addView(text("生成 3 条候选回复。任何 OpenAI 兼容地址，填到 /v1 为止。", 12f, sub))
-
-        val replyBaseEdit = edit(prefs.replyBaseUrl, Prefs.DEFAULT_REPLY_BASE)
-        val replyModelEdit = edit(prefs.replyModel, Prefs.DEFAULT_REPLY_MODEL)
-        val replyIdx = when (prefs.replyBaseUrl.trim().trimEnd('/')) {
-            Prefs.DEFAULT_REPLY_BASE -> 0
-            Prefs.DEEPSEEK_BASE -> 1
-            Prefs.DASHSCOPE_BASE -> 2
-            else -> 3
-        }
-        replyCard.addView(pills(
-            listOf("OpenRouter", "DeepSeek 官方", "通义兼容", "自定义"), replyIdx) { idx ->
-            when (idx) {
-                0 -> { replyBaseEdit.setText(Prefs.DEFAULT_REPLY_BASE); replyModelEdit.setText(Prefs.DEFAULT_REPLY_MODEL) }
-                1 -> { replyBaseEdit.setText(Prefs.DEEPSEEK_BASE); replyModelEdit.setText(Prefs.DEEPSEEK_MODEL) }
-                2 -> { replyBaseEdit.setText(Prefs.DASHSCOPE_BASE); replyModelEdit.setText(Prefs.DASHSCOPE_MODEL) }
-            }
-        })
+        replyCard.addView(replyPillsHost)
         replyCard.addView(label("Base URL"))
         replyCard.addView(replyBaseEdit)
         replyCard.addView(label("密钥"))
-        replyCard.addView(edit(prefs.replyKey, "留空则用判断接口密钥", password = true).also { replyKeyEdit = it })
+        replyCard.addView(replyKeyEdit)
         replyCard.addView(label("模型"))
         replyCard.addView(replyModelEdit)
-        val replyResult = resultText()
         replyCard.addView(cardBtn("测试回复") {
             val base = replyBaseEdit.text.toString().trim()
             val model = replyModelEdit.text.toString().trim()
+            val replyDefaultBase =
+                if (profiles.activeRegion == RegionProfiles.REGION_CN) Prefs.DEEPSEEK_BASE
+                else Prefs.DEFAULT_REPLY_BASE
+            val replyDefaultModel =
+                if (profiles.activeRegion == RegionProfiles.REGION_CN) Prefs.DEEPSEEK_MODEL
+                else Prefs.DEFAULT_REPLY_MODEL
             val probe = draftPrefs(SCRATCH_REPLY) {
                 judgeKey = judgeKeyEdit.text.toString().trim()
-                replyBaseUrl = base.ifBlank { Prefs.DEFAULT_REPLY_BASE }
+                replyBaseUrl = base.ifBlank { replyDefaultBase }
                 replyKey = replyKeyEdit.text.toString().trim()
-                replyModel = model.ifBlank { Prefs.DEFAULT_REPLY_MODEL }
+                replyModel = model.ifBlank { replyDefaultModel }
             }
             if (probe.effectiveReplyKey().isBlank()) { replyResult.text = "请先填密钥（或填判断接口密钥）"; return@cardBtn }
             replyResult.text = "测试中…"
@@ -261,6 +397,8 @@ class SettingsActivity : AppCompatActivity() {
         replyCard.addView(replyResult)
         root.addView(replyCard)
 
+        applySnapshot(snap0, profiles.activeRegion)
+
         // --- 视觉接口 ---
         val visionCard = card()
         visionCard.addView(cardTitle("视觉接口（OCR 用，可先不填）"))
@@ -279,7 +417,7 @@ class SettingsActivity : AppCompatActivity() {
                 0 -> { visionBaseEdit.setText(Prefs.DEFAULT_VISION_BASE); visionModelEdit.setText(Prefs.DEFAULT_VISION_MODEL) }
                 1 -> { visionBaseEdit.setText(Prefs.DASHSCOPE_BASE); visionModelEdit.setText(Prefs.DASHSCOPE_VISION_MODEL) }
             }
-        })
+        }.view)
         visionCard.addView(label("Base URL"))
         visionCard.addView(visionBaseEdit)
         visionCard.addView(label("密钥"))
@@ -338,7 +476,7 @@ class SettingsActivity : AppCompatActivity() {
         card2.addView(autoRow)
         card2.addView(label("候选回复条数"))
         var pickedCount = prefs.candidateCount
-        card2.addView(pills(listOf("1 条", "2 条", "3 条"), pickedCount - 1) { pickedCount = it + 1 })
+        card2.addView(pills(listOf("1 条", "2 条", "3 条"), pickedCount - 1) { pickedCount = it + 1 }.view)
         card2.addView(text("只要 1 条时不做排序，出得更快；不满意可以在卡片里点「换一组」。", 11f, sub))
 
         // --- OCR 兜底（B 阶段）---
@@ -425,27 +563,43 @@ class SettingsActivity : AppCompatActivity() {
             // Address wins over the pill: a preset HOST in the box means that
             // preset's provider (and so its path), whatever the pill last said.
             val judgeBaseTyped = judgeBaseEdit.text.toString().trim()
-            val judgeProv = resolveJudgeProvider(judgeProviderIdx, judgeBaseTyped)
+            val judgeProv = resolveJudgeProvider(currentJudgeProvider, judgeBaseTyped)
             val judgeModelTyped = judgeModelEdit.text.toString().trim()
-            prefs.judgeProvider = judgeProv
-            // Blank falls back to THIS provider's preset — never OpenRouter's by
-            // default. Custom is left exactly as typed (blank included): guessing
-            // a URL for it would silently point somewhere the user did not choose.
-            prefs.judgeBaseUrl = when {
-                judgeBaseTyped.isNotBlank() -> judgeBaseTyped
-                judgeProv == Prefs.PROVIDER_CUSTOM -> ""
-                else -> defaultJudgeBase(judgeProv)
-            }
-            prefs.judgeKey = judgeKeyEdit.text.toString()
-            prefs.judgeModel = when {
-                judgeModelTyped.isNotBlank() -> judgeModelTyped
-                judgeProv == Prefs.PROVIDER_CUSTOM -> ""
-                else -> defaultJudgeModel(judgeProv)
-            }
+            val replyDefaultBase =
+                if (profiles.activeRegion == RegionProfiles.REGION_CN) Prefs.DEEPSEEK_BASE
+                else Prefs.DEFAULT_REPLY_BASE
+            val replyDefaultModel =
+                if (profiles.activeRegion == RegionProfiles.REGION_CN) Prefs.DEEPSEEK_MODEL
+                else Prefs.DEFAULT_REPLY_MODEL
+            val resolved = RouteSnapshot(
+                judgeProvider = judgeProv,
+                judgeBase = when {
+                    judgeBaseTyped.isNotBlank() -> judgeBaseTyped
+                    judgeProv == Prefs.PROVIDER_CUSTOM -> ""
+                    else -> defaultJudgeBase(judgeProv)
+                },
+                judgeKey = judgeKeyEdit.text.toString().trim(),
+                judgeModel = when {
+                    judgeModelTyped.isNotBlank() -> judgeModelTyped
+                    judgeProv == Prefs.PROVIDER_CUSTOM -> ""
+                    else -> defaultJudgeModel(judgeProv)
+                },
+                replyBase = replyBaseEdit.text.toString().trim().ifBlank { replyDefaultBase },
+                replyKey = replyKeyEdit.text.toString().trim(),
+                replyModel = replyModelEdit.text.toString().trim().ifBlank { replyDefaultModel },
+            )
+            // Both tabs land in Prefs; the open tab also becomes the live keys.
+            profiles.stash(resolved)
+            profiles.persist()
 
-            prefs.replyBaseUrl = replyBaseEdit.text.toString().trim().ifBlank { Prefs.DEFAULT_REPLY_BASE }
-            prefs.replyKey = replyKeyEdit.text.toString()
-            prefs.replyModel = replyModelEdit.text.toString().trim().ifBlank { Prefs.DEFAULT_REPLY_MODEL }
+            prefs.judgeProvider = resolved.judgeProvider
+            prefs.judgeBaseUrl = resolved.judgeBase
+            prefs.judgeKey = resolved.judgeKey
+            prefs.judgeModel = resolved.judgeModel
+            prefs.replyBaseUrl = resolved.replyBase
+            prefs.replyKey = resolved.replyKey
+            prefs.replyModel = resolved.replyModel
+            prefs.region = profiles.activeRegion
 
             prefs.visionBaseUrl = visionBaseEdit.text.toString().trim()
             prefs.visionKey = visionKeyEdit.text.toString()
@@ -474,29 +628,20 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var replyKeyEdit: EditText
     private lateinit var visionKeyEdit: EditText
 
-    private fun providerOf(idx: Int) = when (idx) {
-        1 -> Prefs.PROVIDER_BOCHA
-        2 -> Prefs.PROVIDER_TYPESAFE
-        3 -> Prefs.PROVIDER_VERCEL
-        4 -> Prefs.PROVIDER_ZEN
-        5 -> Prefs.PROVIDER_CUSTOM
-        else -> Prefs.PROVIDER_OPENROUTER
-    }
-
     /**
      * The provider actually implied by what is in the address box. A preset host
      * carries its own path (`/alpha/decisions`, `/v1/systemone`), so leaving that
      * host in the box while the pill says something else would POST the wrong
      * path — or, for custom, the bare API root.
      */
-    private fun resolveJudgeProvider(idx: Int, base: String): String =
+    private fun resolveJudgeProvider(selected: String, base: String): String =
         when (base.trim().trimEnd('/')) {
             Prefs.DEFAULT_JUDGE_BASE_BOCHA -> Prefs.PROVIDER_BOCHA
             Prefs.DEFAULT_JUDGE_BASE_OPENROUTER -> Prefs.PROVIDER_OPENROUTER
             Prefs.DEFAULT_JUDGE_BASE_TYPESAFE -> Prefs.PROVIDER_TYPESAFE
             Prefs.DEFAULT_JUDGE_BASE_VERCEL -> Prefs.PROVIDER_VERCEL
             Prefs.DEFAULT_JUDGE_BASE_ZEN -> Prefs.PROVIDER_ZEN
-            else -> providerOf(idx)
+            else -> selected
         }
 
     /** The full endpoint a preset host would have been expanded to. */
@@ -566,8 +711,61 @@ class SettingsActivity : AppCompatActivity() {
     private fun pct(d: Double?): String =
         if (d == null) "?" else "${(d * 100).roundToInt()}%"
 
+    private inner class PillsHandle(val view: View, private val views: List<TextView>) {
+        fun paintSelected(idx: Int) {
+            views.forEachIndexed { j, v -> paintPill(v, j == idx) }
+        }
+        fun paintNone() {
+            views.forEach { paintPill(it, false) }
+        }
+    }
+
+    /** Equal-width overseas / mainland tabs, same paint as [pills] but larger. */
+    private fun regionTabs(initial: String, onPick: (String) -> Unit): View {
+        val row = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = dp(4) }
+        }
+        lateinit var intlTv: TextView
+        lateinit var cnTv: TextView
+        var selected = initial
+        fun paint() {
+            paintPill(intlTv, selected == RegionProfiles.REGION_INTL)
+            paintPill(cnTv, selected == RegionProfiles.REGION_CN)
+        }
+        intlTv = TextView(this).apply {
+            text = "海外（推荐）"; textSize = 15f; gravity = Gravity.CENTER
+            setPadding(dp(8), dp(12), dp(8), dp(12))
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+                .apply { rightMargin = dp(8) }
+            setOnClickListener {
+                if (selected == RegionProfiles.REGION_INTL) return@setOnClickListener
+                selected = RegionProfiles.REGION_INTL
+                paint()
+                onPick(RegionProfiles.REGION_INTL)
+            }
+        }
+        cnTv = TextView(this).apply {
+            text = "国内"; textSize = 15f; gravity = Gravity.CENTER
+            setPadding(dp(8), dp(12), dp(8), dp(12))
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+            setOnClickListener {
+                if (selected == RegionProfiles.REGION_CN) return@setOnClickListener
+                selected = RegionProfiles.REGION_CN
+                paint()
+                onPick(RegionProfiles.REGION_CN)
+            }
+        }
+        row.addView(intlTv)
+        row.addView(cnTv)
+        paint()
+        return row
+    }
+
     /** Horizontal selectable pills; calls [onPick] with the chosen index. */
-    private fun pills(options: List<String>, initial: Int, onPick: (Int) -> Unit): View {
+    private fun pills(options: List<String>, initial: Int, onPick: (Int) -> Unit): PillsHandle {
         val row = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
         }
@@ -587,7 +785,7 @@ class SettingsActivity : AppCompatActivity() {
             }
             row.addView(pill)
         }
-        views.forEachIndexed { j, v -> paintPill(v, j == initial) }
+        views.forEachIndexed { j, v -> paintPill(v, initial >= 0 && j == initial) }
         val scroller = HorizontalScrollView(this).apply {
             isHorizontalScrollBarEnabled = false
             addView(row)
@@ -595,7 +793,7 @@ class SettingsActivity : AppCompatActivity() {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = dp(10) }
         }
-        return scroller
+        return PillsHandle(scroller, views)
     }
 
     private fun paintPill(v: TextView, on: Boolean) {
