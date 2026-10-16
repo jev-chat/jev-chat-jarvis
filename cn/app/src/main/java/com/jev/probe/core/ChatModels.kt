@@ -24,11 +24,14 @@ data class BubbleRect(val rect: Rect, val side: String)
  * [note] is a caveat about how this snapshot was produced, shown verbatim in
  * the analysis panel (OCR captures cannot tell who said what).
  */
+@Suppress("ArrayInDataClass") // image is payload, never used as a map key or == compared
 data class ChatSnapshot(
     val title: String?,
     val messages: List<Msg>,
     val bubbleRects: List<BubbleRect> = emptyList(),
-    val note: String? = null
+    val note: String? = null,
+    /** Downscaled JPEG for TypeSafe vision judge. Not part of [signature]; never logged. */
+    val image: ByteArray? = null
 ) {
     val latestFrom: String? get() = messages.lastOrNull()?.side
 

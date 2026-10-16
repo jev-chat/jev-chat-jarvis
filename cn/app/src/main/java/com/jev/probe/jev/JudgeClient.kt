@@ -28,7 +28,8 @@ class JudgeClient(private val prefs: Prefs) {
         return try {
             val answers = postDecisions(
                 snapshot, relationship, ctx,
-                JevQuestions.judge()
+                JevQuestions.judge(),
+                allowImage = true
             )
             Analysis(
                 trueIntent = parseChoice(answers.optJSONObject("true_intent")),
@@ -57,7 +58,7 @@ class JudgeClient(private val prefs: Prefs) {
     ): List<RankedReply> {
         val questions = JSONObject().put("best_reply",
             JevQuestions.rankQuestion(candidates).getJSONObject("best_reply"))
-        val answers = postDecisions(snapshot, relationship, ctx, questions)
+        val answers = postDecisions(snapshot, relationship, ctx, questions, allowImage = false)
         return parseRanked(answers.optJSONObject("best_reply"), candidates)
     }
 
@@ -69,33 +70,77 @@ class JudgeClient(private val prefs: Prefs) {
      * 4xx is not verified against production yet (see the A-stage report). If a
      * request carrying them comes back 4xx, it is sent again once without them,
      * so an unverified field can degrade the analysis but never break it.
+     *
+     * Image fallback (vision judge): a request carrying a screenshot that
+     * returns 4xx or any other failure is sent again once without the image
+     * (status + byte count only in the log). This runs first so it cannot
+     * swallow the background/history fallback, and the other way around.
+     *
+     * [allowImage] is true only for [judge]; [rank] never attaches a screenshot.
      */
     private fun postDecisions(
         snapshot: ChatSnapshot,
         relationship: String,
         ctx: ChatContext?,
-        questions: JSONObject
+        questions: JSONObject,
+        allowImage: Boolean
     ): JSONObject {
         val background = ctx?.background(relationship) ?: ""
         val history = ctx?.history ?: emptyList()
         val enriched = background.isNotBlank() || history.isNotEmpty()
+        val jpeg = if (allowImage) snapshot.image else null
+
+        fun once(withImage: Boolean, withCtx: Boolean): JSONObject {
+            val state = if (withCtx)
+                JevQuestions.buildState(snapshot, relationship, background, history)
+            else
+                JevQuestions.buildState(snapshot, relationship)
+            return send(state, questions, if (withImage) jpeg else null)
+        }
+
         return try {
-            send(JevQuestions.buildState(snapshot, relationship, background, history), questions)
-        } catch (e: ApiException) {
-            if (enriched && e.status != null && e.status in 400..499) {
+            once(jpeg != null, enriched)
+        } catch (e: InterruptedException) {
+            throw e
+        } catch (e: Exception) {
+            if (jpeg != null) {
+                val status = (e as? ApiException)?.status
+                Log.w(TAG, "judge with image HTTP ${status ?: "-"} bytes=${jpeg.size}; retrying without image")
+                try {
+                    once(false, enriched)
+                } catch (e2: InterruptedException) {
+                    throw e2
+                } catch (e2: ApiException) {
+                    if (enriched && e2.status != null && e2.status in 400..499) {
+                        Log.w(TAG, "judge HTTP ${e2.status} with background/history; retrying plain")
+                        once(false, false)
+                    } else throw e2
+                }
+            } else if (e is ApiException && enriched && e.status != null && e.status in 400..499) {
                 Log.w(TAG, "judge HTTP ${e.status} with background/history; retrying plain")
-                send(JevQuestions.buildState(snapshot, relationship), questions)
+                once(false, false)
             } else throw e
         }
     }
 
-    private fun send(state: JSONObject, questions: JSONObject): JSONObject {
+    private fun send(state: JSONObject, questions: JSONObject, jpeg: ByteArray? = null): JSONObject {
         val url = prefs.judgeEndpoint()
+        val built = JudgeRequest.build(HttpJson.headersFor(url), jpeg)
         val body = JSONObject()
             .put("model", prefs.judgeModel)
             .put("state", state)
             .put("questions", questions)
-        val resp = HttpJson.post(url, prefs.judgeKey, body, Route.JUDGE, HttpJson.headersFor(url))
+        val asset = built.asset
+        if (asset != null) {
+            state.put("screenshot", built.screenshotRef)
+            state.put("screenshot_note", built.screenshotNote)
+            body.put("assets", JSONObject().put(asset.ref, JSONObject()
+                .put("type", asset.type)
+                .put("format", asset.format)
+                .put("data_base64", asset.dataBase64)))
+            Log.i(TAG, "judge request with image bytes=${jpeg?.size ?: 0}")
+        }
+        val resp = HttpJson.post(url, prefs.judgeKey, body, Route.JUDGE, built.headers)
         return resp.optJSONObject("answers") ?: JSONObject()
     }
 

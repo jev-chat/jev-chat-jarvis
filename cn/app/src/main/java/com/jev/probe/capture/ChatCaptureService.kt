@@ -21,7 +21,9 @@ import com.jev.probe.core.Prefs
 import com.jev.probe.core.kb.ContextBuilder
 import com.jev.probe.core.kb.KbStore
 import com.jev.probe.jev.JevClient
+import com.jev.probe.jev.VisionImage
 import com.jev.probe.overlay.OverlayController
+import java.io.ByteArrayOutputStream
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
@@ -676,6 +678,7 @@ open class ChatCaptureService : AccessibilityService() {
                 is ScreenCapture.Result.Ok -> {
                     ocr.scaleX = res.scaleX; ocr.scaleY = res.scaleY
                     ocr.originX = res.originX; ocr.originY = res.originY
+                    val jpeg = jpegForVision(res.bitmap)
                     if (rects.isNotEmpty() && !manual) {
                         // Re-measure inside the callback. The rects handed in were
                         // read before the 120ms overlay-hide wait and the shot
@@ -683,15 +686,22 @@ open class ChatCaptureService : AccessibilityService() {
                         // rows next to the ones in the picture. Fall back to the
                         // old rects only if the tree gives us nothing now.
                         val fresh = rootInActiveWindow?.let { collectFeishuBubbleRects(it, resources) }
-                        ocrByRects(res.bitmap, if (fresh.isNullOrEmpty()) rects else fresh, treeTitle, pkg, token)
-                    } else ocrWholeScreen(res.bitmap, treeTitle, pkg, manual, token)
+                        ocrByRects(res.bitmap, if (fresh.isNullOrEmpty()) rects else fresh, treeTitle, pkg, token, jpeg)
+                    } else ocrWholeScreen(res.bitmap, treeTitle, pkg, manual, token, jpeg)
                 }
             }
         }
     }
 
     /** One OCR pass per bubble rectangle; each rect becomes exactly one message. */
-    private fun ocrByRects(bmp: Bitmap, rects: List<BubbleRect>, title: String?, pkg: String, token: ConversationSession.Token) {
+    private fun ocrByRects(
+        bmp: Bitmap,
+        rects: List<BubbleRect>,
+        title: String?,
+        pkg: String,
+        token: ConversationSession.Token,
+        jpeg: ByteArray?
+    ) {
         val sx = ocr.scaleX; val sy = ocr.scaleY
         // Screen -> bitmap: drop the window origin first. A window shot does not
         // start at (0,0) in split screen or when it excludes the status bar.
@@ -708,21 +718,28 @@ open class ChatCaptureService : AccessibilityService() {
                 remaining--
                 if (remaining == 0) {
                     runCatching { bmp.recycle() }
-                    finishOcrSnapshot(ChatSnapshot(title, out.filterNotNull()), pkg, manual = false, token = token)
+                    finishOcrSnapshot(ChatSnapshot(title, out.filterNotNull(), image = jpeg), pkg, manual = false, token = token)
                 }
             }
         }
     }
 
     /** Whole screen minus the top bar and the input area, grouped by line gaps. */
-    private fun ocrWholeScreen(bmp: Bitmap, treeTitle: String?, pkg: String, manual: Boolean, token: ConversationSession.Token) {
+    private fun ocrWholeScreen(
+        bmp: Bitmap,
+        treeTitle: String?,
+        pkg: String,
+        manual: Boolean,
+        token: ConversationSession.Token,
+        jpeg: ByteArray?
+    ) {
         val region = Rect(0, (bmp.height * TOP_CROP).toInt(), bmp.width, (bmp.height * BOTTOM_CROP).toInt())
         ocr.recognize(bmp, region) { lines ->
             runCatching { bmp.recycle() }
             val msgs = groupOcrLines(lines)
             val title = treeTitle?.takeIf { it.isNotBlank() }
                 ?: lines.firstOrNull()?.text?.trim()?.take(24)
-            finishOcrSnapshot(ChatSnapshot(title, msgs, note = OCR_NOTE), pkg, manual, token)
+            finishOcrSnapshot(ChatSnapshot(title, msgs, note = OCR_NOTE, image = jpeg), pkg, manual, token)
         }
     }
 
@@ -769,12 +786,45 @@ open class ChatCaptureService : AccessibilityService() {
         return t
     }
 
+    /**
+     * Downscale + JPEG (q=85) for TypeSafe vision judge. Recycles the scaled
+     * intermediate; the original [bmp] is still owned by the OCR path.
+     * Null when the switch is off, the provider is not TypeSafe direct, or
+     * the shot is outside TypeSafe's pixel window.
+     */
+    private fun jpegForVision(bmp: Bitmap): ByteArray? {
+        if (!prefs.visionJudge || prefs.judgeProvider != Prefs.PROVIDER_TYPESAFE) return null
+        val size = VisionImage.targetSize(bmp.width, bmp.height) ?: return null
+        val (tw, th) = size
+        var scaled: Bitmap? = null
+        return try {
+            val src = if (tw == bmp.width && th == bmp.height) bmp else {
+                Bitmap.createScaledBitmap(bmp, tw, th, true).also { scaled = it }
+            }
+            val out = ByteArrayOutputStream()
+            if (!src.compress(Bitmap.CompressFormat.JPEG, 85, out)) {
+                Log.w(TAG, "vision jpeg compress failed")
+                null
+            } else {
+                val bytes = out.toByteArray()
+                Log.i(TAG, "vision jpeg ${bmp.width}x${bmp.height} -> ${tw}x${th} bytes=${bytes.size}")
+                bytes
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "vision jpeg failed: ${e.javaClass.simpleName}")
+            null
+        } finally {
+            val s = scaled
+            if (s != null && s !== bmp) s.recycle()
+        }
+    }
+
     /** Shared tail of both OCR paths: dedupe, then analyze or park the bubble. */
     private fun finishOcrSnapshot(snapshot: ChatSnapshot, pkg: String, manual: Boolean, token: ConversationSession.Token) {
         ocrBusy = false
         if (!isCurrent(token)) return
         // Counts only — OCR'd chat text never goes to logcat.
-        Log.i(TAG, "ocr[$pkg] msgs=${snapshot.messages.size} manual=$manual")
+        Log.i(TAG, "ocr[$pkg] msgs=${snapshot.messages.size} manual=$manual visionBytes=${snapshot.image?.size ?: 0}")
         if (snapshot.messages.isEmpty()) {
             if (manual) overlay?.showError("这一屏没认出文字")
             return

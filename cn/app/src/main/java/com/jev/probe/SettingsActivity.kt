@@ -114,6 +114,8 @@ class SettingsActivity : AppCompatActivity() {
         bochaBox.addView(text("去 jev.bocha.cn 领取限时免费 API Key", 11f, sub))
         bochaBox.visibility = if (judgeProviderIdx == 1) View.VISIBLE else View.GONE
 
+        val visionJudgeRow = toggleRow("看图判断（实验）", prefs.visionJudge)
+
         judgeCard.addView(pills(
             listOf("OpenRouter", "博查 Jev", "TypeSafe 直连", "Vercel", "OpenCode Zen", "自定义"), judgeProviderIdx) { idx ->
             judgeProviderIdx = idx
@@ -144,6 +146,7 @@ class SettingsActivity : AppCompatActivity() {
                 5 -> judgeBaseEdit.setText(expandJudgeUrl(judgeBaseEdit.text.toString()))
             }
             bochaBox.visibility = if (idx == 1) View.VISIBLE else View.GONE
+            setToggleInteractive(visionJudgeRow, idx == 2)
         })
         judgeCard.addView(label("Base URL"))
         judgeCard.addView(judgeBaseEdit)
@@ -192,6 +195,11 @@ class SettingsActivity : AppCompatActivity() {
             }
         })
         judgeCard.addView(judgeResult)
+        judgeCard.addView(visionJudgeRow)
+        judgeCard.addView(text(
+            "判断接口选 TypeSafe 直连时可用。开启后，截屏识别时会把缩小后的截图一起发给 TypeSafe 做判断；候选回复仍由回复模型根据识别出的文字生成。TypeSafe 标注这是预览功能。",
+            11f, sub))
+        setToggleInteractive(visionJudgeRow, judgeProviderIdx == 2)
         root.addView(judgeCard)
 
         // --- 回复接口 ---
@@ -328,7 +336,7 @@ class SettingsActivity : AppCompatActivity() {
         // --- OCR 兜底（B 阶段）---
         val ocrFallbackRow = toggleRow("树读不到正文时用 OCR 兜底", prefs.ocrFallback)
         card2.addView(ocrFallbackRow)
-        card2.addView(text("飞书正文是画上去的，节点树里读不到，这时截一次屏本地识别（不上传）。", 11f, sub))
+        card2.addView(text("飞书正文是画上去的，节点树里读不到，这时截一次屏本地识别。截图默认不上传；打开上面的「看图判断（实验）」后，缩小的截图会发给 TypeSafe 做判断。", 11f, sub))
         val ocrAutoRow = toggleRow("OCR 模式自动分析", prefs.ocrAutoAnalyze)
         card2.addView(ocrAutoRow)
         card2.addView(text("关闭时 OCR 认完只亮悬浮球，点一下再分析。", 11f, sub))
@@ -440,6 +448,7 @@ class SettingsActivity : AppCompatActivity() {
                 .map { it.trim() }.filter { it.isNotEmpty() }.toSet()
             prefs.autoAnalyze = (autoRow.tag as? Boolean) ?: true
             prefs.candidateCount = pickedCount
+            prefs.visionJudge = (visionJudgeRow.tag as? Boolean) ?: false
             prefs.ocrFallback = (ocrFallbackRow.tag as? Boolean) ?: true
             prefs.ocrAutoAnalyze = (ocrAutoRow.tag as? Boolean) ?: false
             prefs.contextEnabled = (ctxRow.tag as? Boolean) ?: false
@@ -610,6 +619,15 @@ class SettingsActivity : AppCompatActivity() {
         }
         row.addView(lab); row.addView(sw)
         return row
+    }
+
+    /** Grey out a [toggleRow] without clearing its stored value (row.tag). */
+    private fun setToggleInteractive(row: LinearLayout, enabled: Boolean) {
+        row.alpha = if (enabled) 1f else 0.4f
+        row.getChildAt(1)?.let { sw ->
+            sw.isEnabled = enabled
+            sw.isClickable = enabled
+        }
     }
 
     // atoms

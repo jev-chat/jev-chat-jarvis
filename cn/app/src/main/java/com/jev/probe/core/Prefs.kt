@@ -88,6 +88,15 @@ class Prefs(context: Context, prefsName: String = PREFS_MAIN) {
         get() = sp.getString(K_JUDGE_MODEL, DEFAULT_JUDGE_MODEL_OPENROUTER) ?: DEFAULT_JUDGE_MODEL_OPENROUTER
         set(v) = sp.edit().putString(K_JUDGE_MODEL, v.trim()).apply()
 
+    /**
+     * Attach a downscaled screenshot to the Jev judgment call (TypeSafe
+     * preview). Default off. Only takes effect when [judgeProvider] is
+     * [PROVIDER_TYPESAFE]; the stored value is kept if the user switches away.
+     */
+    var visionJudge: Boolean
+        get() = sp.getBoolean(K_VISION_JUDGE, false)
+        set(v) = sp.edit().putBoolean(K_VISION_JUDGE, v).apply()
+
     /** Back-compat alias so older call sites keep compiling. */
     var openRouterKey: String
         get() = judgeKey
@@ -282,6 +291,7 @@ class Prefs(context: Context, prefsName: String = PREFS_MAIN) {
         private const val K_JUDGE_BASE = "judge_base_url"
         private const val K_JUDGE_KEY = "judge_key"
         private const val K_JUDGE_MODEL = "judge_model"
+        private const val K_VISION_JUDGE = "vision_judge"
         private const val K_REPLY_BASE = "reply_base_url"
         private const val K_REPLY_KEY = "reply_key"
         private const val K_REPLY_MODEL = "reply_model"

@@ -2,7 +2,7 @@
 
 **Jev 聊天助手在你的设备上读取你正在看的聊天，把内容发给你自己配置的模型接口做判断和起草回复。作者不运营服务器，收不到你的任何数据。**
 
-版本 v1.0，生效日期 2026-09-23。适用范围：Android 端 [jev-chat-jarvis](https://github.com/jev-chat/jev-chat-jarvis)。Windows 版（[jev-chat-windows](https://github.com/jev-chat/jev-chat-windows)）与 macOS 版（[jev-chat-jarvis-mac](https://github.com/jev-chat/jev-chat-jarvis-mac)）是各自独立的仓库和安装包，不在本政策范围内，请分别查看它们自己的说明。
+版本 v1.0，生效日期 2026-10-16。适用范围：Android 端 [jev-chat-jarvis](https://github.com/jev-chat/jev-chat-jarvis)。Windows 版（[jev-chat-windows](https://github.com/jev-chat/jev-chat-windows)）与 macOS 版（[jev-chat-jarvis-mac](https://github.com/jev-chat/jev-chat-jarvis-mac)）是各自独立的仓库和安装包，不在本政策范围内，请分别查看它们自己的说明。
 
 如果你更习惯先看结论：本项目**不是**"零数据收集"产品——它确实会把你正在看的聊天文字发给一个第三方模型接口，但那个接口地址是你自己在设置里填的，不是作者的服务器。除此之外的数据只留在你手机里，删应用或点一键清空都能删干净。下面逐项说清楚"发了什么、发给谁、什么时候发、存在哪、怎么删"。
 
@@ -12,7 +12,7 @@
 
 - 会离开你设备的，只有「用于生成判断和回复」这一批聊天文字和背景信息，且只发往**你自己在设置页填写的模型接口地址**。
 - 作者不运营任何后端服务器，代码里也没有向作者或任何固定第三方回传数据的逻辑；你的聊天内容作者看不到，也拿不到。
-- 截图本身从不上传，识别文字（OCR）全部在手机本地完成。
+- 截图默认不上传，识别文字（OCR）全部在手机本地完成。只有你在设置里打开「看图判断（实验）」并且判断接口是 TypeSafe 直连时，截屏识别时才会把缩小后的截图发给你自己配置的 TypeSafe 接口；截图不保存。
 - 密钥、设置、知识库、聊天历史都只存在手机本地的 App 私有目录，其它 App 读不到；卸载即清空。
 - 无广告、无第三方统计 SDK、不用 Cookie 或广告标识符、不读通讯录、不读位置、不读其它 App 列表。
 
@@ -28,7 +28,7 @@
 
 API 密钥会作为请求头（`Authorization`）随对应请求发给你自己配置的那个接口，只用于身份校验，不发往其它任何地方。
 
-**不会发送的内容**：截图本身（识别文字在手机本地完成，见第 4 节）、通讯录、设备标识符、位置信息、其它 App 的列表或使用情况。
+**不会发送的内容**：截图本身（默认不上传，识别文字在手机本地完成，见第 4 节）、通讯录、设备标识符、位置信息、其它 App 的列表或使用情况。仅当你在设置里打开「看图判断（实验）」并且判断接口是 TypeSafe 直连时，截屏识别会把缩小后的截图发给你自己配置的 TypeSafe 接口；截图不保存。
 
 模型服务商拿到这些内容后如何处理，由它们各自的隐私政策决定，需要你自己去看：
 
@@ -60,7 +60,7 @@ API 密钥会作为请求头（`Authorization`）随对应请求发给你自己�
 | 权限 | 用途 | 不做什么 |
 |---|---|---|
 | 无障碍服务 | 读取当前聊天窗口的文字，把选中的回复填进输入框 | 不点发送键，不操作转账/红包/收款，不读取其它应用的数据库 |
-| 截屏能力（无障碍服务附带） | 控件树读不到正文时（例如飞书），截取当前窗口做本地 OCR | 截图只在内存中处理，识别完即释放，不保存、不上传 |
+| 截屏能力（无障碍服务附带） | 控件树读不到正文时（例如飞书），截取当前窗口做本地 OCR | 截图只在内存中处理，识别完即释放，不保存。默认不上传；只有你打开「看图判断（实验）」且判断接口是 TypeSafe 直连时，缩小后的截图会发给你自己配置的 TypeSafe 接口 |
 | 悬浮窗 | 在聊天上方显示分析面板 | 不采集其它应用界面 |
 | 网络 | 访问你自己配置的模型接口 | 不连接作者的任何服务器，无遥测、无埋点上报 |
 | 前台服务 + 通知 | 保持服务不被系统冻结、清理 | 不推送营销通知 |
@@ -108,11 +108,11 @@ Jev Chat Assistant (Android) reads the chat you are currently viewing on your de
 
 - **No servers are operated by the author.** The author cannot receive, store, or see your chat content — it never passes through any author-controlled infrastructure.
 - **Chat text goes only to your own configured model endpoint**, along with a relationship description you write, optionally matched knowledge-base notes/contact notes, and optionally recent history for that contact (default 30 messages, 0–100 adjustable, off by default).
-- **Screenshots are never uploaded.** When a chat app's accessibility tree lacks readable text (e.g. Feishu), the screen is captured and OCR'd entirely on-device; the image is processed in memory and discarded, never saved or sent anywhere.
+- **Screenshots are not uploaded by default.** When a chat app's accessibility tree lacks readable text (e.g. Feishu), the screen is captured and OCR'd entirely on-device; the image is processed in memory and discarded, never saved. The resized screenshot is sent only if you turn on "Vision judge (experimental)" in Settings and the judge endpoint is TypeSafe direct; it goes to the TypeSafe endpoint you configured.
 - **Local-only storage**: API keys, endpoint settings, knowledge-base notes/contacts, and (if enabled) per-contact chat history live only in the app's private storage on your device. Nothing syncs to the cloud. Uninstalling the app deletes all of it; a one-tap "clear knowledge base & history" option is also available.
 - **No ads, no third-party analytics SDKs (no Google Analytics, Firebase, etc.), no cookies or advertising identifiers.**
 - The app never sends messages automatically — you always press send yourself — and it never touches money transfers, red packets, or payments.
 - The project is open source; every claim above can be verified against the source at https://github.com/jev-chat/jev-chat-jarvis.
 - Third-party model providers you choose to use are governed by their own privacy policies, which you should review separately.
 
-Version 1.0, effective 2026-09-23. Scope: Android app only.
+Version 1.0, effective 2026-10-16. Scope: Android app only.
