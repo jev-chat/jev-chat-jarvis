@@ -736,7 +736,7 @@ class SettingsActivity : AppCompatActivity() {
             paintPill(cnTv, selected == RegionProfiles.REGION_CN)
         }
         intlTv = TextView(this).apply {
-            text = "海外（推荐）"; textSize = 15f; gravity = Gravity.CENTER
+            text = "海外模型（推荐）"; textSize = 15f; gravity = Gravity.CENTER
             setPadding(dp(8), dp(12), dp(8), dp(12))
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
                 .apply { rightMargin = dp(8) }
@@ -748,7 +748,7 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
         cnTv = TextView(this).apply {
-            text = "国内"; textSize = 15f; gravity = Gravity.CENTER
+            text = "国内模型"; textSize = 15f; gravity = Gravity.CENTER
             setPadding(dp(8), dp(12), dp(8), dp(12))
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
             setOnClickListener {
