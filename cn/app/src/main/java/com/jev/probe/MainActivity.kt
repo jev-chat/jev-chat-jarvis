@@ -16,6 +16,9 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.jev.probe.capture.live.LiveCaptureService
+import com.jev.probe.capture.live.LiveConsentActivity
+import com.jev.probe.capture.live.LiveFrameHub
 import com.jev.probe.core.Prefs
 import kotlin.math.roundToInt
 
@@ -30,6 +33,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var container: LinearLayout
     private val a11yComponent =
         "com.jev.probe/com.jev.probe.capture.ChatCaptureService"
+
+    private val liveListener = object : LiveFrameHub.Listener {
+        override fun onLiveChanged(live: Boolean) {
+            if (!isDestroyed) build()
+        }
+    }
 
     private val accent = Color.parseColor("#3A7AFE")
     private val green = Color.parseColor("#16A34A")
@@ -55,9 +64,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(scroll)
     }
 
+    override fun onStart() {
+        super.onStart()
+        LiveFrameHub.observe(liveListener)
+    }
+
     override fun onResume() {
         super.onResume()
         build()
+    }
+
+    override fun onStop() {
+        LiveFrameHub.remove(liveListener)
+        super.onStop()
     }
 
     private fun build() {
@@ -96,6 +115,29 @@ class MainActivity : AppCompatActivity() {
         container.addView(actionRow("设置", "密钥 · 模型 · 关系 · 透明度 · 会话白名单") {
             startActivity(Intent(this, SettingsActivity::class.java))
         })
+
+        // Live capture (v2 step 1: MediaProjection frames only)
+        container.addView(sectionLabel("直播模式（试验）"))
+        val liveOn = LiveFrameHub.isLive
+        val liveBtn = TextView(this).apply {
+            text = if (liveOn) "停止直播" else "开始直播"
+            textSize = 15f; gravity = Gravity.CENTER; setTypeface(typeface, Typeface.BOLD)
+            setTextColor(if (liveOn) Color.WHITE else accent)
+            background = roundBg(dp(14), if (liveOn) green else Color.WHITE, stroke = !liveOn)
+            setPadding(dp(16), dp(15), dp(16), dp(15))
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+            ).apply { topMargin = dp(10) }
+            setOnClickListener {
+                if (LiveFrameHub.isLive) LiveCaptureService.stop(this@MainActivity)
+                else startActivity(Intent(this@MainActivity, LiveConsentActivity::class.java))
+            }
+        }
+        container.addView(liveBtn)
+        container.addView(text(
+            if (liveOn) "正在本机取帧，通知栏可停止" else "系统录屏授权后每 1.5 秒取一帧，不做识别",
+            12f, sub
+        ).apply { setPadding(0, dp(6), 0, 0) })
 
         // Master toggle
         val toggle = bigToggle(prefs.enabled)

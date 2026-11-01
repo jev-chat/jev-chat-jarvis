@@ -205,6 +205,16 @@ class Prefs(context: Context, prefsName: String = PREFS_MAIN) {
         get() = sp.getBoolean(K_OCR_AUTO, false)
         set(v) = sp.edit().putBoolean(K_OCR_AUTO, v).apply()
 
+    // ------------------------------------------------------------- live (v2)
+
+    /**
+     * How often the live capture service grabs a frame, in milliseconds.
+     * Not shown on the settings page yet (v2 step 1).
+     */
+    var liveIntervalMs: Long
+        get() = sp.getLong(K_LIVE_INTERVAL, DEFAULT_LIVE_INTERVAL_MS).coerceAtLeast(500L)
+        set(v) = sp.edit().putLong(K_LIVE_INTERVAL, v.coerceAtLeast(500L)).apply()
+
     // ------------------------------------------------------------- existing
 
     /** Free-text describing who the other person is; goes into Jev's state. */
@@ -344,6 +354,7 @@ class Prefs(context: Context, prefsName: String = PREFS_MAIN) {
         private const val K_OCR_UNKNOWN = "ocr_unknown_apps"
         private const val K_OCR_FALLBACK = "ocr_fallback"
         private const val K_OCR_AUTO = "ocr_auto_analyze"
+        private const val K_LIVE_INTERVAL = "live_interval_ms"
         private const val K_REL = "relationship"
         private const val K_ENABLED = "enabled"
         private const val K_WHITELIST = "whitelist"
@@ -397,5 +408,6 @@ class Prefs(context: Context, prefsName: String = PREFS_MAIN) {
         const val DASHSCOPE_VISION_MODEL = "qwen-vl-max"
 
         const val DEFAULT_REL = "对方是我的伴侣；from=me 的是我发的，from=other 的是对方发的"
+        const val DEFAULT_LIVE_INTERVAL_MS = 1500L
     }
 }
