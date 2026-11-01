@@ -26,7 +26,9 @@ import android.os.SystemClock
 import android.util.Log
 import android.widget.Toast
 import com.jev.probe.MainActivity
+import com.jev.probe.capture.AnalysisCoordinator
 import com.jev.probe.core.Prefs
+import com.jev.probe.overlay.OverlayController
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
@@ -54,6 +56,10 @@ class LiveCaptureService : Service() {
     private var captureHandler: Handler? = null
     private var intervalMs: Long = Prefs.DEFAULT_LIVE_INTERVAL_MS
     private var lastSig: LongArray? = null
+    private var prefs: Prefs? = null
+    private var overlay: OverlayController? = null
+    private var coordinator: AnalysisCoordinator? = null
+    private var reader: LiveChatReader? = null
 
     private val projectionCallback = object : MediaProjection.Callback() {
         override fun onStop() {
@@ -122,7 +128,9 @@ class LiveCaptureService : Service() {
             Log.i(TAG, "live already running; ignore new start (token is single-use after stop)")
             return
         }
-        intervalMs = Prefs(this).liveIntervalMs
+        val p = Prefs(this)
+        prefs = p
+        intervalMs = p.liveIntervalMs
         val dm = resources.displayMetrics
         val width = (dm.widthPixels / 2).coerceAtLeast(1)
         val height = (dm.heightPixels / 2).coerceAtLeast(1)
@@ -176,6 +184,7 @@ class LiveCaptureService : Service() {
 
         LiveFrameHub.setLive(true)
         lastSig = null
+        startReader()
         Log.i(TAG, "live projection ready ${width}x${height} dpi=$density interval=${intervalMs}ms")
         handler.postDelayed(grabRunnable, FIRST_GRAB_DELAY_MS)
     }
@@ -213,6 +222,7 @@ class LiveCaptureService : Service() {
             return
         }
         Log.i(TAG, "live stop reason=$reason")
+        stopReader()
         releaseAll()
         LiveFrameHub.setLive(false)
         lastSig = null
@@ -237,6 +247,31 @@ class LiveCaptureService : Service() {
                 runCatching { p.stop() }
             }
         }
+    }
+
+    private fun startReader() {
+        val p = prefs ?: Prefs(this).also { prefs = it }
+        val ov = OverlayController(this)
+        val coord = AnalysisCoordinator(
+            appCtx = this,
+            prefs = p,
+            overlay = ov,
+            extraCurrent = { LiveFrameHub.isLive && !stopping.get() },
+            fillInput = null,
+        )
+        overlay = ov
+        coordinator = coord
+        reader = LiveChatReader(this, p, ov, coord).also { it.start() }
+        isOwnOverlayVisible = true
+    }
+
+    private fun stopReader() {
+        runCatching { reader?.stop() }
+        reader = null
+        runCatching { coordinator?.destroy() }
+        coordinator = null
+        overlay = null
+        isOwnOverlayVisible = false
     }
 
     private fun failStart(msg: String) {

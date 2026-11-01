@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PixelFormat
+import android.graphics.Rect
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
+import com.jev.probe.capture.live.LiveCaptureService
+import com.jev.probe.capture.live.LiveFrameHub
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
@@ -97,6 +100,21 @@ class OverlayController(private val ctx: Context) {
 
     /** Whether the overlay window is currently on screen. */
     fun isShowing(): Boolean = root != null
+
+    /**
+     * Screen-space box of the visible overlay window, used by live OCR to
+     * drop lines that are our own bubble/card. Null when hidden or not laid out.
+     */
+    fun visibleScreenRect(): Rect? {
+        val r = root ?: return null
+        if (r.visibility != View.VISIBLE) return null
+        val loc = IntArray(2)
+        r.getLocationOnScreen(loc)
+        val w = r.width
+        val h = r.height
+        if (w <= 0 || h <= 0) return null
+        return Rect(loc[0], loc[1], loc[0] + w, loc[1] + h)
+    }
 
     private fun dp(v: Int) = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP, v.toFloat(), ctx.resources.displayMetrics).roundToInt()
@@ -295,7 +313,12 @@ class OverlayController(private val ctx: Context) {
             setPadding(dp(4), dp(4), dp(4), dp(4))
             layoutParams = FrameLayout.LayoutParams(dp(196), ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = top }
         }
-        menu.addView(menuItem("截屏识别一次") { dismissMenu(); onOcrCapture?.invoke() })
+        if (LiveFrameHub.isLive) {
+            menu.addView(menuItem("立即分析这一屏") { dismissMenu(); LiveFrameHub.requestAnalyzeNow() })
+            menu.addView(menuItem("停止直播") { dismissMenu(); LiveCaptureService.stop(ctx) })
+        } else {
+            menu.addView(menuItem("截屏识别一次") { dismissMenu(); onOcrCapture?.invoke() })
+        }
         menu.addView(menuItem("把当前会话存为联系人") { dismissMenu(); onSaveContact?.invoke() })
         menu.addView(menuItem("打开设置") { dismissMenu(); openSettings() })
         menu.addView(menuItem("隐藏助手（本次）") { hide() })

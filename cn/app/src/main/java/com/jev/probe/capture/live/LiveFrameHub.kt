@@ -21,6 +21,8 @@ object LiveFrameHub {
     interface Listener {
         fun onFrame(bitmap: Bitmap, capturedAtMs: Long) {}
         fun onLiveChanged(live: Boolean) {}
+        /** Overlay menu "立即分析这一屏": re-run the current frame, skip the new-message gate. */
+        fun onAnalyzeNow() {}
     }
 
     private val lock = Any()
@@ -43,6 +45,10 @@ object LiveFrameHub {
 
     fun observe(listener: Listener) {
         listeners.add(listener)
+    }
+
+    fun requestAnalyzeNow() {
+        main.post { listeners.forEach { it.onAnalyzeNow() } }
     }
 
     fun remove(listener: Listener) {
