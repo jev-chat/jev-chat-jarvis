@@ -14,7 +14,7 @@
 
 ### 🌐 官网：**[chatjevs.com](https://chatjevs.com)**
 
-[English](README.md) | 简体中文 | [Tiếng Việt](README.vi.md) | [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
+[English](README.md) | 简体中文 | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md) | [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
 
 **[下载](#下载与安装) · [产品一览](#产品一览) · [它怎么工作](#它怎么工作) · [隐私](#隐私与风险) · [交流群](#交流群--需求收集) · [安装指南](https://chatjevs.com/guides/android-setup.html)**
 

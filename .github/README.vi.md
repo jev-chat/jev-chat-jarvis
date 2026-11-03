@@ -14,7 +14,7 @@
 
 ### 🌐 Trang web chính thức: **[chatjevs.com](https://chatjevs.com)**
 
-[English](README.md) | [简体中文](README.zh-CN.md) | Tiếng Việt | [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
+[English](README.md) | [简体中文](README.zh-CN.md) | Tiếng Việt | [日本語](README.ja.md) | [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
 
 **[Tải về](#tải-về-và-cài-đặt) · [Sản phẩm](#sản-phẩm) · [Cách hoạt động](#cách-hoạt-động) · [Quyền riêng tư](#quyền-riêng-tư-và-rủi-ro) · [Cộng đồng](#nhóm-trao-đổi--thu-thập-yêu-cầu)**
 

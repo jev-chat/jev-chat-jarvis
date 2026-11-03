@@ -14,7 +14,7 @@
 
 ### 🌐 Official website: **[chatjevs.com](https://chatjevs.com)**
 
-English | [简体中文](README.zh-CN.md) | [Tiếng Việt](README.vi.md) | [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
+English | [简体中文](README.zh-CN.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md) | [Releases](https://github.com/jev-chat/jev-chat-jarvis/releases)
 
 **[Download](#download--installation) · [Products](#products) · [How It Works](#how-it-works) · [Privacy](#privacy-and-risk) · [Community](#community-and-feedback)**
 
