@@ -78,6 +78,9 @@ open class ChatCaptureService : AccessibilityService() {
      *  never read at all (see [maybeCapture] / [onAccessibilityEvent]). */
     private val adapters = listOf(QQAdapter(), XAdapter(), FeishuAdapter(), WhatsAppAdapter()).associateBy { it.pkg }
 
+    /** 通用几何适配器：任何没写专门适配器的聊天软件都走它（微信 / Soul / 其它 IM）。 */
+    private val genericAdapter = GenericAdapter()
+
     /** Submit to the worker, ignoring rejection after the service is torn down
      *  (a stale overlay callback must never crash the process). */
     private fun submit(task: () -> Unit) {
@@ -154,26 +157,23 @@ open class ChatCaptureService : AccessibilityService() {
         val pkg = root.packageName?.toString() ?: return null
         if (isBlocked(pkg) || pkg == packageName || pkg == "com.android.systemui" ||
             pkg.contains("launcher", true) || pkg == "com.miui.home") return null
-        val adapter = adapters[pkg]
-        var messagesSignature: String? = null
-        val title = if (adapter != null) {
-            val snapshot = adapter.extract(root, resources) ?: return null
-            messagesSignature = snapshot.takeIf { it.messages.isNotEmpty() }?.signature()
-            // A loading/unknown title cannot prove which conversation is open —
-            // unless the SAME app+window already has a known one: animated
-            // headers swap in skeleton/transient titles for a beat (#68), and
-            // unbinding the session there killed in-flight analyses. Keep the
-            // previously verified title instead.
-            val fresh = snapshot.title?.takeUnless { isTransientTitle(it) }
-            if (fresh != null) fresh
-            else {
-                val known = session.target
-                if (known != null && known.pkg == pkg && known.windowId == root.windowId &&
-                    !known.title.isNullOrBlank()) known.title else return null
-            }
-        } else {
-            findTitleInActionBar(root, Int.MAX_VALUE, resources.displayMetrics.widthPixels,
-                resources, 0.15, 0.85)
+        // Unknown apps fall back to the generic geometry adapter instead of being
+        // dropped, so WeChat / Soul / any left-right bubble app is read without a
+        // dedicated adapter. A dedicated one still wins when it exists.
+        val adapter = adapters[pkg] ?: genericAdapter
+        val snapshot = adapter.extract(root, resources) ?: return null
+        val messagesSignature = snapshot.takeIf { it.messages.isNotEmpty() }?.signature()
+        // A loading/unknown title cannot prove which conversation is open —
+        // unless the SAME app+window already has a known one: animated
+        // headers swap in skeleton/transient titles for a beat (#68), and
+        // unbinding the session there killed in-flight analyses. Keep the
+        // previously verified title instead.
+        val fresh = snapshot.title?.takeUnless { isTransientTitle(it) }
+        val title = if (fresh != null) fresh
+        else {
+            val known = session.target
+            if (known != null && known.pkg == pkg && known.windowId == root.windowId &&
+                !known.title.isNullOrBlank()) known.title else return null
         }
         return ConversationSession.Target(pkg, root.windowId, title, messagesSignature)
     }
@@ -348,12 +348,9 @@ open class ChatCaptureService : AccessibilityService() {
         // notice (deduped); it must never reach an adapter or the OCR path.
         if (isBlocked(pkg)) { showBlocked(auto = true); return }
         blockedNoticeShown = false // any other foreground → allow the notice again next visit
-        // Apps with no adapter are never handled automatically (v1.3 revision):
-        // the only way in for them is the bubble menu's "截屏识别一次".
-        val adapter = adapters[pkg] ?: run {
-            if (session.target != null && session.target != targetFor(root)) leaveConversation()
-            return
-        }
+        // 通用几何适配器兜底：没有专门适配器的聊天软件（微信 / Soul / 其它 IM）
+        // 也自动进入分析流程。它自己会在非聊天界面（通讯录、设置页）返回 null。
+        val adapter = adapters[pkg] ?: genericAdapter
         // Outside a chat window (the conversation list, a profile, settings…) the
         // adapter returns null. That is NOT a reason to show nothing: an adapted
         // app must behave at least as well as an unadapted one, which parks an idle
@@ -439,9 +436,12 @@ open class ChatCaptureService : AccessibilityService() {
      */
     private val confirmLeave = Runnable {
         val root = rootInActiveWindow
-        val adapter = root?.packageName?.toString()?.let { adapters[it] }
-        val gone = root == null || adapter == null ||
+        // Same fallback as maybeCapture: an app without a dedicated adapter can
+        // still be in a chat window, so "no adapter" must not mean "left".
+        val gone = if (root == null) true else {
+            val adapter = root.packageName?.toString()?.let { adapters[it] } ?: genericAdapter
             adapter.extract(root, resources) == null || targetFor(root) == null
+        }
         if (gone) { leaveConversation(); overlay?.showIdle(null) }
     }
 
