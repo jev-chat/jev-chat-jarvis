@@ -83,10 +83,10 @@ Open Settings, then Analysis, then "Knowledge Base and Contacts."
 ### APIs and Models
 
 - Set a separate URL, key, and model for assessment, replies, and vision.
-- The built-in "Bocha Jev" assessment preset appears first as of v1.4, ahead of OpenRouter, TypeSafe Direct, and Custom. Selecting it fills in `https://jev.bocha.cn` and model `bocha-jev-v1`, which uses the same protocol as TypeSafe. The settings screen displays the official URL with a copy button. The service is currently free for a limited time. Fresh installs default to Bocha Jev; existing assessment configurations retain their provider and key.
+- The built-in "Bocha Jev" assessment preset appears second, after OpenRouter. Selecting it fills in `https://jev.bocha.cn` and model `bocha-jev-v1`, which uses the same protocol as TypeSafe. The settings screen displays the official URL with a copy button. The service is currently free for a limited time. Fresh installs default to OpenRouter; existing assessment configurations retain their provider and key.
 - The "Vercel" assessment preset uses `https://ai-gateway.vercel.sh/typesafe` and model `typesafe-ai/jev`. Supply a [Vercel AI Gateway](https://vercel.com/ai-gateway/models/jev) key. It uses the same protocol as TypeSafe Direct (`POST /v1/systemone`).
 - The "OpenCode Zen" assessment preset uses `https://opencode.ai/zen` and model `jev-1.13`, with free output and input at $0.042 per million tokens. An assessment uses roughly 1,000 input tokens. Supply an [OpenCode Zen](https://opencode.ai/zen) key. This also uses the TypeSafe Direct protocol (`POST /v1/systemone`). For free input as well, manually switch to `jev-1.13-free`, a limited-time option with restricted functionality.
-- Built-in presets include OpenRouter, TypeSafe Direct, Vercel, OpenCode Zen, DeepSeek, and Tongyi-compatible services. Each card has a connection test.
+- Built-in presets include OpenRouter, Bocha Jev, TypeSafe Direct, Vercel, OpenCode Zen, DeepSeek, and Tongyi-compatible services. Each card has a connection test.
 - A single key is enough: leave the reply and vision settings blank to inherit the assessment API configuration.
 - On upgrade from an older version, your existing key is migrated to the new three-card layout once.
 
